@@ -1,3 +1,15 @@
+> ### ⚠️ Superseded — this file is from the **previous** Milestone 2 submission
+>
+> It is kept at its original path so that links from the previous Proof of Achievement still
+> resolve. It has **not** been edited, so anything it says that we later found to be wrong is
+> still wrong here — deliberately.
+>
+> **Start at [`README.md`](./README.md)** for the resubmission.
+> **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
+> this file that we have since corrected or withdrawn — including the usability row *"Tester completed the flow without external guidance ✅ Yes"*, which is **withdrawn**. The resubmission also no longer offers test-suite figures as evidence at all; it rests on the Cardano ledger and on the records of the protocol whose loans were settled.
+
+---
+
 # Milestone 2 — Integration Test Report
 
 **Feature:** Rolling Loan ("Refinance via Dano") — refinance a loan from **Fluid** into a

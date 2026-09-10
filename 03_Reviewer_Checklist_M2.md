@@ -1,3 +1,15 @@
+> ### ⚠️ Superseded — this file is from the **previous** Milestone 2 submission
+>
+> It is kept at its original path so that links from the previous Proof of Achievement still
+> resolve. It has **not** been edited, so anything it says that we later found to be wrong is
+> still wrong here — deliberately.
+>
+> **Start at [`README.md`](./README.md)** for the resubmission.
+> **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
+> this file that we have since corrected or withdrawn.
+
+---
+
 # Milestone 2 — Reviewer Checklist
 
 Maps every milestone Output, Acceptance Criterion, and Evidence item to the concrete artifact that
