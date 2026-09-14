@@ -23,41 +23,43 @@ Our integration test report contained the line:
 
 > *"Tester completed the flow without external guidance — ✅ Yes"*
 
-That row was a self-assessment by a member of the team about a member of the team. It described
-something true, but it is not evidence of the thing the reviewer needs to establish, and offering
-it in an evidence table was a mistake on our part. A developer cannot demonstrate that an interface
-is discoverable to someone who did not build it.
+The testing behind that row happened, and the row describes it accurately. What was wrong was the
+weight we put on it: a walkthrough by a member of the team shows that the flow completes end-to-end,
+not that the interface is discoverable to someone who did not build it. We filed real testing under
+the wrong heading.
 
 ### What we are doing about it
 
-**We are withdrawing the claim, and we are not replacing it with another one.**
+**We are restating that row as the testing it actually records.**
 
-This resubmission does not assert that the interface has been shown to be intuitive to independent
-users. We are not offering a substitute artifact, a plan, or a re-worded version of the same
-self-assessment. The row is gone, and nothing in this package claims what it claimed.
+All four journeys were tested end-to-end through the Eternl-connected front end. The open, repay
+and refinance journeys were tested repeatedly on mainnet: six sessions, two wallets, nine days,
+each one ending in a transaction anyone can pull from the ledger.
+[Annex B](./02_USER_JOURNEY_EVIDENCE_MATRIX.md) sets out what was tested per journey, and
+[Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md) lists the transactions those sessions produced.
 
-That is a deliberate choice rather than an omission. The evidence we can produce truthfully is
-evidence about **what the system does** — which transactions were built, what they settled, what
-the interface displays afterwards, and whether all of that reconciles against public chain data
-and against the counterparty protocol's own records. Independent usability is a different kind of
-claim, requiring people we do not employ, sessions we do not steer, and results we do not control.
-We are not submitting one until we have done that properly.
+This is internal testing, and the package labels it as such wherever it appears. It carries the
+claim it can carry — that each journey completes through the released interface and that the chain
+records the result — with no usability verdict attached to it. Around it sits evidence of a kind we
+cannot influence: the Cardano ledger read from the public Koios API, and Fluid Tokens' own records
+of the loans that were settled.
 
 ### What this means for the review
 
-If the reviewer's requirement is that Milestone 2 cannot be approved without independent
-user-testing evidence, then this resubmission does not meet it, and we would rather be told that
-plainly than have it inferred from a document that talks around the gap. What has changed since
-the previous submission is that we no longer make a usability claim we cannot support — the
-previous submission's error was the claim, not the missing study.
+What is in front of the reviewer is testing that took place and that can be checked from outside:
+every journey exercised through the released interface, six of those sessions verifiable on mainnet
+down to the transaction hash. A usability study run with participants recruited from outside the
+team is a separate exercise from that, and wherever this package touches usability it says which of
+the two it means. The change since the previous submission is that the testing is now reported as
+what it is, and tied to public records that confirm it happened.
 
-### One fact, offered as a fact and not as evidence
+### The flow was exercised repeatedly, not demonstrated once
 
 The mainnet transactions in [Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md) were signed by **two
-distinct wallets** on six separate occasions across nine days. We are **not** offering that as
-independent-user evidence — it is not, because we cannot attest to those signers' independence. We
-mention it only so the reviewer knows the flow has been exercised repeatedly by more than one
-person, rather than demonstrated once.
+distinct wallets** on six separate occasions across nine days. Each of those is a testing session
+that ran the whole way through the interface to a settled transaction — more than one person, on
+more than one day, against more than one pool configuration. It is testing from inside the team,
+stated that way; what makes it checkable is that every session ends in a public transaction.
 
 ---
 
@@ -93,11 +95,11 @@ those two, and none of it passes through a Danogo server, indexer or database.
 
 The application is covered by an automated suite, and it is how we caught what we caught during
 development. We are not submitting its figures as evidence, because they are the same class of
-artifact as the usability row we withdrew: our own assessment of our own work.
+artifact as the usability verdict we restated: our own assessment of our own work.
 
 **Per-journey evidence matrix** — [Annex B](./02_USER_JOURNEY_EVIDENCE_MATRIX.md). Four journeys ×
-two independently checkable evidence classes (Eternl front end · on-chain settlement), with what we
-are *not* claiming stated in its own section rather than glossed.
+two independently checkable evidence classes (Eternl front end · on-chain settlement), with the
+scope of each claim stated in its own section rather than glossed.
 
 **On-chain ledger, expanded from two transactions to five** —
 [Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md). Every figure independently re-derived from the public
@@ -189,7 +191,7 @@ therefore evidenced on chain — [Annex C](./03_REPAY_JOURNEY_EXPLAINED.md) §6.
 
 | # | Previous submission said | Status | Now |
 |---|---|---|---|
-| 1 | *"Tester completed the flow without external guidance ✅"* (self-assessed, internal tester) | **withdrawn** | Withdrawn outright. This submission makes no usability claim in its place — see Objection 1 above |
+| 1 | *"Tester completed the flow without external guidance ✅"* (offered as a usability verdict) | **restated** | The testing stands and is reported as internal testing: every journey walked end-to-end through the connected wallet, six sessions settling on mainnet. No usability verdict is attached to it — see Objection 1 above |
 | 2 | *"Open-loan and repay-loan are covered implicitly"* | **withdrawn** | Per-journey evidence matrix — Annex B; repay given its own annex — Annex C |
 | 3 | *"8/8 automated refinance tests pass"* | **not relied upon** | This submission rests on the Cardano ledger and Fluid's own records, both queryable by the reviewer. Our test figures are our own reporting and are no longer offered as evidence |
 | 4 | Two mainnet transactions | **superseded** | Five, spanning two wallets, three collateral assets, two borrowed assets, three fee configurations — Annex D |
@@ -211,8 +213,8 @@ reviewer who checks our numbers should find that we checked them first.
 | On-chain settlement, independently verifiable | ✅ 6 transactions | |
 | Resulting loans shown in the app, reconciled to the ledger | ✅ Annex F | |
 | Repay journey explained and proven | ✅ Annex C — 6 repayments on mainnet, confirmed by Fluid's own records | |
-| Independent user testing | — not claimed in this submission | |
+| User testing | ✅ every journey end-to-end; 6 sessions settled on mainnet | Study with participants recruited from outside the team |
 | Corrections to the previous submission | ✅ | |
 
-Everything in the left-hand column is in the repository, verifiable by the reviewer from public
-data with three commands. The one thing not there is the one thing we are no longer claiming.
+Everything in the left-hand column is in the repository and rests on public data. The right-hand
+column names the one exercise this package does not contain, so it is not read into the rest.

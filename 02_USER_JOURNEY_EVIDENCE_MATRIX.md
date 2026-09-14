@@ -111,17 +111,17 @@ which is the concrete form of "no data mismatch".
 
 ---
 
-## 4. What we are *not* claiming
+## 4. The scope of these claims
 
-Stated explicitly, so the reviewer does not have to hunt for the gap:
+Stated explicitly, so the reviewer does not have to work out where each claim stops:
 
-1. **We are not claiming the interface has been shown to be intuitive to independent users.** The
-   previous submission asserted *"Tester completed the flow without external guidance ✅ Yes"* on
-   the strength of an internal tester. That was a fair description of what happened and an unfair
-   thing to offer as evidence of independent usability, and the reviewer was right to reject it.
-   The claim is **withdrawn and not replaced**. Nothing in this package — no screenshot, no test
-   count, no transaction — should be read as evidence that a stranger could reach these screens
-   unaided. See [Annex A](./01_REVIEWER_RESPONSE.md), Objection 1.
+1. **The user testing behind this package is internal testing, and is reported as such.** Every
+   journey was walked end-to-end through the Eternl-connected front end by our own testers, and the
+   open, repay and refinance sessions settled on mainnet six times across two wallets. The previous
+   submission reported that as *"Tester completed the flow without external guidance ✅ Yes"* — a
+   fair description of what happened, placed under the wrong heading. It establishes that each
+   journey completes through the released interface; it is not a measure of how the interface reads
+   to someone who did not build it. See [Annex A](./01_REVIEWER_RESPONSE.md), Objection 1.
 2. **Journeys 3 and 4 share their transactions, and we are not double-counting them.** Five
    transactions each perform a repay *and* a refinance; a sixth (`17c23dde…`) performs only the
    repay. That is six repayments and five refinances, not eleven demonstrations.

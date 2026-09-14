@@ -6,7 +6,7 @@
 >
 > **Start at [`README.md`](./README.md)** for the resubmission.
 > **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
-> this file that we have since corrected or withdrawn — including the usability row *"Tester completed the flow without external guidance ✅ Yes"*, which is **withdrawn**. The resubmission also no longer offers test-suite figures as evidence at all; it rests on the Cardano ledger and on the records of the protocol whose loans were settled.
+> this file that we have since corrected or withdrawn — including the usability row *"Tester completed the flow without external guidance ✅ Yes"*, which is **restated as internal testing** rather than as a verdict on usability. The resubmission also no longer offers test-suite figures as evidence at all; it rests on the Cardano ledger and on the records of the protocol whose loans were settled.
 
 ---
 

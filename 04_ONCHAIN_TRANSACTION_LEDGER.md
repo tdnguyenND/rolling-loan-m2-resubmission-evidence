@@ -30,10 +30,11 @@ under materially different conditions — which is what "the feature works" mean
 | TX‑04 | [`c426d9fa…25c8c`](https://cardanoscan.io/transaction/c426d9fa4bb213e95efe7bdef96ccc4d9a97b89f750527b1375608d89cd25c8c) | 13,853,825 | 2026‑08‑25 09:06:41 | 1.555760 ₳ | **W2** | **DJED 6.000000** | ADA | Flexible Pool | 2.000000 ₳ |
 | TX‑05 | [`0e26cc58…05b8`](https://cardanoscan.io/transaction/0e26cc585890eeb13c9bc1e4a37f752eaf770abaf72f8fbde199cf13908b05b8) | 13,861,168 | 2026‑08‑27 02:31:36 | 1.538854 ₳ | **W2** | **DJED 10.000000** | **STRIKE** | Flexible Pool | **none** |
 
-Signer wallets (base addresses, publicly inspectable):
+Signer wallets, shown as the Fluid loan script address carrying each borrower's own stake
+credential (publicly inspectable):
 
-- **W1** `addr1q8009gf2f66x5nnk3xd7f3kagn3avqtyhk5uf4zhnejmjrw7lqahdkjjknfuxdj9kevvyqmlu3zyx3x547dqw2pevx0sewx5g2` … TX‑01, TX‑02
-- **W2** `addr1q8epy5jaharr0857d0lcwhlyg7tnarlajcml084mlhv92h39xk00fdnqnawyvkcs43kmt7hv4uqwetw9yd6lkjl5vxhs279pxf` … TX‑03, TX‑04, TX‑05
+- **W1** `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfkk7lqahdkjjknfuxdj9kevvyqmlu3zyx3x547dqw2pevx0sewx5g2` … TX‑01, TX‑02
+- **W2** `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfk39xk00fdnqnawyvkcs43kmt7hv4uqwetw9yd6lkjl5vxhs279pxf` … TX‑03, TX‑04, TX‑05
 
 Screenshots of each transaction on Cardanoscan are in [`cardanoscan/`](./screenshots/cardanoscan/)
 (timestamps in those screenshots render in UTC+7 — the ledger above is normalised to UTC).

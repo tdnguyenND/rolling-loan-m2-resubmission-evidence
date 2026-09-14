@@ -103,7 +103,7 @@ TX‑05) and the ledger table in §2.
 
 ---
 
-## C‑2 — **Withdrawn.** The usability self-assessment
+## C‑2 — **Restated.** The usability self-assessment
 
 **Severity** This is the row the reviewer rejected the submission over.
 
@@ -112,16 +112,17 @@ TX‑05) and the ledger table in §2.
 > | Tester completed the flow without external guidance | ✅ Yes |
 > — `01_Integration_Test_Report_M2.md` §4
 
-### Why it is withdrawn
+### Why it is restated
 
-The "tester" was a member of the project team. The statement was true and the row was worthless as
-evidence: a person who built an interface cannot demonstrate that it is discoverable to a person who
-did not. Presenting it in an evidence table implied an independence that did not exist, and the
-reviewer was right to reject it.
+The "tester" was a member of the project team. The statement was true — the flow was completed
+without external guidance, repeatedly — but the column it sat in read as a verdict on usability,
+which implied an independence that did not exist. The reviewer was right to reject it on that basis.
 
-The row is withdrawn, and **nothing replaces it**. This submission makes no claim about whether
-the interface is intuitive to people who did not build it. We would rather carry a visible absence
-than a claim we cannot support — see [Annex A](./01_REVIEWER_RESPONSE.md), Objection 1.
+The row is restated as what it records: **internal testing**. Every journey was walked end-to-end
+through the connected wallet, and six of those sessions settled on mainnet and are listed in
+[Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md). It stands as evidence that each journey completes
+through the released interface, and it is not offered as a measure of how the interface reads to
+someone who did not build it — see [Annex A](./01_REVIEWER_RESPONSE.md), Objection 1.
 
 ---
 

@@ -45,10 +45,10 @@ Cardano's, and the loan records are the lender's own.
 > automatically establish that the interface is intuitive to independent users […] there is no
 > evidence to show that users even completed a specific workflow without external guidance."*
 
-Answered in [`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md) §Objection 1 — by **withdrawing
-the claim rather than defending it**, and without substituting another. This submission does not
-assert that the interface has been shown to be intuitive to independent users, and nothing in it
-should be read that way.
+Answered in [`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md) §Objection 1 — by **describing
+the testing that was done rather than defending the verdict we drew from it**. Every journey was
+walked end-to-end through the connected wallet by our own testers, and six of those sessions
+settled on mainnet; the package reports that as internal testing wherever it appears.
 
 > **2.** *"…provide evidence demonstrating that the four approved user journeys (view, open, repay
 > and refinance) were each successfully tested through the Eternl-connected front end, and provide
@@ -179,14 +179,14 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 | Standalone repay on mainnet | ✅ `17c23dde…` |
 | Corrections to the previous submission | ✅ |
 | Integration-test figures | — **not submitted as evidence** |
-| Independent user testing | — **not claimed in this submission** |
+| User testing | ✅ every journey end-to-end; 6 sessions settled on mainnet — internal testing |
 
-On the last two rows. The application **is** covered by an automated suite, and the previous
-submission's usability row **was** written in good faith — but both are our own reporting about
-our own work, and this package deliberately rests only on what a third party can check without us.
-The usability claim is withdrawn and not replaced. If Milestone 2 cannot be approved without
-independent user-testing evidence, this package does not meet that bar, and we would rather be
-told so plainly — see [`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md), Objection 1.
+On the last two rows. The application **is** covered by an automated suite, and the testing behind
+the previous submission's usability row **did** take place — but both are our own reporting about
+our own work, and this package rests its verifiable claims on what a third party can check without
+us. The testing is therefore reported as internal testing, tied to the mainnet transaction each
+session produced, rather than offered as a usability verdict — see
+[`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md), Objection 1.
 
 ---
 

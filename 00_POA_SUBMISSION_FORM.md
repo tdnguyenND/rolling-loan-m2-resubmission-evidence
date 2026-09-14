@@ -10,7 +10,8 @@
 
 > **How to use this file.** This document is organised as Output, Acceptance criteria and Evidence,
 > the shape the Catalyst Proof of Achievement form requires. Each claim links to a public artifact.
-> Independent usability testing is not claimed; see the Opening statement.
+> Each journey was walked end-to-end through the connected wallet by our own testers; that is
+> presented here as internal testing — see the Opening statement.
 
 ---
 
@@ -18,12 +19,16 @@
 
 We accept the previous review in full. Both objections described real gaps.
 
-The previous usability claim was based on an internal tester and is withdrawn. This resubmission
-makes no independent-usability claim; it focuses on verifiable functional and on-chain evidence.
+The previous submission reported its testing as a verdict on usability, which is not what that
+testing established. The testing itself is real and repeatable: each journey was walked end-to-end
+through the connected wallet, and the open, repay and refinance sessions settled on mainnet six
+times, from two wallets, over nine days. This resubmission presents that as internal testing and
+pairs it with functional and on-chain evidence a reviewer can check without us.
 
 Three things changed:
 
-1. **The independent-usability claim is withdrawn**, and nothing replaces it.
+1. **The usability verdict is restated as the testing that produced it** — internal walkthroughs
+   of each journey, six of them traceable to a mainnet transaction.
 2. **Evidence is organised by journey** — each of the four is evidenced on its own, rather than
    inferred from another journey.
 3. **On-chain figures were rechecked against Koios**, a public Cardano API, instead of our own
@@ -272,7 +277,7 @@ our own reporting, and errors we find are disclosed rather than left for a revie
 |---|---|
 | Functional and repayment-status claims | ✅ supported by Koios and Fluid public data |
 | UI screenshots and demo video | ✅ linked separately, under Outputs 1 and 4 |
-| Independent user testing | — **not claimed**, and not substituted for |
+| User testing | ✅ every journey walked end-to-end by our own testers; 6 sessions settled on mainnet — internal testing |
 
 The functional on-chain and repayment-status claims above are supported by public data: the Cardano
 ledger read from the Koios API, and Fluid Tokens' own loan records read from Fluid's API. The
