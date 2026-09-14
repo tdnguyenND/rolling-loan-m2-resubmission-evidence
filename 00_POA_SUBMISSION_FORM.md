@@ -35,7 +35,52 @@ Three things changed:
    backend; one correction is disclosed in Output 5.
 
 The previous submission's files are kept, unedited, in the same repository, each carrying a banner
-that points at the corrections log. We did not quietly fix them.
+that points at the corrections log. We did not quietly fix them; every claim that changed is
+itemised below and in that log.
+
+---
+
+## Response to the previous review
+
+### Objection 1 — a developer's demo is not evidence of an intuitive interface
+
+The previous submission's integration test report carried the row *"Tester completed the flow
+without external guidance — ✅ Yes"* in a table that read as a verdict on usability. The testing
+behind that row happened and the row described it accurately; the heading was wrong. A walkthrough
+by a member of the team shows that the flow completes end-to-end, not that the interface is
+discoverable to someone who did not build it.
+
+It is restated as what it records. All four journeys were tested end-to-end through the
+Eternl-connected front end, and the open, repay and refinance journeys were tested repeatedly on
+mainnet: six sessions, two wallets, nine days, each ending in a transaction anyone can pull from the
+ledger. This is internal testing and is labelled as such wherever it appears
+([corrections log](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md), C‑2).
+A usability study run with participants recruited from outside the team is a separate exercise, and
+this submission does not present itself as one.
+
+### Objection 2 — evidence per journey, and the integration-test results
+
+The previous submission said open and repay were "covered implicitly" by the refinance. Each of the
+four journeys is now evidenced on its own, with two independent classes of evidence — the
+Eternl-connected front end, and on-chain settlement — in
+[user journeys §1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl),
+which also sets out the user path for each. Repay, the journey most likely to be read as missing,
+has its own section with six mainnet repayments and the counterparty protocol's own confirmation of
+all six — Output 2 below. Integration-test results are in the previous submission's
+[integration test report](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/01_Integration_Test_Report_M2.md) — §2 (25 transaction QC checks) and
+§3 (8 automated UI tests, all passing); §2.7 TC‑24 is corrected in Output 5 below.
+
+### What is fixed from the previous submission, itemised
+
+| # | Previous submission said | Status | Now |
+|---|---|---|---|
+| 1 | *"Tester completed the flow without external guidance ✅"*, offered as a usability verdict | **restated** | The testing stands and is reported as internal testing; no usability verdict is attached to it |
+| 2 | *"Open-loan and repay-loan are covered implicitly"* | **withdrawn** | Per-journey evidence matrix, and repay given its own section with six mainnet repayments |
+| 3 | *"8/8 automated refinance tests pass"*, offered as evidence | **not relied upon** | Still reported, but named as our own reporting; the load-bearing evidence is the ledger and Fluid's own records |
+| 4 | Two mainnet transactions | **superseded** | Six — five refinances spanning two wallets, three collateral assets, two borrowed assets and three fee configurations, plus one standalone repay |
+| 5 | *"TC‑24 — no-origination-fee pool: tx `88579a30…`"* | **corrected** | `88579a30…` does carry a 2.000000 ₳ origination-fee leg. The zero-fee example is `0e26cc58…` — Output 5 |
+| 6 | Figures sourced from our own backend | **strengthened** | Every on-chain figure re-derived from the public Koios API |
+| 7 | Evidence stopped at the transaction | **extended** | The state the transactions produced is shown *in the application* and reconciled to the ledger row by row |
 
 ---
 
@@ -43,13 +88,13 @@ that points at the corrections log. We did not quietly fix them.
 
 | Journey | Result | Main evidence |
 |---|---|---|
-| **View** | Both borrower wallets' loan screens captured from the live app; every displayed borrowed amount matches the ledger | [Post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_POST_STATE_UI_RECONCILIATION.md) |
-| **Open** | Five Dano loans opened on mainnet, one in each refinance transaction | [Transaction ledger](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_ONCHAIN_TRANSACTION_LEDGER.md) |
-| **Repay** | Six Fluid loans repaid in full — five as the settlement leg of a refinance, one standalone; Fluid reports all six as repaid | [Repay journey annex](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/03_REPAY_JOURNEY_EXPLAINED.md) |
-| **Refinance** | Five mainnet transactions, each closing a Fluid loan and opening a Dano loan in one transaction | [Transaction ledger](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_ONCHAIN_TRANSACTION_LEDGER.md) |
+| **View** | Both borrower wallets' loan screens captured from the live app; every displayed borrowed amount matches the ledger | [User journeys §2 — post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger) |
+| **Open** | Five Dano loans opened on mainnet, one in each refinance transaction | [On-chain evidence §1 — the five transactions](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
+| **Repay** | Six Fluid loans repaid in full — five as the settlement leg of a refinance, one standalone; Fluid reports all six as repaid | [On-chain evidence §5 — the repay journey](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-both-of-its-forms) |
+| **Refinance** | Five mainnet transactions, each closing a Fluid loan and opening a Dano loan in one transaction | [On-chain evidence §1 — the five transactions](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
 
 Per-journey user paths and evidence classes:
-[Journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/02_USER_JOURNEY_EVIDENCE_MATRIX.md).
+[User journeys §1 — the journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl).
 
 ---
 
@@ -89,9 +134,9 @@ keys.*
 **Evidence:**
 - Live application — https://v2.dano.finance/
 - Demo video — https://youtu.be/z07TxLJLC2w
-- [Journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/02_USER_JOURNEY_EVIDENCE_MATRIX.md)
+- [User journeys §1 — the journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl)
   — the exact user path and evidence for each journey
-- [Post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_POST_STATE_UI_RECONCILIATION.md)
+- [User journeys §2 — post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)
   — the *view* journey, captured on two mainnet wallets, every displayed figure matched to the ledger
 - [Walkthrough captures](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots)
   — loans sheet, refinance card, the Eternl signing dialog with inputs and outputs, confirmation
@@ -103,7 +148,7 @@ keys.*
 
 **Output:** Repay has two forms: **(1)** standalone repayment from the loan-management screen,
 implemented for each supported lending protocol with its own rules (see the
-[journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/02_USER_JOURNEY_EVIDENCE_MATRIX.md)),
+[user journeys §1 — the journey matrix](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl)),
 and **(2)** repayment as part of a rolling refinance. In the rolling flow, the new Dano loan settles
 the Fluid debt in the same transaction. The borrower does not need to repay the Fluid debt
 separately before opening the Dano loan.
@@ -138,13 +183,13 @@ wallets, and each record reports `status: repaid` and `remainingDebt: 0`.
     repay does not.
 
   The per-loan table, the burn records and the arithmetic are in the
-  [repay journey annex](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/03_REPAY_JOURNEY_EXPLAINED.md).
+  [on-chain evidence §5 — the repay journey](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-both-of-its-forms).
 - **The Fluid position was closed in each refinance.** The Fluid position NFT was burned in all five
   transactions — in plain terms, the Fluid loan ceased to exist — and Fluid's API independently
   reports the same loans as repaid with zero remaining debt.
 - **The settlement holds after the fact, not only inside the transaction.** At the time of the
   Koios query documented in the
-  [post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_POST_STATE_UI_RECONCILIATION.md)
+  [user journeys §2 — post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)
   (2026‑09‑10), all five Fluid position NFTs had a total supply of zero on Cardano, and neither
   borrower's *My Account* screen listed a Fluid loan.
 - **The standalone repay flow, on mainnet.**
@@ -182,7 +227,7 @@ three origination-fee configurations.
 4. Every figure is derived from public chain data, not from our own backend.
 
 **Evidence:**
-- [Transaction ledger](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_ONCHAIN_TRANSACTION_LEDGER.md)
+- [On-chain evidence §1 — the five transactions](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)
   — per-transaction value flow, with the public-API source of every figure
 - [Cardanoscan screenshots](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/cardanoscan),
   one per transaction
@@ -233,13 +278,13 @@ on-chain principal plus interest accrued at the APR the same row displays.
 4. The settled Fluid loans are absent from the interface, because they are absent from the chain.
 
 **Evidence:**
-- [Post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_POST_STATE_UI_RECONCILIATION.md)
+- [User journeys §2 — post-state reconciliation](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)
   — the row-by-row reconciliation above, screenshots included
 - [Application screenshots](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/screens),
   one per wallet
 - **The loan counts match the chain.** The application shows **2** loans for W1 and **4** for W2.
-  Those counts equal the Borrower NFTs each wallet holds on chain; the post-state annex explains the
-  NFT mapping.
+  Those counts equal the Borrower NFTs each wallet holds on chain; the user-journeys file §2.3
+  explains the NFT mapping.
 - The figures are **live** reads from the public Koios API: the principals are fixed, and the
   accrued interest grows as the loans age.
 

@@ -13,15 +13,20 @@ Same capability, two names.
 
 | # | Document | What it answers | Time |
 |---|---|---|---|
-| 1 | [`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md) | Point-by-point answer to both objections, and what we withdrew | 6 min |
-| 2 | [`02_USER_JOURNEY_EVIDENCE_MATRIX.md`](./02_USER_JOURNEY_EVIDENCE_MATRIX.md) | **The four journeys × two classes of evidence, in one table** | 4 min |
-| 3 | [`03_REPAY_JOURNEY_EXPLAINED.md`](./03_REPAY_JOURNEY_EXPLAINED.md) | Where "repay" lives in a rolling-loan product, and its on-chain proof | 5 min |
-| 4 | [`04_ONCHAIN_TRANSACTION_LEDGER.md`](./04_ONCHAIN_TRANSACTION_LEDGER.md) | Five mainnet transactions, and the value flow of each | 8 min |
-| 5 | [`06_POST_STATE_UI_RECONCILIATION.md`](./06_POST_STATE_UI_RECONCILIATION.md) | **The resulting loans, in the app — every displayed number matched to the ledger** | 5 min |
-| 6 | [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) | Errors we found in **our own** previous submission, unprompted | 3 min |
-| — | [`00_POA_SUBMISSION_FORM.md`](./00_POA_SUBMISSION_FORM.md) | The text submitted to the Catalyst form | — |
+| 1 | [`00_POA_SUBMISSION_FORM.md`](./00_POA_SUBMISSION_FORM.md) | The submission itself: the response to both objections, then Output 1–5 with their evidence | 8 min |
+| 2 | [`04_USER_JOURNEYS_AND_APP_STATE.md`](./04_USER_JOURNEYS_AND_APP_STATE.md) | **The four journeys through the Eternl-connected front end**, and the resulting loans in the app matched to the ledger | 9 min |
+| 3 | [`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) | **Six mainnet transactions**, the value flow of each, and the repay journey in both of its forms | 12 min |
+| 4 | [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) | Errors we found in **our own** previous submission, unprompted | 3 min |
 
-In a hurry? Read **#2**, then the ledger in **#4**.
+In a hurry? Read the journey matrix in
+[`04` §1](./04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl), then the
+transactions in [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions).
+
+The previous submission's own files — the integration test report, the transaction evidence and the
+reviewer checklist — are kept **unedited** at their original paths, each with a banner pointing at
+[`08_CORRECTIONS.md`](./08_CORRECTIONS.md). The manual refinance journey step by step, and the
+integration-test results, are in
+[`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §1–§3.
 
 ---
 
@@ -45,35 +50,39 @@ Cardano's, and the loan records are the lender's own.
 > automatically establish that the interface is intuitive to independent users […] there is no
 > evidence to show that users even completed a specific workflow without external guidance."*
 
-Answered in [`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md) §Objection 1 — by **describing
-the testing that was done rather than defending the verdict we drew from it**. Every journey was
-walked end-to-end through the connected wallet by our own testers, and six of those sessions
-settled on mainnet; the package reports that as internal testing wherever it appears.
+Answered by **describing the testing that was done rather than defending the verdict we drew from
+it**. Every journey was walked end-to-end through the connected wallet by our own testers, and six
+of those sessions settled on mainnet; the package reports that as internal testing wherever it
+appears — see [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑2 and
+[`04` §1.4](./04_USER_JOURNEYS_AND_APP_STATE.md#14-the-scope-of-these-claims).
 
 > **2.** *"…provide evidence demonstrating that the four approved user journeys (view, open, repay
 > and refinance) were each successfully tested through the Eternl-connected front end, and provide
 > the corresponding integration-test results."*
 
-Answered per journey — [`02_USER_JOURNEY_EVIDENCE_MATRIX.md`](./02_USER_JOURNEY_EVIDENCE_MATRIX.md)
-— and evidenced by the expanded ledger in
-[`04_ONCHAIN_TRANSACTION_LEDGER.md`](./04_ONCHAIN_TRANSACTION_LEDGER.md) (five transactions, not
-two), the post-settlement state in the application
-([`06_POST_STATE_UI_RECONCILIATION.md`](./06_POST_STATE_UI_RECONCILIATION.md)), and the
-counterparty protocol's own loan records.
+Answered per journey in
+[`04` §1](./04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl) — a
+matrix with two independent classes of evidence for each journey, plus the user path for each — and
+evidenced by six mainnet transactions instead of two
+([`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)), the
+post-settlement state in the application
+([`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)),
+and the counterparty protocol's own loan records
+([`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-both-of-its-forms)).
 
-On the second half of that request: **we are not submitting test-suite figures.** The previous
-submission's *"8/8 refinance tests pass"* was true and was the wrong kind of thing to lead with —
-our own count, of our own tests, about our own work. What replaces it is evidence we cannot
-influence: the Cardano ledger, and Fluid Tokens' records of the loans we settled.
+Integration-test results are in the previous submission's
+[`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) — §2 (25 transaction QC
+checks) and §3 (8 automated UI tests, all passing). Those figures are our own reporting and are
+named as such; the load-bearing evidence is the ledger and Fluid's own records.
 
-The "repay" journey has a dedicated annex because it is the one most likely to be judged missing:
-[`03_REPAY_JOURNEY_EXPLAINED.md`](./03_REPAY_JOURNEY_EXPLAINED.md).
+"Repay" — the journey the previous submission covered "implicitly" — has its own section:
+[`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-both-of-its-forms).
 
 ---
 
 ## The evidence in one screen
 
-**Five signed Cardano mainnet transactions**, two wallets, nine days, all independently verifiable:
+**Five signed Cardano mainnet refinances**, two wallets, nine days, all independently verifiable:
 
 | Tx | Date (UTC) | Collateral carried | Borrowed | Liquidity source | Fee |
 |---|---|---|---|---|---|
@@ -99,15 +108,15 @@ Verified for **every** one of them:
 queried for these two wallets over this period, returns **six** loan events — every one
 `"action": "loan_repaid"`, `"status": "repaid"`, `"remainingDebt": 0`, and every one naming a
 transaction *this application built*. The loan token Fluid names is the exact token each
-transaction burned, and each transaction pays at least the total Fluid says was due.
-See [Annex C](./03_REPAY_JOURNEY_EXPLAINED.md) §3 and
+transaction burned, and each transaction pays at least the total Fluid says was due —
+[`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-both-of-its-forms) and
 [`screenshots/fluid-dashboard/`](./screenshots/fluid-dashboard/).
 
 **And one of those six is a standalone repayment.** `17c23dde…`, written by this application with
 the metadata *"Dano Finance: Repay Fluid Loan"* — the borrower pays the debt from their **own**
 wallet, the collateral is **released back to them**, and no Dano loan is created. It is the exact
 mirror of the refinance case, so the repay journey is evidenced on mainnet in both of its forms —
-[Annex C](./03_REPAY_JOURNEY_EXPLAINED.md) §6.
+[`05` §5.5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#55-the-standalone-repay-journey-also-on-mainnet).
 
 **UI/ledger agreement, before signing.** Before signing `c426d9fa…`, the interface showed a Fluid
 debt of 12 ADA and a fee of 2 ADA. On chain: settlement 12.000102 ADA, fee exactly 2.000000 ADA,
@@ -115,7 +124,7 @@ DJED 6.000000 carried across. The number the user was shown is the number that s
 
 **UI/ledger agreement, after settling.** The two wallets' *My Account → Loans* screens, captured
 from the live app, list the resulting Dano loans and no Fluid loans. Every row reconciles —
-[Annex F](./06_POST_STATE_UI_RECONCILIATION.md):
+[`04` §2.4](./04_USER_JOURNEYS_AND_APP_STATE.md#24-row-by-row-the-displayed-amount-is-the-ledger-amount):
 
 | Wallet | UI shows | Created by | Principal on chain | + accrual at the APR the row displays |
 |---|---|---|---|---|
@@ -135,34 +144,33 @@ Cardano.
 ## Package contents
 
 ```
-00_POA_SUBMISSION_FORM.md          the text submitted to the Catalyst form
-01_REVIEWER_RESPONSE.md            point-by-point response to both objections
-02_USER_JOURNEY_EVIDENCE_MATRIX.md four journeys x four evidence classes
-03_REPAY_JOURNEY_EXPLAINED.md      the repay journey, and its on-chain proof
-04_ONCHAIN_TRANSACTION_LEDGER.md   five mainnet transactions, verified
-06_POST_STATE_UI_RECONCILIATION.md the resulting loans in the app, matched to the ledger
-08_CORRECTIONS.md                  corrections to our own previous submission
+00_POA_SUBMISSION_FORM.md            the text submitted to the Catalyst form, and the
+                                     response to both objections
+04_USER_JOURNEYS_AND_APP_STATE.md    the four journeys via Eternl, and the resulting
+                                     loans in the app matched to the ledger
+05_ONCHAIN_TRANSACTIONS_AND_REPAY.md six mainnet transactions, per-transaction value
+                                     flow, the repay journey in both of its forms
+08_CORRECTIONS.md                    corrections to our own previous submission
 
 screenshots/
-  screens/                         the app's My Account - Loans, one per wallet
-  fluid-dashboard/                 Fluid's own borrower dashboard: the loans marked REPAID
-  cardanoscan/                     Cardanoscan, one per refinance transaction
-  *.png                            walkthrough captures from the previous submission
+  screens/                           the app's My Account - Loans, one per wallet
+  fluid-dashboard/                   Fluid's own borrower dashboard: the loans marked REPAID
+  cardanoscan/                       Cardanoscan, one per refinance transaction
+  *.png                              walkthrough captures of the manual refinance journey
 
 previous submission, kept in place so its links still resolve, each with a banner:
-  01_Integration_Test_Report_M2.md
-  02_Mainnet_Transactions_M2.md
-  03_Reviewer_Checklist_M2.md
-  PREVIOUS_README.md
-  screenshots/*.png                its walkthrough captures (kept in place)
+  01_Integration_Test_Report_M2.md   the manual refinance journey, the transaction QC
+                                     checks, and the automated integration-test results
+  02_Mainnet_Transactions_M2.md      its two mainnet transactions
+  03_Reviewer_Checklist_M2.md        its output / criterion / evidence mapping
 ```
 
 ### The previous submission is still here
 
-The four files above are the evidence the reviewer read the first time. They are **unedited** — we
-did not quietly fix them — and each carries a banner pointing at
+Those three files are the evidence the reviewer read the first time. They are **unedited** — we did
+not quietly fix them — and each carries a banner pointing at
 [`08_CORRECTIONS.md`](./08_CORRECTIONS.md), which lists every claim in them we have since corrected
-or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
+or restated, with the on-chain arithmetic. Their walkthrough screenshots in
 [`screenshots/`](./screenshots/) remain valid and are still referenced by this package.
 
 ---
@@ -171,22 +179,21 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 
 | | |
 |---|---|
-| Per-journey evidence matrix | ✅ |
-| On-chain ledger, independently verifiable | ✅ 6 transactions |
-| Post-refinance state in the app, reconciled to the ledger | ✅ every displayed amount |
-| Repay journey explained and proven on-chain | ✅ |
+| Per-journey evidence matrix | ✅ `04` §1 |
+| On-chain evidence, independently verifiable | ✅ 6 transactions |
+| Post-refinance state in the app, reconciled to the ledger | ✅ every displayed borrowed amount |
+| Repay journey evidenced in both of its forms | ✅ `05` §5 |
 | Repayment confirmed by the counterparty protocol's own records | ✅ 6/6 `loan_repaid` |
 | Standalone repay on mainnet | ✅ `17c23dde…` |
 | Corrections to the previous submission | ✅ |
-| Integration-test figures | — **not submitted as evidence** |
+| Integration-test figures | ✅ reported, and named as our own reporting |
 | User testing | ✅ every journey end-to-end; 6 sessions settled on mainnet — internal testing |
 
 On the last two rows. The application **is** covered by an automated suite, and the testing behind
 the previous submission's usability row **did** take place — but both are our own reporting about
 our own work, and this package rests its verifiable claims on what a third party can check without
-us. The testing is therefore reported as internal testing, tied to the mainnet transaction each
-session produced, rather than offered as a usability verdict — see
-[`01_REVIEWER_RESPONSE.md`](./01_REVIEWER_RESPONSE.md), Objection 1.
+us. The testing is reported as internal testing, tied to the mainnet transaction each session
+produced, rather than offered as a usability verdict.
 
 ---
 

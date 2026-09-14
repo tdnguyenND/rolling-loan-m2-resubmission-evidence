@@ -1,4 +1,4 @@
-# Annex H — Corrections to the Previous Submission
+# Corrections to the Previous Submission
 
 **Project** 1400107 · **Milestone 2**
 
@@ -28,9 +28,9 @@ hold.
 > **TC‑24** — No-origination-fee pool → borrow = exact Fluid debt.
 > *"For a pool with 0 origination fee, new loan borrow = the Fluid debt exactly (no +fee bump)."*
 > Evidence cited: tx `88579a30…`
-> — `01_Integration_Test_Report_M2.md` §2.7
+> — `01_Integration_Test_Report_M2.md` §2.7, TC‑24
 
-The same claim appeared in the transaction annex:
+The same claim appeared in the transaction evidence file:
 
 > *"**Refinance → Dano no-fee pool** — Same atomic refinance on a pool with **no origination fee** —
 > new loan borrow = exact Fluid debt (no fee bump)"* — cited against `88579a30…`
@@ -45,7 +45,7 @@ what is disbursed. So a Fluid loan carrying **20 ADA** of debt, refinanced into 
 origination fee is **2 ADA**, becomes a **22 ADA** Dano loan: 20 ADA leaves the pool to settle the
 Fluid debt, 2 ADA leaves the pool to pay the fee, and the borrower owes the sum of the two. This is
 by design, and it is the reason the borrower needs no capital of their own to refinance
-([Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md) INV‑8) — the fee is financed by the loan, not paid
+([`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions), INV‑8) — the fee is financed by the loan, not paid
 out of pocket. The new debt is therefore the old debt **grossed up** by the fee, not equal to it.
 
 Whether the gross-up happens at all is **per-pool configuration**: a fee-bearing pool produces
@@ -69,7 +69,7 @@ the debt (20.000851 ADA) grossed up by the 2.000000 ADA fee, exactly as the spec
 for a fee-bearing pool. The figure the previous submission offered as the new borrow — 20 ADA — is
 the debt that was *settled*; the loan Dano actually opened is 22.000857 ADA, which is why wallet
 W1's Dano position reads **22.04 ADA** in the application (principal plus accrued interest,
-reconciled row by row in [Annex F](./06_POST_STATE_UI_RECONCILIATION.md) §4).
+reconciled row by row in [`04` §2.4](./04_USER_JOURNEYS_AND_APP_STATE.md#24-row-by-row-the-displayed-amount-is-the-ledger-amount)).
 
 ### The correction
 
@@ -96,10 +96,11 @@ TX‑05 is a strictly better example than the one we originally cited, because i
 | `0e26cc58…` | 5.000560 STRIKE | 5.000558 STRIKE | **none** | ✅ zero-fee pool |
 
 *(The few-lovelace residuals between disbursement and the sum of the two legs are min-UTxO
-adjustments, visible in the full value flow in [Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md) §4.)*
+adjustments, visible in the full value flow in [`05` §3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow).)*
 
-**Where the corrected claim now lives:** [Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md) §4 (TX‑01 and
-TX‑05) and the ledger table in §2.
+**Where the corrected claim now lives:**
+[`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md` §3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow) (TX‑01 and
+TX‑05) and the transaction table in §1 of the same file.
 
 ---
 
@@ -120,9 +121,11 @@ which implied an independence that did not exist. The reviewer was right to reje
 
 The row is restated as what it records: **internal testing**. Every journey was walked end-to-end
 through the connected wallet, and six of those sessions settled on mainnet and are listed in
-[Annex D](./04_ONCHAIN_TRANSACTION_LEDGER.md). It stands as evidence that each journey completes
+[`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions).
+It stands as evidence that each journey completes
 through the released interface, and it is not offered as a measure of how the interface reads to
-someone who did not build it — see [Annex A](./01_REVIEWER_RESPONSE.md), Objection 1.
+someone who did not build it — see
+[`04_USER_JOURNEYS_AND_APP_STATE.md` §1.4](./04_USER_JOURNEYS_AND_APP_STATE.md#14-the-scope-of-these-claims).
 
 ---
 
