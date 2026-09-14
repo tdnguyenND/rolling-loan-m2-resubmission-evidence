@@ -6,7 +6,13 @@
 >
 > **Start at [`README.md`](./README.md)** for the resubmission.
 > **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
-> this file that we have since corrected or withdrawn — including the usability row *"Tester completed the flow without external guidance ✅ Yes"*, which is **restated as internal testing** rather than as a verdict on usability. The resubmission also no longer offers test-suite figures as evidence at all; it rests on the Cardano ledger and on the records of the protocol whose loans were settled.
+> this file that we have since corrected or restated — including the usability row in §4,
+> *"Tester completed the flow without external guidance ✅ Yes"*, which the resubmission does not
+> rely on, and the zero-origination-fee claim in §2.7 TC‑24, which the chain contradicts. **§1–§3 of this file remain
+> current**: §1 is the step-by-step manual refinance journey, §2 the 25 transaction QC checks, and
+> §3 the 8 automated integration tests — the integration-test results the reviewer asked for. Those
+> figures are our own reporting and are named as such; the load-bearing evidence in the
+> resubmission is the Cardano ledger and the records of the protocol whose loans were settled.
 
 ---
 

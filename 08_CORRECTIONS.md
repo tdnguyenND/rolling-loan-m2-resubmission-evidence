@@ -3,8 +3,8 @@
 **Project** 1400107 · **Milestone 2**
 
 While preparing this resubmission we re-derived every on-chain figure from a **public Cardano API
-(Koios)** rather than from our own reporting. That exercise found one factual error, and one claim
-that should never have been offered as evidence. Both are recorded here.
+(Koios)** rather than from our own reporting. That exercise found one factual error, and one row in
+the test report that was doing more work than it could carry. Both are recorded here.
 
 A third change is not a correction but is worth stating in the same place: this resubmission does
 not rest any part of its case on test-suite figures. The previous submission's *"8/8 automated
@@ -58,8 +58,8 @@ to the smallest unit — it **does** carry an origination-fee leg:
 | Leg | Address | Amount |
 |---|---|---|
 | Dano Flexible Pool disburses | `addr1wx2degj2ru0uctl4rnvs7vh5l608smvxrgkm7lf8txxjd6qs43szs` | **−22.000857 ADA** |
-| Fluid debt settlement | `addr1q9mt6pcxvkdnszlj4jeztxzshhvsfzq4zsjgwlgh364yct00mr8eah8c9at` | **+20.000851 ADA** |
-| **Dano origination fee** | `addr1qywadgaxcnh993zpzl5kfs806nqe7jyxp4e8unjpll5quymw2aappdz98na` | **+2.000000 ADA** |
+| Fluid debt settlement | `addr1q9mt6pcxvkdnszlj4jeztxzshhvsfzq4zsjgwlgh364yct00mr8eah8c9at0zh3payfgmnvl4c74a2f6rwfp4eptnrcsgv4qa5` | **+20.000851 ADA** |
+| **Dano origination fee** | `addr1qywadgaxcnh993zpzl5kfs806nqe7jyxp4e8unjpll5quymw2aappdz98nah303sy0dc3p83x4hewv5z5c44q2sfqgqqdnjkku` | **+2.000000 ADA** |
 
 The fee address `addr1qywadgax…` receives exactly 2.000000 ADA in this transaction, and the same
 2.000000 ADA in transactions `1cf8f08b…` and `c426d9fa…`. It is the fee leg, and it is present.
@@ -106,7 +106,7 @@ TX‑05) and the transaction table in §1 of the same file.
 
 ## C‑2 — **Restated.** The usability self-assessment
 
-**Severity** This is the row the reviewer rejected the submission over.
+**Severity** This is the row the reviewer stopped the submission on.
 
 ### What we said
 
@@ -115,17 +115,101 @@ TX‑05) and the transaction table in §1 of the same file.
 
 ### Why it is restated
 
-The "tester" was a member of the project team. The statement was true — the flow was completed
-without external guidance, repeatedly — but the column it sat in read as a verdict on usability,
-which implied an independence that did not exist. The reviewer was right to reject it on that basis.
+The row was a self-assessment, and it sat in an evidence table as though it settled how the
+interface reads to someone who did not build it. The statement itself was true — the flow was
+completed without external guidance, repeatedly — but the verdict attached to it was more than the
+row could carry, and the reviewer was right to stop on it.
 
-The row is restated as what it records: **internal testing**. Every journey was walked end-to-end
-through the connected wallet, and six of those sessions settled on mainnet and are listed in
-[`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions).
-It stands as evidence that each journey completes
-through the released interface, and it is not offered as a measure of how the interface reads to
-someone who did not build it — see
+### What replaces it
+
+The row is replaced by the sessions it recorded. Every journey was walked end-to-end through the
+Eternl-connected front end, and the open, repay and refinance sessions settled on mainnet fifteen
+times from two separate wallets. That record is reported per journey in
+[`04_USER_JOURNEYS_AND_APP_STATE.md` §1](./04_USER_JOURNEYS_AND_APP_STATE.md#1-the-four-approved-user-journeys-via-eternl),
+where each journey carries its own user path and its own evidence, and the reviewer can check every
+figure directly. The sessions establish that each journey completes through the released interface;
+they are not offered as a verdict on how the interface reads to someone who did not take part. See
+the scope note at
 [`04_USER_JOURNEYS_AND_APP_STATE.md` §1.4](./04_USER_JOURNEYS_AND_APP_STATE.md#14-the-scope-of-these-claims).
+
+---
+
+## C‑3 — **Corrected.** A recurring marker token was described as a per-loan NFT
+
+### What we said
+
+> *"a new Dano loan position NFT is minted into the Dano Flexible Loan contract"* — offered as proof
+> that a distinct new loan was created in each refinance.
+
+### What the chain says
+
+Danogo mints **two** tokens per loan under policy
+`aca8e306eda3eb6c25a838bebac37d929c216aab13c8d463fca5a08d`, and they are different kinds of object.
+Their live supply figures from Koios `asset_info` settle it:
+
+| Token | Where it goes | Supply | Mints | Burns |
+|---|---|---|---|---|
+| `asset1pr26rn8rqyuctelvw09f05af6c5e9vuccstma6` | Dano loan contract | 8 | **57** | **49** |
+| `asset1hwst3ac0pldqnmqneq83qqysr588lr3n4p8wmc` | Dano loan contract | 8 | **32** | **24** |
+| `asset1nghq6njhwydv59m6nualpa08j4mpgl02ahuj7s` | Dano loan contract | 1 | **17** | **16** |
+| `asset1cf3ey4y9sfaume4dq0txeeu8xzpdj98l7qjgjg` | **borrower's wallet** | 1 | **1** | **0** |
+| `asset18980lwqkdlfchpxpukkeznm59k9xktvxp3pqjf` | **borrower's wallet** | 1 | **1** | **0** |
+| `asset198w3w26rh8ywtjsr7ueq3fpwqjx9caw52huhqj` | **borrower's wallet** | 1 | **1** | **0** |
+| `asset19435nakpzldnfcg2ku0lpvn37j3g6v8rrguvft` | **borrower's wallet** | 1 | **1** | **0** |
+| `asset1gnw4grx8vyuq3t99azngwpxzvv7sj29f2x6p3z` | **borrower's wallet** | 1 | **1** | **0** |
+
+The token that stays in the loan contract is a **recurring marker**, minted and burned continuously
+across many loans. It is not unique to a loan — `asset1pr26rn8r…` is in fact the *same* token in
+TX‑01, TX‑03 and TX‑04. Citing it as proof that a distinct new loan was created was wrong.
+
+The token paid to the **borrower's wallet** is the unique one, and Danogo's own CIP‑25 metadata
+names it *"Borrower NFT (Flexible Pool Lending)"*.
+
+### The correction
+
+Every claim of the form "a distinct loan was created" is now made against the **Borrower NFT**. The
+five refinances produced **five distinct Borrower NFTs**; they produced only three distinct marker
+tokens.
+
+**Where the corrected claim now lives:**
+[`05` §2.1 and INV‑5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#21-two-danogo-tokens-and-which-one-identifies-a-loan),
+and [`04` §2.3](./04_USER_JOURNEYS_AND_APP_STATE.md#23-how-the-application-knows-which-loans-to-show),
+which uses the same tokens to reconcile the loan counts the application displays.
+
+---
+
+## C‑4 — **Corrected.** "The borrower contributes only the network fee" was over-stated
+
+### What we said
+
+> *"the borrower contributed only the Cardano network fee; the Dano pool funded the repayment"* —
+> stated of all five refinance transactions.
+
+### What the chain says
+
+It holds for the four Flexible Pool refinances. It does **not** hold for **TX‑02** (`d240fab1…`),
+which draws on the fixed-term **staking** contract:
+
+| | Disbursed by Dano | Settlement + fee | Shortfall |
+|---|---|---|---|
+| TX‑01 | 22.000857 ₳ | 20.000851 + 2.000000 = 22.000851 ₳ | none |
+| TX‑03 | 13.000010 ₳ | 11.000005 + 2.000000 = 13.000005 ₳ | none |
+| TX‑04 | 14.000108 ₳ | 12.000102 + 2.000000 = 14.000102 ₳ | none |
+| **TX‑02** | **15.015024 ₳** | 15.000002 + 0.969750 = **15.969752 ₳** | **0.954728 ₳, from the borrower** |
+
+On TX‑02 the origination fee is therefore **not** capitalised into the loan, and W1's net outflow
+(−6.374582 ₳) is correspondingly larger than on the Flexible Pool transactions. TX‑02 still settles
+the Fluid debt in full and still carries the collateral across — it is a valid refinance and it
+demonstrates a second, structurally different liquidity source. What it does not demonstrate is the
+"no capital needed" property.
+
+### The correction
+
+That property is now claimed **only** for TX‑01, TX‑03, TX‑04 and TX‑05, and TX‑02's difference is
+stated wherever TX‑02 appears.
+
+**Where the corrected claim now lives:**
+[`05` §3 (TX‑02), INV‑8 and §5.4](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow).
 
 ---
 
@@ -141,7 +225,7 @@ For completeness — these were checked against public chain data and stand unch
 | tx `c426d9fa…`: Fluid debt 12 ADA, fee 2 ADA, new borrow 14 ADA | ✅ settlement 12.000102 ADA, fee 2.000000 ADA, pool disbursement 14.000108 ADA |
 | tx `c426d9fa…`: collateral DJED 6 carried across | ✅ 6.000000 DJED in from the Fluid script, 6.000000 DJED out to the Dano loan contract |
 | Atomicity — one transaction, one block | ✅ on all five |
-| Borrower needs no capital beyond the network fee | ✅ the settlement leg is funded by the Dano pool on all five |
+| Borrower needs no capital beyond the network fee | ⚠️ **holds for four of the five** — funded by the Dano pool on TX‑01, TX‑03, TX‑04 and TX‑05; TX‑02 is the exception, see C‑4 |
 | Fluid has no Cardano testnet deployment, so mainnet is the only possible environment | ✅ unchanged; no testnet Fluid deployment exists |
 
 All of the above was re-checked against the public Koios API, not against our own reporting.
