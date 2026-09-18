@@ -234,7 +234,7 @@ contract on any Cardano testnet, so the Fluid→Dano flow can only run on mainne
 ### What is actually the case
 
 The two interface walkthroughs added to this resubmission
-([`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen))
+([`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen))
 were tested against the **Fluid smart contracts on preprod**, and the transactions they produced are
 on preprod Cardanoscan:
 

@@ -16,7 +16,7 @@ The package uses three environments, and never interchangeably:
 | | Environment | When |
 |---|---|---|
 | **Settlement evidence** — the transactions everything rests on | **Cardano mainnet** | 18–28 August 2026 |
-| **Interface walkthroughs** — the two journeys captured screen by screen | **preprod** (https://preprod.danogo.io) | 18 September 2026 |
+| **Interface walkthroughs** — the four journeys captured screen by screen | **preprod** (https://preprod.danogo.io) | 18 September 2026 |
 | **Historical test report** (`01`, `02`, `03`, kept unedited) | staging UI connected to **mainnet** | previous submission |
 
 Where a document says "the live app", it means the front end the wallet was connected to in that
@@ -113,7 +113,7 @@ the ledger and Fluid's own records.
 | Journey | In the interface | On the ledger |
 |---|---|---|
 | **View** | *My Account → Loans* on both signing wallets — [`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger) | every displayed figure re-derived from the chain — [`04` §2.4](./04_USER_JOURNEYS_AND_APP_STATE.md#24-row-by-row-the-displayed-amount-is-the-ledger-amount) |
-| **Open** | two journeys captured screen by screen, first click to settled loan — [`00` §D](./00_POA_SUBMISSION_FORM.md) | **7 mainnet Open transactions** — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) |
+| **Open** | four journeys captured screen by screen, first click to settled loan, including the multi-pool case where one borrow opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) | **7 mainnet Open transactions** — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) |
 | **Repay** | the *Repay* action in the loan sheet — [`04` §1.3](./04_USER_JOURNEYS_AND_APP_STATE.md#13-the-user-path-for-each-journey) | **3 direct mainnet Repay transactions**, plus the settlement leg inside every Refinance (the *Repay* step performed in the same transaction); Fluid's own API reports all seven loans repaid — [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance) |
 | **Refinance** | refinance card → Eternl dialog → confirmation → portfolio after — [`01` §1](./01_Integration_Test_Report_M2.md) | **5 mainnet refinances** — collateral in = out, source position NFT burned, Borrower NFT minted — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
 
@@ -145,18 +145,24 @@ integration-test results as they stand today, is in
 05_ONCHAIN_TRANSACTIONS_AND_REPAY.md fifteen mainnet transactions grouped by journey,
                                      per-transaction value flow, the repay journey in
                                      all three of its forms
+06_UAT_Report_Journey_1_M2.md        the four journeys on one loan, step by step and
+07_UAT_Report_Journey_2_M2.md        check by check, in opposite asset directions
 08_CORRECTIONS.md                    corrections to our own previous submission
+09_UAT_Report_Journey_3_M2.md        the same four journeys, a second tester, second wallet
+10_UAT_Report_Journey_4_M2.md        one borrow, two pools, two loans, both refinanced
 
 screenshots/
   screens/                           the app's My Account - Loans, one per wallet
   fluid-dashboard/                   Fluid's own borrower dashboard: the loans marked REPAID
   cardanoscan/                       Cardanoscan, one per refinance transaction
-  journey-1-borrow-ADA-collateral-USDM/    open + view + refinance, screen by screen
+  journey-1-borrow-ADA-collateral-USDM/    open + view + refinance + repay, screen by screen
   journey-2-borrow-USDM-collateral-ADA/    the same, in the opposite asset direction
+  journey-3-borrow-USDM-collateral-ADA/    the same again, a second tester on a second wallet
+  journey-4-borrow-ADA-collateral-USDM/    one borrow filling two pools, both loans refinanced
   *.png                              walkthrough captures of the manual refinance journey
 
-videos/                              screen recordings of the two journeys above,
-                                     first click to settled loan (`00` §D)
+videos/                              screen recordings of the four journeys above,
+                                     first click to settled loan (`00` §C)
 
 previous submission, kept in place so its links still resolve, each with a banner:
   01_Integration_Test_Report_M2.md   the manual refinance journey, the transaction QC
@@ -188,20 +194,21 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 | Corrections to our own previous submission | ✅ 5, four of them unprompted |
 | Integration-test figures | ✅ reported, and named as our own reporting |
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
-| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the two preprod walkthroughs — `00` §C; **repay** end-to-end on both loans those walkthroughs created — `06` and `07` §1 |
+| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`10`); **repay** end-to-end on three loans those walkthroughs created — `06`, `07` and `09` §1 |
 
 On the last two rows. The application **is** covered by an automated suite, and every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
 settled on mainnet. The package reports those sessions and rests its verifiable claims on what a
 third party can check without us: the ledger and the counterparty protocol's records. The refinance
 journey is captured end-to-end, including the Eternl signing dialog, and so is the **open** journey
-— in the two walkthroughs added for this resubmission, which run *Open → View → Refinance → View*
+— in the four walkthroughs added for this resubmission, which run *Open → View → Refinance → View*
 on preprod with a screenshot of every screen and a screen recording of the whole session
-([`00`](./00_POA_SUBMISSION_FORM.md) §D). **Repay** is captured screen by screen too, in both walkthroughs — the
+([`00`](./00_POA_SUBMISSION_FORM.md) §C). **Repay** is captured screen by screen too, in three of them — the
 quote, the wallet dialog burning the loan token, and the settled transaction — each closing the loan
 that walkthrough had just opened and refinanced ([`06`](./06_UAT_Report_Journey_1_M2.md),
-[`07`](./07_UAT_Report_Journey_2_M2.md)); it has no screen recording of its own, and the journey's
-mainnet evidence is its three signed transactions.
+[`07`](./07_UAT_Report_Journey_2_M2.md), [`09`](./09_UAT_Report_Journey_3_M2.md)); only
+[`09`](./09_UAT_Report_Journey_3_M2.md) has a screen recording that runs through the repayment, and the
+journey's mainnet evidence is its three signed transactions.
 
 ---
 
@@ -213,9 +220,9 @@ settles a real debt is executed there. Mainnet is not a shortcut here — it is 
 cross-protocol path lives in, and it produces the stronger evidence, because every transaction above
 is public and immutable, and the transaction and repayment records are publicly verifiable.
 
-Fluid's smart contracts on **preprod** were used for the two interface walkthroughs added to this
-resubmission — open and refinance, screen by screen, with preprod Cardanoscan links
-([`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen)).
+Fluid's smart contracts on **preprod** were used for the four interface walkthroughs added to this
+resubmission — open, refinance and repay, screen by screen, with preprod Cardanoscan links
+([`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen)).
 The settlement evidence in this package is mainnet throughout. The previous submission stated more
 absolutely that Fluid has no testnet deployment at all; that overstatement is withdrawn and recorded
 in [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑5.

@@ -40,7 +40,7 @@ executed there. Mainnet is not a shortcut here; it happens to be the stronger ev
 every transaction below is public and immutable on a ledger neither protocol controls.
 
 Fluid's smart contracts on **preprod** were used for the interface walkthroughs in
-[`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen);
+[`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen);
 every transaction in *this* file is a mainnet transaction. The previous submission stated more
 absolutely that no testnet Fluid deployment exists — see
 [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑5.
