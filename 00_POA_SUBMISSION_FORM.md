@@ -16,9 +16,11 @@ it is named "Refinance via Dano". The two names refer to the same capability. So
 ## What is new in this resubmission
 
 **1. Each of the four journeys now has its own evidence and its own test result.** The previous
-submission said open and repay were "covered implicitly" by the refinance. That was wrong. View,
-open, repay and refinance each carry their own mainnet transactions (section A) and their own
-reported result (section C). What links one journey to another is a token rather than an inference:
+submission said open and repay were "covered implicitly" by the refinance. That was wrong. Each of
+the four now carries its own evidence and its own reported result (sections A and C): **open, repay
+and refinance each have their own mainnet transactions**, and **view** — which is not a transaction
+by nature — is carried by the live-app capture on both signing wallets, with every displayed figure
+re-derived from the ledger. What links one journey to another is a token rather than an inference:
 each Fluid position NFT has exactly one mint and one burn in its whole on-chain history — the mint
 is the Open transaction, the burn is the Refinance or Repay that closed it.
 
@@ -295,8 +297,9 @@ This submission demonstrates the fully integrated Rolling Loan (Refinance via Da
 journey by journey:
 
 - **View** — the borrower's loans in *My Account*, every displayed figure re-derived from the ledger
-- **Open** — 7 mainnet Open transactions, plus two walkthroughs capturing the workflow screen by
-  screen from the first click to the settled loan
+- **Open** — 7 mainnet Open transactions, plus four walkthroughs capturing the workflow screen by
+  screen from the first click to the settled loan, one of them the multi-pool case where a single
+  borrow opens two loans
 - **Repay** — 3 mainnet Repay transactions as a direct user action, one of them on Danogo's own
   `Repay Loan` path, plus the settlement leg inside every refinance; the counterparty protocol's own
   records report seven loans repaid with nothing owing

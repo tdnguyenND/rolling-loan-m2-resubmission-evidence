@@ -233,15 +233,17 @@ contract on any Cardano testnet, so the Fluid→Dano flow can only run on mainne
 
 ### What is actually the case
 
-The two interface walkthroughs added to this resubmission
+The four interface walkthroughs added to this resubmission
 ([`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen))
-were tested against the **Fluid smart contracts on preprod**, and the transactions they produced are
-on preprod Cardanoscan:
+were tested against the **Fluid smart contracts on preprod**, and the refinance each produced is on
+preprod Cardanoscan:
 
 | | Transaction |
 |---|---|
 | Journey 1 — borrow ADA, collateral fUSDM | [`0bfa25db…ccfd`](https://preprod.cardanoscan.io/transaction/0bfa25db49a676c15645c25d1d8b35acf5630d1d9cb1d472d386430cb954ccfd) |
 | Journey 2 — borrow fUSDM, collateral ADA | [`78d434d5…95d6`](https://preprod.cardanoscan.io/transaction/78d434d5d3028e2f8025f9ad06ad65849cee4dcbd89d6abd206334baaa2495d6) |
+| Journey 3 — second tester, second wallet | [`a04fe52e…68d8f4`](https://preprod.cardanoscan.io/transaction/a04fe52e0545f546b71a866ed48b1a83aac271dbece74d21fb27e835d268d8f4) |
+| Journey 4 — one borrow, two pools, two loans | [`6ab3bde0…c7ad43`](https://preprod.cardanoscan.io/transaction/6ab3bde0739c1a53aacbbd6c43aacd848b3311a8958030be412c22ffe1c7ad43) · [`3cbb01a7…9694a8`](https://preprod.cardanoscan.io/transaction/3cbb01a7b9dce89f175a75174dff109d48c231f42b2059fc8950d2485f9694a8) |
 
 So the absolute form of the claim — that there is no testnet environment at all — does not hold, and
 we are withdrawing it rather than leaving a reviewer to find the tension between it and §D.

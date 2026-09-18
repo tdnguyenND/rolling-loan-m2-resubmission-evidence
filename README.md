@@ -186,7 +186,7 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 
 | | |
 |---|---|
-| Per-journey evidence matrix, each journey with its own transactions | ✅ `04` §1 |
+| Per-journey evidence matrix, each journey with its own evidence — own mainnet transactions for open / repay / refinance, ledger-reconciled screen capture for view | ✅ `04` §1 |
 | On-chain evidence, independently verifiable | ✅ 15 transactions |
 | Post-refinance state in the app, reconciled to the ledger | ✅ every displayed borrowed amount |
 | Repay journey evidenced — two direct-repay flows, plus repayment within refinance | ✅ `05` §5 |

@@ -10,9 +10,10 @@ API (§5.3).
 loans they close — the *open* journey, evidenced on its own rather than inferred. **§2–§4** are the
 invariants that hold across the refinances, the value flow of each, and what the five together cover
 that one would not. **§5** is the *repay* journey, which the previous submission covered only
-implicitly: three repayments made as a **direct user action** from the borrower's own funds, and,
-separately, the settlement leg inside each of the five refinances — all on mainnet and confirmed by
-the protocol that was owed the money.
+implicitly: three repayments made as a **direct user action** from the borrower's own funds and,
+as a second line of evidence, the settlement leg carried inside each of the five refinances — all on
+mainnet and confirmed by the protocol that was owed the money. The settlement legs are not extra
+transactions: they are part of the refinances already counted in §1.
 
 The front-end half of the evidence is in [`04_USER_JOURNEYS_AND_APP_STATE.md`](./04_USER_JOURNEYS_AND_APP_STATE.md).
 
@@ -563,9 +564,10 @@ solely as a leg of something else.
 ---
 
 The repay journey is therefore evidenced on mainnet by **three repayments made as a direct user
-action**, from the borrower's own funds, and separately by the **five settlement legs** inside the
-refinances — each verified against the Cardano ledger, and the seven Fluid loans additionally
-against the counterparty protocol's own records.
+action**, from the borrower's own funds, and — as a second line of evidence, not five more
+transactions — by the **five settlement legs carried inside the five refinances of §1**. Each is
+verified against the Cardano ledger, and the seven Fluid loans additionally against the counterparty
+protocol's own records.
 
 ---
 
