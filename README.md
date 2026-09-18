@@ -174,7 +174,12 @@ screenshots/
   screens/                           the app's My Account - Loans, one per wallet
   fluid-dashboard/                   Fluid's own borrower dashboard: the loans marked REPAID
   cardanoscan/                       Cardanoscan, one per refinance transaction
+  journey-1-borrow-ADA-collateral-USDM/    open + view + refinance, screen by screen
+  journey-2-borrow-USDM-collateral-ADA/    the same, in the opposite asset direction
   *.png                              walkthrough captures of the manual refinance journey
+
+videos/                              screen recordings of the two journeys above,
+                                     first click to settled loan (`00` §D)
 
 previous submission, kept in place so its links still resolve, each with a banner:
   01_Integration_Test_Report_M2.md   the manual refinance journey, the transaction QC
@@ -203,7 +208,7 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 | Repay journey evidenced in all three of its forms | ✅ `05` §5 |
 | Repayment confirmed by the counterparty protocol's own records | ✅ 7/7 `loan_repaid` |
 | Repayment from the borrower's own funds, on mainnet | ✅ `17c23dde…` · `ea823365…` · `77748bd9…` |
-| Corrections to our own previous submission | ✅ 4, three of them unprompted |
+| Corrections to our own previous submission | ✅ 5, four of them unprompted |
 | Integration-test figures | ✅ reported, and named as our own reporting |
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
 | Interface walkthrough per journey | ✅ refinance end-to-end including the Eternl signing dialog; open and repay via their own transactions and the resulting app state — `04` §1 |
@@ -218,9 +223,17 @@ be added on request.
 
 ---
 
-## Why mainnet and not testnet
+## Why the settlement evidence is on mainnet
 
-Fluid does not deploy its smart contracts to any Cardano testnet. There is no test network on which
-a Fluid → Dano refinance can be executed at all. Mainnet is not a shortcut here — it is the only
-environment where this cross-protocol path exists, and it produces the stronger evidence, because
-every transaction above is public, immutable, and verifiable by the reviewer without our cooperation.
+Mainnet is where the Fluid → Dano path exists as a real market: that is where Fluid's pools hold
+real liquidity and where the collateral assets borrowers actually post live, so a refinance that
+settles a real debt is executed there. Mainnet is not a shortcut here — it is the environment this
+cross-protocol path lives in, and it produces the stronger evidence, because every transaction above
+is public, immutable, and verifiable by the reviewer without our cooperation.
+
+Fluid's smart contracts on **preprod** were used for the two interface walkthroughs added to this
+resubmission — open and refinance, screen by screen, with preprod Cardanoscan links
+([`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen)).
+The settlement evidence in this package is mainnet throughout. The previous submission stated more
+absolutely that Fluid has no testnet deployment at all; that overstatement is withdrawn and recorded
+in [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑5.

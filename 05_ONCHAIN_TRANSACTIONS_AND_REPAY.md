@@ -17,12 +17,18 @@ The front-end half of the evidence is in [`04_USER_JOURNEYS_AND_APP_STATE.md`](.
 
 ---
 
-## Why mainnet and not testnet
+## Why the settlement evidence is on mainnet
 
-Fluid does not deploy its smart contracts to any Cardano testnet. There is therefore no test network
-on which a Fluid → Dano refinance can be executed at all. Mainnet is not a shortcut here; it is the
-only environment where this cross-protocol path exists — and it happens to be the stronger evidence,
-because every transaction below is public and immutable on a ledger neither protocol controls.
+Mainnet is where the Fluid → Dano path exists as a real market — Fluid's pools with real liquidity,
+and the collateral assets borrowers actually post — so a refinance that settles a real debt is
+executed there. Mainnet is not a shortcut here; it happens to be the stronger evidence, because
+every transaction below is public and immutable on a ledger neither protocol controls.
+
+Fluid's smart contracts on **preprod** were used for the interface walkthroughs in
+[`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen);
+every transaction in *this* file is a mainnet transaction. The previous submission stated more
+absolutely that no testnet Fluid deployment exists — see
+[`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑5.
 
 ---
 

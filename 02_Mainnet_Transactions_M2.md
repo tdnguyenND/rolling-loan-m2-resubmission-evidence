@@ -6,7 +6,7 @@
 >
 > **Start at [`README.md`](./README.md)** for the resubmission.
 > **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
-> this file that we have since corrected or withdrawn — including the claim that tx `88579a30…` used a **no-origination-fee** pool, which the chain contradicts, and the statement that open and repay are "covered implicitly".
+> this file that we have since corrected or withdrawn — including the claim that tx `88579a30…` used a **no-origination-fee** pool, which the chain contradicts, the statement that open and repay are "covered implicitly", and the §"Why mainnet and not testnet" claim that Fluid deploys no smart contracts on any Cardano testnet, which we have since withdrawn (C‑5).
 
 ---
 

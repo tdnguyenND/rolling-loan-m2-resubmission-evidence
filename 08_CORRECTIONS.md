@@ -3,10 +3,12 @@
 **Project** 1400107 · **Milestone 2**
 
 While preparing this resubmission we re-derived every on-chain figure from a **public Cardano API
-(Koios)** rather than from our own reporting. That exercise found one factual error, and one row in
-the test report that was doing more work than it could carry. Both are recorded here.
+(Koios)** rather than from our own reporting. That exercise found errors and overstatements in
+our own evidence — a mis-cited transaction, a mis-identified token, a self-assessment doing more
+work than it could carry, and two claims stated more absolutely than what we can show. Each is
+recorded here, C‑1 to C‑5.
 
-A third change is not a correction but is worth stating in the same place: this resubmission does
+One further change is not a correction but is worth stating in the same place: this resubmission does
 not rest any part of its case on test-suite figures. The previous submission's *"8/8 automated
 refinance tests pass"* was true, but it is not what we are asking the reviewer to rely on. What we
 are asking them to rely on is the Cardano ledger and Fluid Tokens' own records, both reproducible
@@ -213,6 +215,56 @@ stated wherever TX‑02 appears.
 
 ---
 
+## C‑5 — **Corrected.** "Fluid has no Cardano testnet deployment" was stated too absolutely
+
+**Severity** Presentational — it changes no on-chain figure. But it is a claim about the world stated
+more strongly than we can support, and it is the reason the previous submission gave for evidencing
+the milestone on mainnet.
+
+### What we said
+
+> *"Fluid **does not** deploy its smart contracts on any Cardano testnet. Consequently there is no
+> testnet environment in which this flow can be executed."*
+> — `02_Mainnet_Transactions_M2.md` §"Why mainnet and not testnet"
+
+The same claim appears in `01_Integration_Test_Report_M2.md` §1 (*"Fluid does not provide a testnet
+deployment of its smart contracts"*) and in `03_Reviewer_Checklist_M2.md` (*"Fluid has no smart
+contract on any Cardano testnet, so the Fluid→Dano flow can only run on mainnet"*).
+
+### What is actually the case
+
+The two interface walkthroughs added to this resubmission
+([`00` §D](./00_POA_SUBMISSION_FORM.md#d-interface-walkthroughs--two-complete-journeys-captured-screen-by-screen))
+were tested against the **Fluid smart contracts on preprod**, and the transactions they produced are
+on preprod Cardanoscan:
+
+| | Transaction |
+|---|---|
+| Journey 1 — borrow ADA, collateral fUSDM | [`0bfa25db…ccfd`](https://preprod.cardanoscan.io/transaction/0bfa25db49a676c15645c25d1d8b35acf5630d1d9cb1d472d386430cb954ccfd) |
+| Journey 2 — borrow fUSDM, collateral ADA | [`78d434d5…95d6`](https://preprod.cardanoscan.io/transaction/78d434d5d3028e2f8025f9ad06ad65849cee4dcbd89d6abd206334baaa2495d6) |
+
+So the absolute form of the claim — that there is no testnet environment at all — does not hold, and
+we are withdrawing it rather than leaving a reviewer to find the tension between it and §D.
+
+### The correction
+
+The reason the **settlement** evidence is on mainnet is now stated as what it is: mainnet is where
+the Fluid → Dano path exists as a real market — Fluid's pools with real liquidity, and the collateral
+assets borrowers actually post — so a refinance that settles a real debt is executed there, and it
+produces evidence a third party can verify without our cooperation.
+
+Nothing else changes. All fifteen transactions in
+[`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) are mainnet transactions, and every figure in this
+package is re-derived from mainnet ledger data as before. The preprod sessions are interface
+evidence, and are presented as interface evidence.
+
+**Where the corrected claim now lives:**
+[`00_POA_SUBMISSION_FORM.md`](./00_POA_SUBMISSION_FORM.md) §B and §F ·
+[`README.md`](./README.md) §"Why the settlement evidence is on mainnet" ·
+[`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) §"Why the settlement evidence is on mainnet".
+
+---
+
 ## Claims from the previous submission that we re-verified and that **hold**
 
 For completeness — these were checked against public chain data and stand unchanged:
@@ -226,6 +278,6 @@ For completeness — these were checked against public chain data and stand unch
 | tx `c426d9fa…`: collateral DJED 6 carried across | ✅ 6.000000 DJED in from the Fluid script, 6.000000 DJED out to the Dano loan contract |
 | Atomicity — one transaction, one block | ✅ on all five |
 | Borrower needs no capital beyond the network fee | ⚠️ **holds for four of the five** — funded by the Dano pool on TX‑01, TX‑03, TX‑04 and TX‑05; TX‑02 is the exception, see C‑4 |
-| Fluid has no Cardano testnet deployment, so mainnet is the only possible environment | ✅ unchanged; no testnet Fluid deployment exists |
+| Fluid has no Cardano testnet deployment, so mainnet is the only possible environment | ⚠️ **restated** — mainnet is where this path exists as a real market and where the evidence is third-party-verifiable; the absolute "no testnet deployment" form is withdrawn, see C‑5 |
 
 All of the above was re-checked against the public Koios API, not against our own reporting.
