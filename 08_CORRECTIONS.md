@@ -8,11 +8,11 @@ our own evidence — a mis-cited transaction, a mis-identified token, a self-ass
 work than it could carry, and two claims stated more absolutely than what we can show. Each is
 recorded here, C‑1 to C‑5.
 
-One further change is not a correction but is worth stating in the same place: this resubmission does
-not rest any part of its case on test-suite figures. The previous submission's *"8/8 automated
-refinance tests pass"* was true, but it is not what we are asking the reviewer to rely on. What we
-are asking them to rely on is the Cardano ledger and Fluid Tokens' own records, both reproducible
-from public APIs.
+One further change is not a correction but is worth stating in the same place. The automated-test
+results are included because the reviewer asked for the integration-test results, and they are
+reported in full. We do not present them as independent evidence: they are our own reporting about
+our own work. The primary verifiable evidence is the Cardano ledger and Fluid Tokens' own records,
+both reproducible from public APIs by anyone.
 
 The reviewer did not ask about any of them. We are disclosing them because a reviewer who checks our
 numbers should find that we checked them first, and because an evidence package that never corrects
@@ -120,7 +120,7 @@ TX‑05) and the transaction table in §1 of the same file.
 The row was a self-assessment, and it sat in an evidence table as though it settled how the
 interface reads to someone who did not build it. The statement itself was true — the flow was
 completed without external guidance, repeatedly — but the verdict attached to it was more than the
-row could carry, and the reviewer was right to stop on it.
+row could carry.
 
 ### What replaces it
 
@@ -251,7 +251,7 @@ we are withdrawing it rather than leaving a reviewer to find the tension between
 The reason the **settlement** evidence is on mainnet is now stated as what it is: mainnet is where
 the Fluid → Dano path exists as a real market — Fluid's pools with real liquidity, and the collateral
 assets borrowers actually post — so a refinance that settles a real debt is executed there, and it
-produces evidence a third party can verify without our cooperation.
+produces evidence that is publicly verifiable.
 
 Nothing else changes. All fifteen transactions in
 [`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) are mainnet transactions, and every figure in this

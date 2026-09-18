@@ -12,8 +12,12 @@ left behind — the resulting loans in the application — and reconciles every 
 against the Cardano ledger.
 
 The on-chain half of the evidence is in
-[`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md). The manual refinance journey,
-step by step with screenshots, is in [`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §1.
+[`05_ONCHAIN_TRANSACTIONS_AND_REPAY.md`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md). The
+integration-test results as they stand today are in
+[§1.5](#15-current-integration-test-results) below; the manual refinance journey they came from,
+step by step with screenshots, is in
+[`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §1, kept unedited as an
+archive.
 
 ---
 
@@ -38,8 +42,8 @@ has no interface capture of its own, the cell says so rather than describing a s
 | Journey | E1 · Eternl front end | E2 · On-chain mainnet |
 |---|---|---|
 | **1. View** — see my loans, debt, collateral, health factor, APR | ✅ *My Account → Loans*, captured from the live app on two connected mainnet wallets — [§2.1](#21-the-two-screenshots) | ✅ every displayed borrowed amount reconciled to the ledger — [§2.4](#24-row-by-row-the-displayed-amount-is-the-ledger-amount) |
-| **2. Open** — originate a loan against collateral | ✅ walkthrough through the connected front end; sheet capture not attached — §1.4 · ✅ *corroborating:* the originated loans are listed in the app and still open — §2.3 | ✅ **7 mainnet transactions of its own** — six *"Dano Finance: Borrow from Fluid"*, one *"Create Loan"* opening a Dano loan directly — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) · ✅ each mints that loan's position token and locks its collateral · ✅ **5 distinct Borrower NFTs** minted by the refinances — [`05` §2.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#21-two-danogo-tokens-and-which-one-identifies-a-loan) |
-| **3. Repay** — settle a loan | ✅ walkthrough through the connected front end; sheet capture not attached — §1.4 · ✅ *corroborating:* the settled loans are **absent** from the post-refinance screens — §2.5 · ✅ *corroborating:* **Fluid's own dashboard marks them `REPAID`** — [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid) | ✅ **3 mainnet transactions of its own**, debt paid from the borrower's own funds — `17c23dde…`, `ea823365…`, and **`77748bd9…` on Danogo's own `Repay Loan` path**, which burns the borrower's title to the loan — [`05` §5.5–§5.6](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#55-repaying-an-external-loan-on-mainnet-two-transactions) · ✅ **5 Fluid loans repaid in full** as the settlement leg of a refinance · ✅ the counterparty's own indexer reports **seven** loans `loan_repaid`, `remainingDebt: 0` |
+| **2. Open** — originate a loan against collateral | ✅ **full walkthrough captured, screen by screen** — *Borrow Market* with the amounts entered → Eternl signing *Dano Finance: Borrow from Fluid* → the new loan in *Portfolio* and *My Account*, in two opposite asset directions on preprod — [`00` §D](./00_POA_SUBMISSION_FORM.md) · the **seven mainnet** originations below have no sheet capture of their own — §1.4 · ✅ *corroborating:* the loans they opened are listed in the app and still open — §2.3 | ✅ **7 mainnet transactions of its own** — six *"Dano Finance: Borrow from Fluid"*, one *"Create Loan"* opening a Dano loan directly — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) · ✅ each mints that loan's position token and locks its collateral · ✅ **5 distinct Borrower NFTs** minted by the refinances — [`05` §2.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#21-two-danogo-tokens-and-which-one-identifies-a-loan) |
+| **3. Repay** — settle a loan | ⚠️ **no end-to-end screen recording is included.** The *Repay Loan* entry point is visible in the walkthrough's *Loan Details* panel — [`00` §D](./00_POA_SUBMISSION_FORM.md) — and the signed repayment transactions are listed in [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance) — §1.4 · ✅ *corroborating:* the settled loans are **absent** from the post-refinance screens — §2.5 · ✅ *corroborating:* **Fluid's own dashboard marks them `REPAID`** — [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid) | ✅ **3 mainnet transactions of its own**, debt paid from the borrower's own funds — `17c23dde…`, `ea823365…`, and **`77748bd9…` on Danogo's own `Repay Loan` path**, which burns the borrower's title to the loan — [`05` §5.5–§5.6](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#55-repaying-an-external-loan-on-mainnet-two-transactions) · ✅ **5 Fluid loans repaid in full** as the settlement leg of a refinance · ✅ the counterparty's own indexer reports **seven** loans `loan_repaid`, `remainingDebt: 0` |
 | **4. Refinance** — roll a Fluid loan into a Dano loan | ✅ **full walkthrough**: refinance card and preview → **Eternl signing dialog with inputs and outputs** → confirmation → portfolio after, screenshotted end-to-end — [`01` §1](./01_Integration_Test_Report_M2.md) · ✅ demo video https://youtu.be/z07TxLJLC2w · the **resulting** Dano loans shown in the app — §2 | ✅ **5 signed mainnet refinances**, 2 wallets, 3 collateral assets, 2 borrowed assets, 9 days — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
 
 ### 1.3 The user path for each journey
@@ -83,12 +87,11 @@ and additionally as the second leg of each refinance. See
       →  Confirm  →  Eternl signature prompt  →  submit  →  confirmation
 ```
 
-Protocol-specific rules are enforced and tested: Surf allows full repayment only and disables the
-CTA with a named reason when the wallet cannot cover it; Fluid enforces recast rules and rejects a
-repayment that does not reduce principal; Liqwid offers the receive-as-underlying toggle. This
-journey ran three times on mainnet in its own right — twice against Fluid and once against Danogo's
-own contracts — and additionally as the settlement leg of each refinance. See
-[`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-the-repay-journey-in-all-three-of-its-forms).
+The recorded repayment examples cover **Fluid** and **Dano** loans: this journey ran three times on
+mainnet in its own right — twice against Fluid and once against Danogo's own contracts — and
+additionally as the settlement leg of each refinance. Protocol-specific behaviour outside those
+examples is outside the scope of this resubmission. See
+[`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance).
 
 **Journey 4 — Refinance**
 
@@ -124,13 +127,19 @@ Stated explicitly, so the reviewer does not have to work out where each claim st
 2. **Interface captures.** The refinance journey is captured end-to-end — loan row → refinance card
    → Eternl signing dialog with inputs and outputs → confirmation → portfolio after
    ([`01` §1](./01_Integration_Test_Report_M2.md)), and the demo video walks the same flow
-   (https://youtu.be/z07TxLJLC2w). The *open* and *repay* journeys are carried by their own mainnet
-   transactions and by the resulting state in the app (§2); the sheet captures can be added if the
-   reviewer wants them.
+   (https://youtu.be/z07TxLJLC2w). The **open** journey is captured end-to-end as well, in the two
+   preprod walkthroughs added for this resubmission — [`00` §D](./00_POA_SUBMISSION_FORM.md) — which
+   run *Open → View → Refinance → View* with a screenshot of every screen and a screen recording of
+   the whole session; the seven mainnet **Open** transactions themselves have no sheet capture and are
+   carried by their transactions and by the resulting state in the app (§2). The **repay** journey
+   has **no end-to-end screen recording**: its entry point is visible in the walkthrough's *Loan
+   Details* panel, and the journey itself is carried by the three signed mainnet repayments in
+   [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance)
+   and by the settled state in the app. A recorded repay can be added if the reviewer wants it.
 3. **Journeys are not double-counted.** Five transactions each perform a repay *and* a refinance.
    That is five refinances and five settlement legs, not ten demonstrations. The three separately
-   evidenced repayments are `17c23dde…`, `ea823365…` and `77748bd9…`; the seven separately
-   evidenced originations are in
+   evidenced **Repay** transactions are `17c23dde…`, `ea823365…` and `77748bd9…`; the seven
+   separately evidenced **Open** transactions are in
    [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans).
 4. **"View" has no transaction by nature** — reading a position does not produce one. Its evidence
    is §2, where every displayed figure is re-derived from the ledger.
@@ -142,11 +151,29 @@ Stated explicitly, so the reviewer does not have to work out where each claim st
    ledger proves.
 6. **The automated-test figures in [`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §3 are our own reporting**, not
    third-party-checkable evidence. They are reported because the milestone asks for
-   integration-test results; the load-bearing evidence is the ledger and Fluid's own records.
+   integration-test results; the primary verifiable evidence is the ledger and Fluid's own records.
 
 ---
 
 ---
+
+### 1.5 Current integration-test results
+
+Restated here so that nothing a reviewer needs to rely on lives only inside a superseded file.
+[`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) is kept **unedited**, as an
+archive of the previous submission; where its detail is still good it is linked below, and where it
+is not, this table says so.
+
+| What was tested | Current result | Detail |
+|---|---|---|
+| **25 transaction QC checks** against the executed refinance (TC‑01 … TC‑25) | **24 of 25 hold.** TC‑24 does **not**: the transaction it cites as the zero-origination-fee example, `88579a30…`, pays a **2 ADA** fee — [`08`](./08_CORRECTIONS.md) C‑1. The zero-fee case is `0e26cc58…`, which has no fee leg at all | [`01` §2](./01_Integration_Test_Report_M2.md) |
+| **8 automated UI tests** for the refinance surface (FN‑I7, FN‑I9 … FN‑I14, FN‑J10), Tier‑2 with a connected wallet, on live mainnet data | **8 / 8 pass** | [`01` §3](./01_Integration_Test_Report_M2.md) |
+| **Manual end-to-end refinance journey** on mainnet, step by step | pass — loan row → refinance card → Eternl signing dialog with inputs and outputs → confirmation → portfolio after | [`01` §1](./01_Integration_Test_Report_M2.md) |
+| **Two manual end-to-end walkthroughs** on preprod, *Open → View → Refinance → View*, in opposite asset directions | pass — and the fee, health factor and resulting debt the interface quoted **before** signing are the ones the chain holds afterwards | [`00` §D](./00_POA_SUBMISSION_FORM.md) |
+| **The four journeys, per journey** | evidence and result for each, one row apiece | §1.2 above |
+
+The first three rows are our own reporting about our own work, and are named as such. The
+primary verifiable evidence is the ledger and the counterparty's records — column E2 of §1.2.
 
 ## 2. The post-refinance state in the app, reconciled to the ledger
 

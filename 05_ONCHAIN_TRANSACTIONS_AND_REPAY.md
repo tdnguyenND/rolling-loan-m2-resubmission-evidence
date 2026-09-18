@@ -10,10 +10,25 @@ API (§5.3).
 loans they close — the *open* journey, evidenced on its own rather than inferred. **§2–§4** are the
 invariants that hold across the refinances, the value flow of each, and what the five together cover
 that one would not. **§5** is the *repay* journey, which the previous submission covered only
-implicitly — delivered in **three** forms, with three repayments from the borrower's own funds plus
-five settlement legs, all on mainnet and confirmed by the protocol that was owed the money.
+implicitly: three repayments made as a **direct user action** from the borrower's own funds, and,
+separately, the settlement leg inside each of the five refinances — all on mainnet and confirmed by
+the protocol that was owed the money.
 
 The front-end half of the evidence is in [`04_USER_JOURNEYS_AND_APP_STATE.md`](./04_USER_JOURNEYS_AND_APP_STATE.md).
+
+**Five terms, once:**
+
+- **UTxO** — an on-chain transaction output: a parcel of value sitting at an address, spendable once.
+- **Mint / burn** — creating or destroying a token. A burn of `−1` destroys that token permanently.
+- **Position NFT** — the token that identifies one **Fluid** loan. **Borrower NFT** — the token that
+  identifies one **Dano** loan and is held by the borrower.
+- **`valid_contract = true`** — the transaction was accepted by the contract's own on-chain
+  validator (the Plutus script). A transaction whose validator rejected it cannot produce these
+  outputs.
+- **min-UTxO** — the small amount of ADA every output must carry by protocol rule. It is a deposit
+  held by the output, not a fee paid to anyone.
+- **Settlement leg** — the part of a *Refinance* transaction that pays off the source loan: the
+  *Repay* step, performed inside the *Refinance* rather than as a separate user action.
 
 ---
 
@@ -47,15 +62,11 @@ They are five executions of the same production code path under materially diffe
 | TX‑04 | [`c426d9fa…25c8c`](https://cardanoscan.io/transaction/c426d9fa4bb213e95efe7bdef96ccc4d9a97b89f750527b1375608d89cd25c8c) | 13,853,825 | 2026‑08‑25 09:06:41 | 1.555760 ₳ | **W2** | **DJED 6.000000** | ADA | Flexible Pool | 2.000000 ₳ |
 | TX‑05 | [`0e26cc58…05b8`](https://cardanoscan.io/transaction/0e26cc585890eeb13c9bc1e4a37f752eaf770abaf72f8fbde199cf13908b05b8) | 13,861,168 | 2026‑08‑27 02:31:36 | 1.538854 ₳ | **W2** | **DJED 10.000000** | **STRIKE** | Flexible Pool | **none** |
 
-The two borrower wallets, identified here by the **Fluid loan script address** each one's stake
-credential produces — the script portion is protocol-owned, the delegation portion is the
-borrower's, which is why the two differ while the payment credential is identical:
-
-- **W1** `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfkk7lqahdkjjknfuxdj9kevvyqmlu3zyx3x547dqw2pevx0sewx5g2` … TX‑01, TX‑02
-- **W2** `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfk39xk00fdnqnawyvkcs43kmt7hv4uqwetw9yd6lkjl5vxhs279pxf` … TX‑03, TX‑04, TX‑05
-
-Their base (wallet) addresses, as shown connected in the application, are in
-[`04_USER_JOURNEYS_AND_APP_STATE.md` §2.2](./04_USER_JOURNEYS_AND_APP_STATE.md#22-the-wallets-in-the-screenshots-are-the-wallets-that-signed).
+Two borrower wallets signed these five transactions: **W1** (TX‑01, TX‑02) and **W2** (TX‑03,
+TX‑04, TX‑05). The wallets as shown connected in the application are in
+[`04` §2.2](./04_USER_JOURNEYS_AND_APP_STATE.md#22-the-wallets-in-the-screenshots-are-the-wallets-that-signed);
+their full on-chain addresses, and why each wallet produces a distinct Fluid loan script address,
+are in the [appendix](#appendix--the-addresses-behind-the-labels).
 
 Screenshots of each transaction on Cardanoscan are in
 [`screenshots/cardanoscan/`](./screenshots/cardanoscan/) (timestamps in those screenshots render in
@@ -135,13 +146,16 @@ submission did not draw this distinction; see [`08_CORRECTIONS.md`](./08_CORRECT
 
 ## 3. Per-transaction value flow
 
-Net deltas, from Koios. Legend — `FLUID` = Fluid loan script address · `POOL` = Dano Flexible Pool
-contract `addr1wx2degj2ru0uctl4rnvs7vh5l608smvxrgkm7lf8txxjd6qs43szs` · `STAKING` = Dano Staking
-(fixed-term) contract `addr1xxt4n07cnlafzefqvne69mmxmnzu2t9gtd27jw9d9yvc7u5htxla38l6j9jjqe8n5thkdhx9c5k2sk64ayu262ge3aequnmfak` ·
-`LOAN` = Dano Flexible Loan contract (`addr1zxk23ccxak37kmp94qutawkr0kffcgt24vfu34rrljj6pr…`) ·
-`FEE` = Dano origination-fee address
-`addr1qywadgaxcnh993zpzl5kfs806nqe7jyxp4e8unjpll5quymw2aappdz98nah303sy0dc3p83x4hewv5z5c44q2sfqgqqdnjkku` · `SETTLE` = the Fluid loan's
-settlement recipient (a distinct address per loan).
+Net deltas, from Koios. Five labels do the work, and every full address behind them is in the
+[appendix](#appendix--the-addresses-behind-the-labels):
+
+| Label | What it is |
+|---|---|
+| `FLUID` | the Fluid loan script address — where the loan being closed lives |
+| `POOL` | the Dano pool that funds the new loan — Flexible Pool, or `STAKING` for the fixed-term contract |
+| `LOAN` | the Dano loan contract — where the new loan lands, carrying the collateral |
+| `FEE` | the Dano origination-fee address |
+| `SETTLE` | the Fluid loan's settlement recipient — a distinct address per loan |
 
 ### TX‑01 — `88579a30…6652` · USDM collateral, ADA borrow, fee pool
 
@@ -288,19 +302,23 @@ contradicts; see [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑1.
 
 ---
 
-## 5. The repay journey, in all three of its forms
+## 5. Evidence for repayment: two direct-repay flows, and repayment within a refinance
 
-The previous submission said open and repay were "covered implicitly" by the refinance. That was
-the reviewer's second objection, and it was fair. Repay ships in **three** forms, and all three
-executed on Cardano mainnet during this milestone.
+The approved **Repay** journey is the direct user action — **R‑A** and **R‑B** below, where the
+borrower opens the sheet and settles the debt from their own funds. **R‑C** is not a second repay
+journey and is not counted as one: it is included to show that a refinance also settles the source
+debt in full, on chain, in the same transaction.
+
+The previous submission covered **Repay** only implicitly, through the refinance. All three rows
+below executed on Cardano mainnet during this milestone.
 
 | Form | Where it lives in the product | How the user reaches it | Evidence |
 |---|---|---|---|
 | **R‑A — Repay an external loan** | `BorrowModify` sheet, `Repay` action | Portfolio / My Account → Loans → *Manage* → **Repay** | **Two live mainnet repayments**, `17c23dde…` and `ea823365…`, debt paid from the borrower's own funds and collateral released — §5.5. Implemented for all four supported protocols, each with its own rules. |
 | **R‑B — Repay a Dano loan** | the same sheet, for a loan held on Dano | *Manage* → **Repay** | **One live mainnet repayment**, `77748bd9…`, metadata **_"Dano Finance: Repay Loan"_** — Danogo's own repayment path, burning the borrower's own title to the loan — §5.6. |
-| **R‑C — Repay as the settlement leg of a refinance** | The rolling-loan transaction itself | Loan Details → **Refinance via Dano** → *Confirm* | Five mainnet transactions in which a Fluid loan is repaid in full and its position token burned — §1, §2 (INV‑4). **Fluid's own dashboard marks all five `REPAID`** — §5.3. |
+| **R‑C — Repay as the settlement leg of a refinance** | The refinance transaction itself | Loan Details → **Refinance via Dano** → *Confirm* | Five mainnet transactions in which a Fluid loan is repaid in full and its position token burned — §1, §2 (INV‑4). **Fluid's own dashboard marks all five `REPAID`** — §5.3. |
 
-### 5.1 Why the rolling-loan model makes repay an atomic leg
+### 5.1 Why the refinance settles the source debt in the same transaction
 
 A conventional refinance is three user actions and three risks:
 
@@ -310,7 +328,7 @@ A conventional refinance is three user actions and three risks:
   3. User deposits collateral to Dano, borrows  →  price may have moved; step 3 may fail
 ```
 
-Between steps the user is exposed. The rolling-loan design collapses all three into **one Cardano
+Between steps the user is exposed. The refinance collapses all three into **one Cardano
 transaction**:
 
 ```
@@ -328,27 +346,29 @@ transaction**:
 ```
 
 Either everything happens or nothing does. There is no state in which the Fluid loan is repaid but
-the Dano loan failed to open. This is what the approved specification says, in its own language —
-from `docs/screens/LendBorrow/BorrowModify.Fluid.md` §7.15, excerpted verbatim:
+the Dano loan failed to open.
 
-> **Submission.** One `TransactionLifecycle` handoff builds **one** transaction
-> (**Fluid repay** + DanoFlex create loan). `onConfirmedTransaction` fires once.
+For the **Flexible Pool** route, the refinance combines the repayment and the new borrowing in one
+transaction: the user does not separately withdraw and re-deposit the collateral, and needs no funds
+of their own beyond the network fee, because the new loan is sized to cover the outstanding Fluid
+debt plus its own origination fee. **TX‑02 is the exception** — it draws on a different product, the
+fixed-term staking contract, where the fee is not capitalised and the borrower contributes
+0.954728 ₳; see §3, TX‑02 and [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑4.
 
-and
-
-> The user does not need extra funds beyond the network fee — the DanoFlex borrow amount is
-> grossed up over the Fluid loan's remaining debt by the new loan's own origination fee […] so
-> that net of that fee, the proceeds cover the remaining debt exactly.
-
-The spec calls the leg "Fluid repay" because that is what it is.
+The approved specification describes the same thing, and calls the leg *"Fluid repay"* because that
+is what it is — `docs/screens/LendBorrow/BorrowModify.Fluid.md` §7.15.
 
 ### 5.2 The on-chain proof that a repayment occurred
 
-Cardano gives an unambiguous, protocol-level signal, and it is present in **all five** transactions:
-**the Fluid loan's position NFT is burned.** Fluid mints a unique loan-position token when a loan is
-opened; that token is the loan's on-chain identity, and Fluid's validator permits it to be burned
-**only when the loan is settled**. Once burned, the loan does not exist — it cannot be queried,
-serviced, liquidated, or repaid again.
+Cardano gives a protocol-level signal, and it is present in **all five** transactions: **the Fluid
+loan's position NFT is burned.** Fluid mints a unique loan-position token when a loan is opened, and
+that token is the loan's on-chain identity; once it is burned the loan does not exist on chain — it
+cannot be queried, serviced, liquidated, or repaid again.
+
+This package uses that burn as the on-chain indicator that the source loan was settled. Two things
+corroborate it, and neither is our word: each of these transactions pays a **settlement leg** of at
+least the amount Fluid says was owed (the table below), and **Fluid's own public API and dashboard
+report the same five loans as repaid**, with `remainingDebt: 0` — §5.3.
 
 | Tx | Fluid position NFT burned | Debt settlement leg | Amount settled |
 |---|---|---|---|
@@ -391,8 +411,8 @@ transaction that **opened** the loan in its `loanUtxoId` field.
 | `9b3aa00c…#1` → **O‑06** | `0e26cc58…8b05b8` | *Dano Finance: Create Loan* | refinance |
 
 **Fluid names our opening transaction.** For six of the seven loans, `loanUtxoId` is exactly the
-transaction listed in §1.1. The Open-to-Close pairing is therefore not our construction — Fluid's
-records and the Cardano ledger produce it independently, and they agree. The seventh loan was opened
+transaction listed in §1.1. Fluid's records and the Cardano ledger produce the Open-to-Close pairing
+independently of each other, and they agree. The seventh loan was opened
 in July 2026, before this milestone's window, and we do not claim its opening transaction.
 
 **The reconciliation.** Four things tie Fluid's record to the Cardano ledger:
@@ -453,7 +473,8 @@ TX‑04 and TX‑05 the settlement leg is paid by the Dano pool, not by the borr
 borrower's net ADA change is the network fee and min-UTxO movement only. On TX‑04 the pool disbursed
 14.000108 ADA, of which 12.000102 ADA settled the Fluid debt and exactly 2.000000 ADA paid the
 origination fee, while the borrower contributed 1.555760 ADA of network fee and nothing else.
-**This is the whole point of the product**: you can repay a loan you do not have the money to repay.
+The claim this establishes: a borrower can settle a Fluid debt without holding the funds to settle
+it, because the new Dano loan funds the settlement in the same transaction.
 **TX‑02 is the exception** and is stated as such in §3 — it draws on the fixed-term staking
 contract, where the fee is not capitalised and the borrower funds 0.954728 ₳ of it.
 
@@ -541,9 +562,38 @@ solely as a leg of something else.
 
 ---
 
-The repay journey is therefore evidenced on mainnet **in all three of its forms** — three
-repayments from the borrower's own funds plus five settlement legs — each verified against the
-Cardano ledger, and the seven Fluid loans additionally against the counterparty protocol's own
-records.
+The repay journey is therefore evidenced on mainnet by **three repayments made as a direct user
+action**, from the borrower's own funds, and separately by the **five settlement legs** inside the
+refinances — each verified against the Cardano ledger, and the seven Fluid loans additionally
+against the counterparty protocol's own records.
 
 ---
+
+---
+
+## Appendix — the addresses behind the labels
+
+Kept here so the tables above stay readable. Every address can be opened directly on Cardanoscan.
+
+**The two signing wallets.** Each is identified in §1 by the **Fluid loan script address** its stake
+credential produces: the script portion is protocol-owned and identical for both, the delegation
+portion is the borrower's — which is why the two differ while the payment credential is the same.
+
+| | Fluid loan script address | Transactions |
+|---|---|---|
+| **W1** | `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfkk7lqahdkjjknfuxdj9kevvyqmlu3zyx3x547dqw2pevx0sewx5g2` | TX‑01, TX‑02 |
+| **W2** | `addr1z9dth23wk9mm2ars073kzl35xc5463wh090qsarz822sfk39xk00fdnqnawyvkcs43kmt7hv4uqwetw9yd6lkjl5vxhs279pxf` | TX‑03, TX‑04, TX‑05 |
+
+The base (wallet) addresses, as shown connected in the application, are in
+[`04` §2.2](./04_USER_JOURNEYS_AND_APP_STATE.md#22-the-wallets-in-the-screenshots-are-the-wallets-that-signed).
+
+**The contracts in the value-flow tables (§3).**
+
+| Label | Address |
+|---|---|
+| `POOL` — Dano Flexible Pool | `addr1wx2degj2ru0uctl4rnvs7vh5l608smvxrgkm7lf8txxjd6qs43szs` |
+| `STAKING` — Dano Staking (fixed-term) | `addr1xxt4n07cnlafzefqvne69mmxmnzu2t9gtd27jw9d9yvc7u5htxla38l6j9jjqe8n5thkdhx9c5k2sk64ayu262ge3aequnmfak` |
+| `LOAN` — Dano Flexible Loan contract | `addr1zxk23ccxak37kmp94qutawkr0kffcgt24vfu34rrljj6pr…` |
+| `FEE` — Dano origination-fee address | `addr1qywadgaxcnh993zpzl5kfs806nqe7jyxp4e8unjpll5quymw2aappdz98nah303sy0dc3p83x4hewv5z5c44q2sfqgqqdnjkku` |
+| `FLUID` — Fluid loan script address | per wallet, in the table above |
+| `SETTLE` — the Fluid loan's settlement recipient | a distinct address per loan; each one is named in that loan's row in §3 |
