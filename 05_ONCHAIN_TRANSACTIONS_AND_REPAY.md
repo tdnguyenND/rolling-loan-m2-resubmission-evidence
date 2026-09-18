@@ -95,8 +95,9 @@ directly**, with no external protocol in the path — it mints Borrower NFT
 `valid_contract = true` on every script execution.
 
 **The pairing is a fact about the ledger, not a claim in this document.** Each Fluid position NFT
-has exactly **one mint and one burn** in its entire on-chain history: the mint is the Open
-transaction, the burn is the Refinance or Repay that closed it. It can be checked directly:
+**held by the loan script** — policy `30f1095a…`, and only that policy (§2.2) — has exactly **one
+mint and one burn** in its entire on-chain history: the mint is the Open transaction, the burn is
+the Refinance or Repay that closed it. It can be checked directly:
 
 ```
 GET https://api.koios.rest/api/v1/asset_txs
@@ -142,6 +143,30 @@ and TX‑04 — so it cannot evidence that a distinct loan was created. The **Bo
 Danogo's own CIP‑25 metadata names it *"Borrower NFT (Flexible Pool Lending)"*. Every claim of the
 form "a distinct loan was created" in this package is made against the Borrower NFT. Our previous
 submission did not draw this distinction; see [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑3.
+
+### 2.2 The three Fluid tokens minted at Open, and which one the pairing uses
+
+Opening a Fluid loan mints **three** tokens that all carry the **same asset name** — the loan's
+identifier — under three different policies. Mainnet open `917bdfe1…` (O‑01, the loan closed by
+TX‑01) shows the shape:
+
+| Policy | Where it goes | Burned when the loan closes? |
+|---|---|---|
+| `30f1095a…` | the **Fluid loan script** `addr1z9dth23…` | ✅ **yes** — TX‑01 burns it `−1` |
+| `bcd713bb…` | the loan's **settlement address** `addr1q9mt6pcx…` (the `SETTLE` label in §3) | ❌ no |
+| `eadc69a5…` | the **borrower's wallet** `addr1q8009gf2…` | ❌ no |
+
+Only the first is the position NFT the Open ↔ Close pairing is built on, and it is the one the Koios
+query above names. The other two survive the loan: the borrower's wallet keeps a token for a
+position that no longer exists. That is harmless — each sits in its own min-UTxO — but it means
+**"the token minted at open is the token burned at close" is true of the script-held token and false
+of the wallet-held one**, and the difference is only visible if the policy is read as well as the
+name. Both preprod sessions that looked at this see the same three policies — [`06`
+OI‑2](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session).
+
+Note this is a **Fluid** policy set, distinct from the two **Danogo** tokens in §2.1.
+
+---
 
 ---
 

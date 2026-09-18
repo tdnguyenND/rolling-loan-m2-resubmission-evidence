@@ -97,7 +97,9 @@ and the counterparty protocol's own loan records
 
 Integration-test results are in
 [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) as they stand
-today — 25 transaction QC checks of which **24 hold**, and 8 automated UI tests, all passing — with
+today — 25 transaction QC checks of which **24 hold**, and 8 automated UI tests, all passing (in
+**no-sign** mode: real wallet reads, `signTx`/`submitTx` stubbed, so they evidence the surface and
+its arithmetic, not settlement — [`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) — with
 the step-by-step detail in the previous submission's
 [`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §2–§3, kept unedited as an
 archive. Those figures are our own reporting and are named as such; the primary verifiable evidence is
@@ -121,9 +123,13 @@ Three things hold across all of it:
 
 - **Fifteen signed Cardano mainnet transactions**, two wallets, 18–28 August 2026 — every one built
   by this application (metadata label 674), every Plutus script execution `valid_contract = true`.
-- **The pairing is the ledger's, not ours.** Each Fluid loan's position NFT has exactly one mint and
-  one burn in its whole history: the mint is the Open transaction, the burn is the transaction that
-  closed it. Fluid's own API independently reports the same loans as repaid, naming both hashes.
+- **The pairing is the ledger's, not ours.** Each Fluid loan's position NFT **held by the loan
+  script** (policy `30f1095a…`) has exactly one mint and one burn in its whole history: the mint is
+  the Open transaction, the burn is the transaction that closed it. Open mints two sibling tokens of
+  the same name under other Fluid policies — one to the settlement address, one to the borrower's
+  wallet — which are not burned and which the pairing does not use
+  ([`05` §2.2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#22-the-three-fluid-tokens-minted-at-open-and-which-one-the-pairing-uses)).
+  Fluid's own API independently reports the same loans as repaid, naming both hashes.
 - **The interface quoted what settled.** Before signing `c426d9fa…` it showed a Fluid debt of 12 ADA
   and a fee of 2 ADA; on chain the settlement is 12.000102 ADA, the fee exactly 2.000000 ADA, and
   DJED 6.000000 is carried across.
@@ -150,6 +156,9 @@ integration-test results as they stand today, is in
                                      directions, journey 3 by a second tester on a
                                      second wallet, journey 4 one borrow filling two
                                      pools; 123 QC checks
+07_ACCEPTANCE_CRITERIA_M2.md         every milestone Output, Acceptance Criterion and
+                                     Evidence item mapped to what this package can
+                                     actually show — including the two it cannot
 08_CORRECTIONS.md                    corrections to our own previous submission
 
 screenshots/
@@ -170,6 +179,8 @@ previous submission, kept in place so its links still resolve, each with a banne
                                      checks, and the automated integration-test results
   02_Mainnet_Transactions_M2.md      its two mainnet transactions
   03_Reviewer_Checklist_M2.md        its output / criterion / evidence mapping
+                                     (superseded by 07 — several of its ticks rest
+                                     on claims we have since withdrawn)
 ```
 
 ### The previous submission is still here
@@ -177,7 +188,9 @@ previous submission, kept in place so its links still resolve, each with a banne
 Those three files are the evidence the reviewer read the first time. They are **unedited** — we did
 not quietly fix them — and each carries a banner pointing at
 [`08_CORRECTIONS.md`](./08_CORRECTIONS.md), which lists every claim in them we have since corrected
-or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
+or withdrawn, with the on-chain arithmetic. `03`'s banner additionally points at
+[`07_ACCEPTANCE_CRITERIA_M2.md`](./07_ACCEPTANCE_CRITERIA_M2.md), which replaces its
+criterion-to-evidence mapping. Their walkthrough screenshots in
 [`screenshots/`](./screenshots/) remain valid and are still referenced by this package.
 
 ---

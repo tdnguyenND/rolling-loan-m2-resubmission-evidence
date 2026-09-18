@@ -4,7 +4,8 @@
 loan from the Danogo front end with the user's own wallet.
 
 **What is in this file:** four complete sessions walked end-to-end on **preprod**
-(https://preprod.danogo.io) on **18 September 2026**, on **three different wallets**, against
+(https://preprod.danogo.io) on **18 September 2026**, on **three different wallet accounts — all
+Eternl**, two of them separate installations running different Eternl versions, against
 **Cardano preprod** and the **Fluid preprod** smart contracts. Each session is captured screen by
 screen — every screen from the first click to the settled transaction, a screen recording of the
 whole session, the wallet signing dialog for each signature, and the public-explorer record of each
@@ -32,7 +33,7 @@ transaction — and each is then checked, line by line, against what the chain a
 | | Journey 1 | Journey 2 | Journey 3 | Journey 4 |
 |---|---|---|---|---|
 | **Wallet** | Eternl v2.1.7.1 · *1kang (#0)* · `addr_test1qr4rll…5g494` | the same wallet | Eternl v2.1.5.0 · *Ngan Wallet (#0)* · `addr_test1qqv2pd7…027ghs` | Eternl · *Deploy Oracle (#0)* · `addr_test1qr20zc2v…sm9xmy` |
-| **Run by** | delivery team | delivery team | **a second tester** | ⬜ *to fill* |
+| **Run by** | delivery team | delivery team | **a second tester** (identity not recorded — §3) | not recorded — §4 |
 | **Borrowed** | 25 ADA | 11 fUSDM | 11 fUSDM | **905.004 ADA → two loans, 20 + 885** |
 | **Collateral** | 100 fUSDM | 100 ADA | 100 ADA | 98,327.69 fUSDM |
 | **Journeys covered** | open · view · refinance · repay | open · view · refinance · repay | open · view · refinance · repay | open · view · refinance **×2** — **no repay** |
@@ -40,7 +41,7 @@ transaction — and each is then checked, line by line, against what the chain a
 | **Repay** | [`e134b85e…681416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) | [`bae9a9c9…c75b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d) | [`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed) | — |
 | **QC checks** | **31 / 31** | **33 / 33** | **22 / 22** | **37 / 37** |
 | **Defects found** | — | — | **D-1** submit failed, recovered by *Retry* | — |
-| **Recording** | [`01.webm`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.webm) | [`02.webm`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.webm) | [`03.webm`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.webm) (7 min 29 s) | [`04.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/04-open-and-two-refinances-borrow-ADA-collateral-USDM.mp4) (3 min 50 s) |
+| **Recording** | [`01.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.mp4) | [`02.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.mp4) | [`03.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4) (7 min 29 s) | [`04.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/04-open-and-two-refinances-borrow-ADA-collateral-USDM.mp4) (3 min 50 s) |
 | **Screenshots** | [`journey-1/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-1-borrow-ADA-collateral-USDM) | [`journey-2/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-2-borrow-USDM-collateral-ADA) | [`journey-3/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-3-borrow-USDM-collateral-ADA) | [`journey-4/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-4-borrow-ADA-collateral-USDM) |
 
 Two open items recur across the sessions and are stated once, at the end:
@@ -326,16 +327,15 @@ on a different wallet and a different Eternl installation**.
 `addr_test1qqv2pd75qaeye7w8fcddtwd8uk8wmxgr979wx4zcjknswfjpq4xedf86fkzd7ln9escmvdd4s5enl7ma50q4tk3dn8ys027ghs`.
 **Session:** one continuous recording of **7 min 29 s**, 08:22:02 → 08:29:31 UTC.
 
-**Tester:** ⬜ *to fill:* `____________________` — relation to the delivery team: ⬜ `____________`
-**Instructions given:** ⬜ *to fill:* goals only / step-by-step / other · **questions asked during
-the session:** ⬜ `___`
+**Tester:** a second person, who did not run journeys 1 and 2. **Their name, their relation to the
+delivery team, the instructions they were given and the questions they asked during the session were
+not recorded**, and this package does not reconstruct them after the fact.
 
-> The two lines above are left blank on purpose. This session was run by someone who did not run the
-> earlier walkthroughs, but a usability claim depends on *who* the tester is and *what they were
-> told* — so this package states those facts rather than inferring a verdict from them. Until they
-> are filled in, this session is evidence that the four journeys can be completed by a second person
-> on a second wallet, and of the defect in [§3.3](#33-coverage-stability-and-findings), and nothing
-> more.
+> That omission is stated rather than worked around, because a usability claim depends on exactly
+> those facts. Without them this session establishes that the four journeys can be completed by a
+> second person on a second wallet and a second Eternl installation, and it establishes the defect in
+> [§3.3](#33-coverage-stability-and-findings). **No claim about how intuitive the interface is is
+> drawn from it**, here or anywhere else in the package.
 
 ### 3.1 The session, step by step
 
@@ -434,7 +434,7 @@ transactions above. It is recorded here so the recording is not misread.
 
 | ID | Severity | What happened |
 |---|---|---|
-| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. ⬜ *root cause to fill* |
+| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. ⬜ **Root cause not established** — reported as open, not as fixed. |
 | **D-2** | minor | While the repay preview loads, the dialog reads *"Minimum amount to repay is **--** fUSDM"* and shows skeleton bars for several seconds before the real numbers appear (`10` is the loaded state; the skeleton is visible in the recording at 5:08–5:12). |
 | **D-3** | observation | The repay of the Dano loan took **~1 min 40 s** between signing and the confirmation clearing (5:35 → 7:08), with the dialog showing *"Waiting for confirmation…"* throughout. The block itself settled at 08:29:15; the wait is the app polling, not the chain. |
 | **OI-1** | carried over | the *Deposit 5 ADA* / *Fee 5 fUSDM ($5.00)* line again, against a loan of **11 fUSDM of debt for 11.000000 fUSDM disbursed** — see [Open items](#open-items-common-to-more-than-one-session) |
@@ -459,9 +459,10 @@ multi-pool case**, on a **third wallet**. It does **not** cover repay.
 unaltered except that the browser's **bookmarks bar** has been cropped out; the address bar is kept,
 and the recording is the unedited source for every frame.
 
-**Tester:** ⬜ *to fill:* `____________________` — relation to the delivery team: ⬜ `____________`
-**Instructions given:** ⬜ *to fill:* goals only / step-by-step / other · **questions asked during
-the session:** ⬜ `___`
+**Tester: not recorded.** This session ran on a third wallet, but who operated it, their relation to
+the delivery team and what they were told were not logged at the time — so, as in
+[§3](#journey-3--a-second-tester-on-a-second-wallet), nothing about independence or usability is
+claimed from it. What it establishes is the multi-pool behaviour below.
 
 ### 4.1 The session, step by step
 
@@ -609,37 +610,43 @@ loan that resulted does not carry them:
 | Journey 4 | Deposit 5 ADA · Fee 9.05 ADA ($2.76) | **905.004000 ₳** disbursed, **896.997892 ₳** received, and the whole **8.006108 ₳** difference is network fee (0.894608) plus min-UTxO (7.111500) — no payment to any Dano or Fluid fee address; debt afterwards **905.004 ADA** (not 914.054) |
 
 So whatever those two lines describe, it is **not** an amount deducted at open or capitalised into
-the loan. It is recorded as an open item rather than a pass. ⬜ *root cause to fill.* Note that the
+the loan. It is recorded as an open item rather than a pass. ⬜ **Root cause not established.** Note that the
 **refinance** fee is a different figure and does reconcile exactly, in every session: 2 ADA or
-2 fUSDM quoted, 2.000000 paid to the fee address, six times out of six.
+2 fUSDM quoted, 2.000000 paid to the fee address, five times out of five.
 
 **OI-2 · Which token the refinance burns, and what is left behind.** Two related observations:
 
-- *Journey 2.* The position token minted to the wallet at open, `2d3883b3…70b67d8a`, appears in the
-  refinance **as an input from the Fluid script (−1) and again in an output back to the borrower's
-  wallet (+1)**. The tokens Cardanoscan shows moving across that refinance are **`8dcf151…cf6` out**
-  and **`904770e…4c5` in**, with 3 mints & burns in the transaction. That session's captures
-  therefore do **not** support the statement that the token minted at open is the token burned by the
-  refinance.
+- *Journey 2.* The token name `2d3883b3…70b67d8a` appears in the refinance **as a −1 from the Fluid
+  script and again in an output to the borrower's wallet (+1)**, which reads as though the token
+  minted at open were not the token burned. **Koios resolves it: the two are different tokens that
+  share one asset name.** `tx_info` for `78d434d5…` reports the burn under policy
+  **`8dfb447e…`** (the Fluid loan script's position NFT, `−1`) while the copy left in the wallet
+  `addr_test1qr4rlljc…` is under policy **`eadc69a5…`**, untouched; the same transaction mints two
+  Danogo tokens under `8de34f17…`. So journey 2 has **exactly the shape journey 4 shows**, and the
+  pairing claim holds for the script-held token — see
+  [`05` §2.2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#22-the-three-fluid-tokens-minted-at-open-and-which-one-the-pairing-uses),
+  where the same three policies are shown on mainnet.
 - *Journey 4.* Koios confirms the shape directly: each refinance burns the **Fluid position token**
   held by the loan script (`8dfb447e….*`) and mints a fresh Dano loan token plus a Borrower NFT — but
   the **Fluid borrower NFTs** minted to the wallet at open (`eadc69a5….*`) are **not** burned and
   remain in the wallet after both loans are gone. Harmless (each sits in a 1.245590 ₳ UTxO), but the
   wallet shows tokens for positions that no longer exist.
 
-⬜ *For the team to confirm which of these is intended before the claim is relied on anywhere.*
+What remains open is therefore not *which* token the pairing uses — the ledger answers that — but
+whether leaving the `eadc69a5…` borrower NFT in the wallet after the position is gone is intended.
+⬜ *For the team to confirm.*
 
 ---
 
 ## What the four sessions establish together
 
-Four sessions, three wallets, one day, **123 QC checks, 123 hold**.
+Four sessions, three Eternl accounts, one day, **123 QC checks, 123 hold**.
 
 - **All four journeys are captured end to end.** Three sessions run *open → view → refinance → view →
   repay* on a single loan, from the first click to the settled repayment: journeys 1 and 2 in
   opposite asset directions, journey 3 by a second tester on a second wallet. Journey 4 covers
   *open → view → refinance*, twice, and says plainly that it does not cover repay.
-- **What the interface quotes is what the chain records.** Across six refinances, the fee quoted is
+- **What the interface quotes is what the chain records.** Across five refinances, the fee quoted is
   the fee paid to the lovelace (2.000000 each time), the collateral quoted is the collateral that
   arrives at the Dano contract to the decimal, the health factor quoted is the health factor the new
   loan carries, the resulting debt is debt + fee, and the pool disburses exactly settlement + fee
@@ -647,13 +654,18 @@ Four sessions, three wallets, one day, **123 QC checks, 123 hold**.
   is released in full and the borrower's title to the loan is burned.
 - **The collateral never returns to the borrower in between.** Every refinance moves it from the
   Fluid script to the Dano loan contract inside one transaction, in one block.
-- **No capital of the borrower's own is needed.** Their outlay on a refinance is the network fee plus
-  the min-UTxO top-up, and nothing else.
+- **No capital of the borrower's own is needed — on the pools these sessions used.** In all five
+  refinances here the pool funds both the settlement and the fee, and the borrower's outlay is the
+  network fee plus a min-UTxO top-up, nothing more. This is a property of the Flexible Pool, not of
+  refinancing as such: the one mainnet refinance drawing on the fixed-term staking contract makes the
+  borrower fund 0.954728 ₳ of the fee out of pocket — correction
+  [C-4](./08_CORRECTIONS.md#c4--corrected-the-borrower-contributes-only-the-network-fee-was-over-stated).
 - **Defects are published, not edited out.** Journey 3's refinance failed to submit on the first
   attempt and needed a *Retry* (D-1); journey 4 records four smaller items. Two questions recur and
   are stated once, as OI-1 and OI-2, rather than four times as passes.
 - **What none of this shows** is whether an independent user finds the interface intuitive. Journey 3
-  was run by someone outside the walkthroughs, but until the tester lines in §3 and §4 are filled in,
-  no usability verdict is drawn from any of these sessions. The milestone's settlement evidence
+  was run by someone outside the walkthroughs, but **who the testers of journeys 3 and 4 were, what
+  they were told and what they asked were not recorded** (§3, §4) — so no usability verdict is drawn
+  from any of these sessions. The milestone's settlement evidence
   remains the fifteen mainnet transactions in
   [`00`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/00_POA_SUBMISSION_FORM.md) §A.

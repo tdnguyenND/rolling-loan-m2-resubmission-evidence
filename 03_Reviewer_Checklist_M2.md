@@ -5,6 +5,11 @@
 > still wrong here — deliberately.
 >
 > **Start at [`README.md`](./README.md)** for the resubmission.
+> **The mapping below is superseded by
+> [`07_ACCEPTANCE_CRITERIA_M2.md`](./07_ACCEPTANCE_CRITERIA_M2.md)**, which maps the same Outputs,
+> Acceptance Criteria and Evidence items to what the resubmission can actually show. In particular
+> **AC3 is ticked ✅ here on the strength of the usability self-assessment that has since been
+> withdrawn**; `07` splits it and records it as not evidenced.
 > **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
 > this file that we have since corrected or withdrawn.
 
