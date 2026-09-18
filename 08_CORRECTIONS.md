@@ -277,7 +277,5 @@ For completeness — these were checked against public chain data and stand unch
 | tx `c426d9fa…`: Fluid debt 12 ADA, fee 2 ADA, new borrow 14 ADA | ✅ settlement 12.000102 ADA, fee 2.000000 ADA, pool disbursement 14.000108 ADA |
 | tx `c426d9fa…`: collateral DJED 6 carried across | ✅ 6.000000 DJED in from the Fluid script, 6.000000 DJED out to the Dano loan contract |
 | Atomicity — one transaction, one block | ✅ on all five |
-| Borrower needs no capital beyond the network fee | ⚠️ **holds for four of the five** — funded by the Dano pool on TX‑01, TX‑03, TX‑04 and TX‑05; TX‑02 is the exception, see C‑4 |
-| Fluid has no Cardano testnet deployment, so mainnet is the only possible environment | ⚠️ **restated** — mainnet is where this path exists as a real market and where the evidence is third-party-verifiable; the absolute "no testnet deployment" form is withdrawn, see C‑5 |
 
 All of the above was re-checked against the public Koios API, not against our own reporting.

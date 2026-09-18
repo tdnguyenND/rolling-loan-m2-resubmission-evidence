@@ -184,7 +184,7 @@ the refinance surface carries an automated suite.
 |---|---|---|---|
 | **View** | Every figure in *My Account → Loans* re-derived from the ledger; the loan count equals the Borrower NFTs the wallet holds on chain (2 and 4) | — no journey-specific automated test is reported | [`04` §2](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger) |
 | **Open** | 7 signed Open transactions on mainnet, each `valid_contract = true`; the two walkthroughs below capture the workflow screen by screen | — no journey-specific automated test is reported | [`05` §1.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) |
-| **Repay** | 3 signed mainnet repayments from the borrower's own funds, plus the settlement leg inside each of the 5 refinances; Fluid's indexer reports all 7 of its loans `loan_repaid`, `remainingDebt: 0` | — no journey-specific automated test is reported | [`05` §5](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance) |
+| **Repay** | 3 signed mainnet repayments from the borrower's own funds, plus the settlement leg inside each of the 5 refinances; Fluid's indexer reports all 7 of its loans `loan_repaid`, `remainingDebt: 0`. The journey is also **captured screen by screen** on preprod — quote → wallet dialog → settled transaction — closing the loan journey 1 had just opened | — no journey-specific automated test is reported | [`05` §5](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance) |
 | **Refinance** | 5 signed mainnet refinances; **25 transaction QC checks** (TC-01 … TC-25), **24 of which hold** | **8 automated UI tests** (FN-I7, FN-I9 … FN-I14, FN-J10) on live mainnet data, **8/8 pass** | [`05` §1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) · [`04` §1.5](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) |
 
 TC-24 is the one check that does not hold. It asserts that the transaction we cited as the zero-fee
@@ -196,9 +196,12 @@ error in our own evidence, not a defect in the product.
 To show the click path itself rather than our description of it, two further journeys were walked
 end-to-end on preprod (https://preprod.danogo.io) on 18 September 2026 from one Eternl-connected
 wallet. Both run **Open → View → Refinance → View** in opposite asset directions, and each is
-captured in full: ten screenshots covering every screen from the first click to the settled loan, a
-screen recording of the whole session, the Eternl signing dialog for both signatures, and the
-Cardanoscan record of both transactions.
+captured in full: every screen from the first click to the settled loan, a screen recording of the
+whole session, the Eternl signing dialog for each signature, and the Cardanoscan record of each
+transaction. **Both journeys continue into the fourth journey**: the Dano loan each one created was later
+**repaid in full** from the same interface, so each loan is followed through
+**open → view → refinance → view → repay** end to end — origination to settlement, twice, in
+opposite asset directions.
 
 | | Journey 1 | Journey 2 |
 |---|---|---|
@@ -207,14 +210,23 @@ Cardanoscan record of both transactions.
 | Refinance transaction | [`0bfa25db…ccfd`](https://preprod.cardanoscan.io/transaction/0bfa25db49a676c15645c25d1d8b35acf5630d1d9cb1d472d386430cb954ccfd) | [`78d434d5…95d6`](https://preprod.cardanoscan.io/transaction/78d434d5d3028e2f8025f9ad06ad65849cee4dcbd89d6abd206334baaa2495d6) |
 | Quoted in the app **before** signing | fee 2 ADA · HF 7.27 → **1.21** · net cost 4.00% → 0.68% | fee 2 fUSDM · HF 3.63 → **1.87** · net cost 4.00% → −5.86% |
 | The loan **after** signing | Dano Finance · **27 ADA** · HF **1.21** · APR 3.21% · collateral 100 fUSDM | Dano Finance · **13 fUSDM** · HF **1.87** · APR 3.07% · collateral 100 ADA |
+| Repay, same interface | ✅ [`e134b85e…1416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) — quoted **27.000474 ADA**, paid **27.000473**, loan token burned, **100 fUSDM collateral released** | ✅ [`bae9a9c9…5b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d) — quoted **13.000218 fUSDM**, paid **13.000218**, loan token burned, **100 ADA collateral released** |
 | Screenshots · recording | [`journey-1/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-1-borrow-ADA-collateral-USDM) · [`01.webm`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.webm) | [`journey-2/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-2-borrow-USDM-collateral-ADA) · [`02.webm`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.webm) |
 
 27 ADA = 25 debt + 2 fee; 13 fUSDM = 11 debt + 2 fee. In both journeys the health factor the
 interface showed before the user signed is the health factor the new loan carries afterwards, to two
 decimals, and the fee it quoted is the fee that was capitalised. The collateral is the same
-collateral, never returned to the borrower in between. In journey 2, the token Eternl shows being
-minted by the open transaction is the token it shows being burned by the refinance — one mint, one
-burn, opened and closed in the same session.
+collateral, never returned to the borrower in between. Each refinance carries three mints and burns:
+in journey 2 the explorer shows the source position token leaving the Fluid script and a new Dano
+loan token arriving with the collateral, in the same transaction.
+
+Each session is written up as its own report, in the form of the integration test report of the
+previous submission — the journey step by step, then the QC checks against the settled transaction:
+[`06_UAT_Report_Journey_1_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_UAT_Report_Journey_1_M2.md) (31 checks, 31 hold) and
+[`07_UAT_Report_Journey_2_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_UAT_Report_Journey_2_M2.md) (33 checks, 33 hold) — each report carries all
+four journeys on one loan, including the repayment that closed it. Both
+record, as open items rather than passes, the two figures this package has not reconciled: the
+*Deposit* and *Fee* lines in the Borrow Market preview at open.
 
 These are still our own sessions. They establish the complete, uninterrupted click path of each
 journey and the agreement between what the interface promised and what the chain recorded; they are
@@ -228,6 +240,9 @@ Evidence:
 - The report they come from, kept unedited as an archive: [`01_Integration_Test_Report_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/01_Integration_Test_Report_M2.md)
 - Reviewer checklist: [`03_Reviewer_Checklist_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/03_Reviewer_Checklist_M2.md)
 - Step-by-step screenshots: [`screenshots/01-loans-sheet.png`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/screenshots/01-loans-sheet.png) … [`06-portfolio-after.png`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/screenshots/06-portfolio-after.png)
+- The two sessions written up in full, journey by journey and check by check:
+  [`06_UAT_Report_Journey_1_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/06_UAT_Report_Journey_1_M2.md) ·
+  [`07_UAT_Report_Journey_2_M2.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_UAT_Report_Journey_2_M2.md)
 
 ## D. Clarification
 

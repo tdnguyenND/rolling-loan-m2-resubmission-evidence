@@ -188,7 +188,7 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 | Corrections to our own previous submission | ✅ 5, four of them unprompted |
 | Integration-test figures | ✅ reported, and named as our own reporting |
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
-| Interface walkthrough per journey | ✅ refinance end-to-end including the Eternl signing dialog; **open captured end-to-end** in the two preprod walkthroughs — `00` §D; repay via its own transactions and the resulting app state — `04` §1 |
+| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the two preprod walkthroughs — `00` §C; **repay** end-to-end on both loans those walkthroughs created — `06` and `07` §1 |
 
 On the last two rows. The application **is** covered by an automated suite, and every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
@@ -197,9 +197,11 @@ third party can check without us: the ledger and the counterparty protocol's rec
 journey is captured end-to-end, including the Eternl signing dialog, and so is the **open** journey
 — in the two walkthroughs added for this resubmission, which run *Open → View → Refinance → View*
 on preprod with a screenshot of every screen and a screen recording of the whole session
-([`00`](./00_POA_SUBMISSION_FORM.md) §D). For **repay** there is no end-to-end recording: its entry
-point is visible in those walkthroughs, and the journey's own transactions and the resulting app
-state carry the record. A recorded repay can be added on request.
+([`00`](./00_POA_SUBMISSION_FORM.md) §D). **Repay** is captured screen by screen too, in both walkthroughs — the
+quote, the wallet dialog burning the loan token, and the settled transaction — each closing the loan
+that walkthrough had just opened and refinanced ([`06`](./06_UAT_Report_Journey_1_M2.md),
+[`07`](./07_UAT_Report_Journey_2_M2.md)); it has no screen recording of its own, and the journey's
+mainnet evidence is its three signed transactions.
 
 ---
 
