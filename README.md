@@ -145,11 +145,12 @@ integration-test results as they stand today, is in
 05_ONCHAIN_TRANSACTIONS_AND_REPAY.md fifteen mainnet transactions grouped by journey,
                                      per-transaction value flow, the repay journey in
                                      all three of its forms
-06_UAT_Report_Journey_1_M2.md        the four journeys on one loan, step by step and
-07_UAT_Report_Journey_2_M2.md        check by check, in opposite asset directions
+06_UAT_Reports_Four_Journeys_M2.md   the four preprod sessions, step by step and check
+                                     by check: journeys 1 and 2 in opposite asset
+                                     directions, journey 3 by a second tester on a
+                                     second wallet, journey 4 one borrow filling two
+                                     pools; 123 QC checks
 08_CORRECTIONS.md                    corrections to our own previous submission
-09_UAT_Report_Journey_3_M2.md        the same four journeys, a second tester, second wallet
-10_UAT_Report_Journey_4_M2.md        one borrow, two pools, two loans, both refinanced
 
 screenshots/
   screens/                           the app's My Account - Loans, one per wallet
@@ -194,7 +195,7 @@ or withdrawn, with the on-chain arithmetic. Their walkthrough screenshots in
 | Corrections to our own previous submission | ✅ 5, four of them unprompted |
 | Integration-test figures | ✅ reported, and named as our own reporting |
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
-| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`10`); **repay** end-to-end on three loans those walkthroughs created — `06`, `07` and `09` §1 |
+| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`06` §4.1); **repay** end-to-end on three loans those walkthroughs created — `06` §§1.1, 2.1, 3.1 |
 
 On the last two rows. The application **is** covered by an automated suite, and every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
@@ -205,9 +206,9 @@ journey is captured end-to-end, including the Eternl signing dialog, and so is t
 on preprod with a screenshot of every screen and a screen recording of the whole session
 ([`00`](./00_POA_SUBMISSION_FORM.md) §C). **Repay** is captured screen by screen too, in three of them — the
 quote, the wallet dialog burning the loan token, and the settled transaction — each closing the loan
-that walkthrough had just opened and refinanced ([`06`](./06_UAT_Report_Journey_1_M2.md),
-[`07`](./07_UAT_Report_Journey_2_M2.md), [`09`](./09_UAT_Report_Journey_3_M2.md)); only
-[`09`](./09_UAT_Report_Journey_3_M2.md) has a screen recording that runs through the repayment, and the
+that walkthrough had just opened and refinanced ([`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm),
+[`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada), [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet)); only
+[`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) has a screen recording that runs through the repayment, and the
 journey's mainnet evidence is its three signed transactions.
 
 ---
