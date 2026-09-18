@@ -1,3 +1,15 @@
+> ### ⚠️ Superseded — this file is from the **previous** Milestone 2 submission
+>
+> It is kept at its original path so that links from the previous Proof of Achievement still
+> resolve. It has **not** been edited, so anything it says that we later found to be wrong is
+> still wrong here — deliberately.
+>
+> **Start at [`README.md`](./README.md)** for the resubmission.
+> **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
+> this file that we have since corrected or withdrawn — including the claim that tx `88579a30…` used a **no-origination-fee** pool, which the chain contradicts, the statement that open and repay are "covered implicitly", and the §"Why mainnet and not testnet" claim that Fluid deploys no smart contracts on any Cardano testnet, which we have since withdrawn (C‑5).
+
+---
+
 # Milestone 2 — Deployment & Transaction Evidence (Mainnet)
 
 **Feature:** Rolling Loan ("Refinance via Dano") · **App:** https://v3.danogo.io/ (staging, live mainnet contracts)
