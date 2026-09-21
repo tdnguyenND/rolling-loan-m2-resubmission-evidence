@@ -449,7 +449,10 @@ transactions above. It is recorded here so the recording is not misread.
 
 | ID | Severity | What happened |
 |---|---|---|
-| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. **Cause established — see [Root causes](#root-causes-established-after-the-sessions); no fix shipped yet.** |
+| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. **Impact bounded and checked on chain: no funds were lost, nothing was double-submitted, and the
+ledger carries exactly one transaction for this refinance.** It recovered inside the app, with no
+reload and no data re-entered. Cause established — the wallet supplied a collateral UTxO its own
+cache had not refreshed; see [Root causes](#root-causes-established-after-the-sessions). |
 | **D-2** | minor | While the repay preview loads, the dialog reads *"Minimum amount to repay is **--** fUSDM"* and shows skeleton bars for several seconds before the real numbers appear (`10` is the loaded state; the skeleton is visible in the recording at 5:08–5:12). |
 | **D-3** | observation — **closed, not a product defect** | The repay of the Dano loan took **~1 min 40 s** between signing and the confirmation clearing (5:35 → 7:08), with the dialog showing *"Waiting for confirmation…"* throughout. **The wait is the chain, not the app.** Signing is at 5:35 ≈ 08:27:37; Koios puts the transaction in block **5,190,743 at 08:29:15 UTC**, 1 min 38 s later, and the dialog cleared at 7:08 ≈ 08:29:10 — the same moment within the few seconds of slop in the recording's zero point. See [Root causes](#root-causes-established-after-the-sessions). |
 | **OI-1** | carried over | the *Deposit 5 ADA* / *Fee 5 fUSDM ($5.00)* line again, against a loan of **11 fUSDM of debt for 11.000000 fUSDM disbursed** — see [Open items](#open-items-common-to-more-than-one-session) |
@@ -695,7 +698,10 @@ So whatever those two lines describe, it is **not** an amount deducted at open o
 the loan. Note that the **refinance** fee is a different figure and does reconcile exactly, in every
 session: 2 ADA or 2 fUSDM quoted, 2.000000 paid to the fee address, five times out of five.
 
-**Cause established — see [Root causes](#root-causes-established-after-the-sessions); no fix shipped yet.**
+**Impact bounded and checked on chain: no funds were lost, nothing was double-submitted, and the
+ledger carries exactly one transaction for this refinance.** It recovered inside the app, with no
+reload and no data re-entered. Cause established — the wallet supplied a collateral UTxO its own
+cache had not refreshed; see [Root causes](#root-causes-established-after-the-sessions).
 
 **OI-2 · Which token the refinance burns, and what is left behind.** Two related observations:
 
@@ -725,8 +731,10 @@ whether leaving the `eadc69a5…` borrower NFT in the wallet after the position 
 
 The sessions recorded what happened on screen. Four of the items they raised have since been traced,
 **after the fact**, to a specific line of behaviour — in the application source, in the wallet's own
-CIP-30 behaviour, or in the chain. Each one below states what can be checked and how. Two are
-product defects with no fix shipped yet; two turn out not to be defects at all.
+CIP-30 behaviour, or in the chain. Each one below states what can be checked and how, and what its
+impact is: **neither of the two product defects moves money or changes an amount the borrower pays** —
+one is preview text on a single screen, the other a wallet-side collateral choice that the app
+recovers from. The remaining two turn out not to be defects at all.
 
 ### D-1 — the failed submit: the wallet offered stale collateral
 
@@ -770,10 +778,14 @@ transaction the app is about to build.
   lock. Journey 4 settles it: one borrow, **two** loan UTxOs, **7.111500 ₳** of min-UTxO on chain —
   neither the 5 quoted nor a multiple of it.
 
-Neither figure is ever charged: in all four sessions the borrower's debt afterwards equals the amount
-borrowed, and no payment reaches any fee address at open. **The defect is display-only, and no fix
-has shipped.** The refinance fee, computed server-side on a different path, reconciles exactly five
-times out of five.
+**Impact: display-only. No borrower is ever charged either figure, and that is checked on chain, not
+asserted.** In all four sessions the debt afterwards equals the amount borrowed and **no payment
+reaches any fee address at open** — journey 2's wallet received the full **fUSDM 11.000000** with
+nothing deducted and a debt of 11, not 16; journey 3's pool disbursed **fUSDM 11.000000**, none
+deducted and none capitalised; journey 1 borrowed 25 ADA and owed 25. The money the user is actually
+charged is never taken from this line: the refinance fee, computed server-side on a different path,
+reconciles exactly **five times out of five**. What is wrong is the preview text on one screen, not
+any amount moved.
 
 ### D-3 — the 1 min 40 s wait was the chain, not the app
 
@@ -789,8 +801,9 @@ block time. Anyone can re-run this check: the block timestamp is public.
 
 The band is an **absolute** risk label, not a measure of change: `HEALTHY` above 1.6, `FAIR` from 1.2,
 `VULNERABLE` down to the protocol's own liquidation floor, `CRITICAL` below it. 197 and 32.3 are both
-above 1.6, so both are correctly *Healthy*. There is **no computation error here** — the figures
-themselves reconcile to the chain. What the session raises is a product question, not a bug: whether
+above 1.6, so both are correctly *Healthy*. **Impact: none on any figure.** There is **no computation error here** — both health factors
+reconcile to the chain, and the band is applied exactly as specified. What the session raises is a
+product question, not a bug: whether
 a 6× fall in health factor should be visible as more than an unchanged word, particularly next to
 the line *"Same loan, Same collateral"*. **Open as a product decision**, and it is the one item in
 these sessions that touches how understandable the screen is — which is why it is also in
