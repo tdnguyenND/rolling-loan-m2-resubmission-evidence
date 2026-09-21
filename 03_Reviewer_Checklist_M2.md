@@ -7,9 +7,24 @@
 > **Start at [`README.md`](./README.md)** for the resubmission.
 > **The mapping below is superseded by
 > [`07_ACCEPTANCE_CRITERIA_M2.md`](./07_ACCEPTANCE_CRITERIA_M2.md)**, which maps the same Outputs,
-> Acceptance Criteria and Evidence items to what the resubmission can actually show. In particular
-> **AC3 is ticked ✅ here on the strength of the usability self-assessment that has since been
-> withdrawn**; `07` splits it and records it as not evidenced.
+> Acceptance Criteria and Evidence items to what the resubmission can actually show. Two rows below
+> are ticked ✅ on grounds the resubmission no longer stands on:
+>
+> - **AC3** is ticked here on the strength of the **usability self-assessment that has since been
+>   withdrawn** (see [`08` C‑2](./08_CORRECTIONS.md)). In the resubmission AC3 is **not ticked**:
+>   [`07` §B.1](./07_ACCEPTANCE_CRITERIA_M2.md#b1-ac3-clause-by-clause) scores its four clauses
+>   separately — *stable* ✅, *free from blocking UI/UX issues* ⚠️ with two open defects,
+>   *intuitive* ❌ **not evidenced**, *across supported wallets* ⚠️ Eternl only — and carries the
+>   criterion as **partly met**.
+> - **AC4** is ticked here on **8/8 automated refinance tests** alone. **That figure is withdrawn**:
+>   re-run on 21 September 2026 those eight tests give **4 of 8** on preprod and **0 of 8** on
+>   mainnet, and all eight carry a `KNOWN-FAIL` annotation in their own source. See
+>   [`08` C‑6](./08_CORRECTIONS.md); [`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-ac4-what-is-automated-and-what-is-not)
+>   carries AC4 as **partly met** with the measured numbers.
+> - The **Demo video** rows point at https://youtu.be/z07TxLJLC2w, a developer walking through the
+>   feature. That is **withdrawn as evidence**; the resubmission offers four unedited session
+>   recordings instead — [`videos/`](./videos/), cross-referenced in
+>   [`06`](./06_UAT_Reports_Four_Journeys_M2.md).
 > **[`08_CORRECTIONS.md`](./08_CORRECTIONS.md)** lists, with the on-chain arithmetic, every claim in
 > this file that we have since corrected or withdrawn.
 

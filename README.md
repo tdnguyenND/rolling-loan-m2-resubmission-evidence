@@ -16,8 +16,8 @@ The package uses three environments, and never interchangeably:
 | | Environment | When |
 |---|---|---|
 | **Settlement evidence** — the transactions everything rests on | **Cardano mainnet** | 18–28 August 2026 |
-| **Interface walkthroughs** — the four journeys captured screen by screen | **preprod** (https://preprod.danogo.io) | 18 September 2026 |
-| **Historical test report** (`01`, `02`, `03`, kept unedited) | staging UI connected to **mainnet** | previous submission |
+| **Interface walkthroughs** — the four journeys captured screen by screen | the **preprod app** (https://preprod.danogo.io) | 18 September 2026 |
+| **Historical test report** (`01`, `02`, `03`, kept unedited) | the **mainnet app** (staging deployment, live mainnet contracts) | previous submission |
 
 Where a document says "the live app", it means the front end the wallet was connected to in that
 row — mainnet for the settlement evidence, preprod for the walkthroughs.
@@ -56,6 +56,7 @@ Every factual claim in this package comes from one of two public APIs, and **nei
 | Source | What it settles | Credentials |
 |---|---|---|
 | **Koios** `api.koios.rest` | the transactions, what they burned and minted, what they paid, and what the chain looks like now | none |
+| **Fluid Tokens** `api.fluidtokens.com` | the counterparty protocol's own record that the loans are repaid — raw responses kept in [`fluid-api/`](./fluid-api/) | none |
 | **Fluid Tokens** `api.fluidtokens.com` | whether the lender considers each loan repaid | the public key its own web app sends |
 
 No Danogo server, indexer or database appears anywhere in the figures below: the ledger data is
@@ -97,7 +98,9 @@ and the counterparty protocol's own loan records
 
 Integration-test results are in
 [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) as they stand
-today — 25 transaction QC checks of which **24 hold**, and 8 automated UI tests, all passing (in
+today — 25 transaction QC checks of which **24 hold**, **78 automated UI tests passing** over the
+View journey, and **4 of the 8 refinance tests** passing on preprod (the previous submission's
+“8 / 8” is withdrawn — [`08` C‑6](./08_CORRECTIONS.md)) (in
 **no-sign** mode: real wallet reads, `signTx`/`submitTx` stubbed, so they evidence the surface and
 its arithmetic, not settlement — [`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) — with
 the step-by-step detail in the previous submission's
@@ -174,6 +177,10 @@ screenshots/
 videos/                              screen recordings of the four journeys above,
                                      first click to settled loan (`00` §C)
 
+fluid-api/                           the counterparty protocol's own API responses behind
+                                     the "seven loans repaid" claim, byte for byte, with
+                                     headers, SHA-256 sums and the curl that repeats them
+
 previous submission, kept in place so its links still resolve, each with a banner:
   01_Integration_Test_Report_M2.md   the manual refinance journey, the transaction QC
                                      checks, and the automated integration-test results
@@ -210,7 +217,9 @@ criterion-to-evidence mapping. Their walkthrough screenshots in
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
 | Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`06` §4.1); **repay** end-to-end on three loans those walkthroughs created — `06` §§1.1, 2.1, 3.1 |
 
-On the last two rows. The application **is** covered by an automated suite, and every journey was
+On the last two rows. The application **is** covered by an automated suite — partly: 78 tests pass
+over the *view* journey and 4 of 8 over *refinance*, while the *open* and *repay* suites have not
+been run ([`08` C‑6](./08_CORRECTIONS.md)). Every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
 settled on mainnet. The package reports those sessions and rests its verifiable claims on what a
 third party can check without us: the ledger and the counterparty protocol's records. The refinance

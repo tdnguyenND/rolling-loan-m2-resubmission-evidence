@@ -12,7 +12,7 @@
 
 # Milestone 2 — Deployment & Transaction Evidence (Mainnet)
 
-**Feature:** Rolling Loan ("Refinance via Dano") · **App:** https://v3.danogo.io/ (staging, live mainnet contracts)
+**Feature:** Rolling Loan ("Refinance via Dano") · **App:** the **mainnet app** (staging deployment, live mainnet contracts) https://v3.danogo.io/
 **Network:** Cardano **mainnet** · **Explorer:** https://cardanoscan.io/
 
 > This document provides publicly verifiable, on-chain evidence that the back-end produces correct

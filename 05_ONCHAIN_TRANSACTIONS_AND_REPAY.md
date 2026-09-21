@@ -431,7 +431,7 @@ transaction that **opened** the loan in its `loanUtxoId` field.
 | `917bdfe1…#1` → **O‑01** | `88579a30…146652` | *Dano Finance: Create Loan* | refinance |
 | `247e1218…#1` → **O‑02** | `17c23dde…e2559a` | ***Dano Finance: Repay Fluid Loan*** | **repay** — §5.5 |
 | `a3ed946c…#1` → **O‑03** | `d240fab1…dad84c` | *Dano Finance: Create Loan* | refinance |
-| `38c7802d…#1` → *(opened July 2026)* | `ea823365…2bfe04d` | ***Dano Finance: Repay Fluid Loan*** | **repay** — §5.5 |
+| `38c7802d…#0` → *(opened July 2026)* | `ea823365…2bfe04d` | ***Dano Finance: Repay Fluid Loan*** | **repay** — §5.5 |
 | `7a6caf51…#1` → **O‑04** | `1cf8f08b…549f10` | *Dano Finance: Create Loan* | refinance |
 | `4901277c…#1` → **O‑05** | `c426d9fa…d25c8c` | *Dano Finance: Create Loan* | refinance |
 | `9b3aa00c…#1` → **O‑06** | `0e26cc58…8b05b8` | *Dano Finance: Create Loan* | refinance |
@@ -491,6 +491,12 @@ own indexer sees its own validator accept the settlement. A loan transferred, ro
 liquidated would not appear as `loan_repaid` with `remainingDebt: 0` on the lender's side. And F‑2
 makes Fluid's identifier for the loan and our burn record provably the same object, so a reviewer
 does not have to believe either party.
+
+**The raw responses are published.** Every figure in this section is transcribed from two JSON
+documents, kept byte for byte as Fluid returned them, with their response headers, SHA-256 sums and
+the exact `curl` that reproduces them: [`fluid-api/`](./fluid-api/). No `from` / `to` window was
+applied, so each file is the wallet's whole lending history — nothing can have been left out by
+choosing a range.
 
 ### 5.4 Two further properties the evidence settles
 

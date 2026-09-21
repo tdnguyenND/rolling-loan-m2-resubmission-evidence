@@ -14,9 +14,14 @@
 > - **§2.7 TC‑24**, whose zero-origination-fee claim the chain contradicts: the transaction it cites
 >   (`88579a30…`) does pay a 2 ADA origination fee — [`08`](./08_CORRECTIONS.md) C‑1.
 >
-> Apart from TC‑24, §1–§3 are the integration-test results the resubmission points to — §1 the
-> step-by-step manual refinance journey, §2 the 25 transaction QC checks, §3 the 8 automated
-> integration tests — and they are preserved here exactly as they were submitted, uncorrected.
+> - **§3**, the 8 automated integration tests reported as passing **8 / 8**. That figure is
+>   **withdrawn**: re-run on 21 September 2026 they give **4 of 8** on preprod and **0 of 8** on
+>   mainnet, and all eight are annotated `KNOWN-FAIL` in their own source —
+>   [`08`](./08_CORRECTIONS.md) C‑6.
+>
+> Apart from TC‑24 and §3, §1 and §2 are the integration-test results the resubmission points to —
+> §1 the step-by-step manual refinance journey and §2 the 25 transaction QC checks — and the whole
+> file is preserved here exactly as it was submitted, uncorrected.
 > They are our own reporting and are named as such. For the corrected interpretation and for the
 > current evidence, read [`00`](./00_POA_SUBMISSION_FORM.md), [`04`](./04_USER_JOURNEYS_AND_APP_STATE.md),
 > [`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) and [`08`](./08_CORRECTIONS.md); the load-bearing

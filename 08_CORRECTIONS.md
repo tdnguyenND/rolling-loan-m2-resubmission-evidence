@@ -6,13 +6,18 @@ While preparing this resubmission we re-derived every on-chain figure from a **p
 (Koios)** rather than from our own reporting. That exercise found errors and overstatements in
 our own evidence — a mis-cited transaction, a mis-identified token, a self-assessment doing more
 work than it could carry, and two claims stated more absolutely than what we can show. Each is
-recorded here, C‑1 to C‑5.
+recorded here, C‑1 to C‑6.
 
-One further change is not a correction but is worth stating in the same place. The automated-test
-results are included because the reviewer asked for the integration-test results, and they are
-reported in full. We do not present them as independent evidence: they are our own reporting about
-our own work. The primary verifiable evidence is the Cardano ledger and Fluid Tokens' own records,
-both reproducible from public APIs by anyone.
+**C‑6 came from a different exercise and is the most serious.** We re-ran the automated test suite
+instead of citing the number the previous submission reported, and the number did not survive: the
+“8 / 8” we published is withdrawn. That correction exists because we ran the tests again rather than
+trusting our own prior report.
+
+The automated-test results are included because the reviewer asked for the integration-test results,
+and they are reported in full — now as measured, not as previously claimed. We do not present them
+as independent evidence: they are our own reporting about our own work. The primary verifiable
+evidence is the Cardano ledger and Fluid Tokens' own records, both reproducible from public APIs by
+anyone.
 
 The reviewer did not ask about any of them. We are disclosing them because a reviewer who checks our
 numbers should find that we checked them first, and because an evidence package that never corrects
@@ -266,6 +271,58 @@ evidence, and are presented as interface evidence.
 [`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) §"Why the settlement evidence is on mainnet".
 
 ---
+
+## C‑6 — **Withdrawn.** "The 8 automated refinance tests pass 8 / 8"
+
+The previous submission reported the refinance surface as covered by **8 automated UI tests
+(FN‑I7, FN‑I9 … FN‑I14, FN‑J10) passing 8 / 8**, and this resubmission repeated it. **We re-ran
+them and the claim does not stand.** It is withdrawn.
+
+**What we ran, and what came back.**
+
+| Run | Target | Result |
+|---|---|---|
+| 21 Sep 2026, whole spec, 98 tests, 50 min | **mainnet app** https://v3.danogo.io/ | **78 pass / 20 fail** — all 8 of the refinance tests **fail** |
+| 21 Sep 2026, the 8 refinance tests | **preprod app** https://preprod.danogo.io | **4 pass / 4 fail** |
+
+**Why they fail on mainnet.** The mainnet deployment ships *Refinance via Dano* **off**
+(`VITE_FLUID_REFINANCE_ENABLED=false`), so the CTA the tests assert on does not render. FN‑I7's own
+output says it: `refinance CTA in BorrowDetail = 0`. The harness's flag mechanism
+(`FEATURE_FLAGS` → `?ff=`) is not applied to this spec's first navigation, so it cannot be turned on
+from the outside either.
+
+**On preprod, where the feature ships on, four of the eight pass** — and they are the four that
+matter for whether the surface exists:
+
+| | Result | What it establishes |
+|---|---|---|
+| **FN‑I7** | ✅ | the *Refinance via Dano* CTA renders — `CTA in BorrowDetail = 1` |
+| **FN‑I12** | ✅ | its label carries a figure, never the bare words — `"+0.31% net cost"` |
+| **FN‑I14** | ✅ | it is last in the footer — `["Repay Loan", "Modify Collateral", "Refinance via Dano +0.31% net cost"]` |
+| **FN‑J10** | ✅ | tapping it opens the preview without leaving Loan Details |
+| **FN‑I9**, **FN‑I13** | ❌ | both assert the *savings* branch (`"Save {delta} net cost"`, positive accent). For the one Fluid loan open on preprod, **Dano is dearer** — `+0.31%` — so that branch cannot occur. A data gap, not a defect |
+| **FN‑I10**, **FN‑I11** | ❌ | both force the dearer branch with a route stub bound to the **mainnet** BFF; on preprod the stub does not apply and the Loan Details sheet never renders. A harness limitation, not a defect |
+
+**The part we should have caught before publishing.** All eight tests carry, in the spec source, an
+explicit annotation from the team that wrote them:
+
+> `// 🔴 KNOWN-FAIL (finding, app-vs-spec): the feature EXISTS but in the wrong place …`
+
+They were written to **record a divergence between the app and the screen spec**, not to pass. Citing
+them as a passing suite was wrong regardless of which deployment they run against, and no amount of
+re-running fixes that. We did not check the source before repeating the figure.
+
+**What replaces the claim.** The measured numbers above, and nothing rounded up:
+
+- **78 automated tests pass on mainnet**, covering the **View** journey — Loan Details overview,
+  collateral list, health factor, APR, utilisation, and the money / rate display formats.
+- **4 of 8 refinance tests pass on preprod**, establishing that the CTA exists, is labelled with a
+  figure, sits last in the footer, and opens the preview.
+- **No automated coverage of Open or Repay is reported**, although the harness contains
+  `[Create loan]` and `[Repay]` suites that have not been run.
+
+**Nothing on chain changes.** This correction is about the automated suite only. The 15 mainnet
+transactions, the 123 manual QC checks and the four recorded sessions are untouched by it.
 
 ## Claims from the previous submission that we re-verified and that **hold**
 

@@ -5,7 +5,8 @@ loan from the Danogo front end with the user's own wallet.
 
 **What is in this file:** four complete sessions walked end-to-end on **preprod**
 (https://preprod.danogo.io) on **18 September 2026**, on **three different wallet accounts — all
-Eternl**, two of them separate installations running different Eternl versions, against
+Eternl**, two of them separate installations running different versions — v2.1.7.1 and v2.1.5.0;
+the version used for journey 4 was not recorded — against
 **Cardano preprod** and the **Fluid preprod** smart contracts. Each session is captured screen by
 screen — every screen from the first click to the settled transaction, a screen recording of the
 whole session, the wallet signing dialog for each signature, and the public-explorer record of each
@@ -40,13 +41,16 @@ transaction — and each is then checked, line by line, against what the chain a
 | **Refinance** | [`0bfa25db…ccfd`](https://preprod.cardanoscan.io/transaction/0bfa25db49a676c15645c25d1d8b35acf5630d1d9cb1d472d386430cb954ccfd) | [`78d434d5…95d6`](https://preprod.cardanoscan.io/transaction/78d434d5d3028e2f8025f9ad06ad65849cee4dcbd89d6abd206334baaa2495d6) | [`a04fe52e…68d8f4`](https://preprod.cardanoscan.io/transaction/a04fe52e0545f546b71a866ed48b1a83aac271dbece74d21fb27e835d268d8f4) | [`6ab3bde0…c7ad43`](https://preprod.cardanoscan.io/transaction/6ab3bde0739c1a53aacbbd6c43aacd848b3311a8958030be412c22ffe1c7ad43) · [`3cbb01a7…9694a8`](https://preprod.cardanoscan.io/transaction/3cbb01a7b9dce89f175a75174dff109d48c231f42b2059fc8950d2485f9694a8) |
 | **Repay** | [`e134b85e…681416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) | [`bae9a9c9…c75b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d) | [`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed) | — |
 | **QC checks** | **31 / 31** | **33 / 33** | **22 / 22** | **37 / 37** |
-| **Defects found** | — | — | **D-1** submit failed, recovered by *Retry* | — |
+| **Defects found** | — | — | **D-1** submit failed, recovered by *Retry* | **D-4** rounding in the loan list · **D-5**, **D-6** observations |
 | **Recording** | [`01.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.mp4) | [`02.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.mp4) | [`03.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4) (7 min 29 s) | [`04.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/04-open-and-two-refinances-borrow-ADA-collateral-USDM.mp4) (3 min 50 s) |
 | **Screenshots** | [`journey-1/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-1-borrow-ADA-collateral-USDM) | [`journey-2/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-2-borrow-USDM-collateral-ADA) | [`journey-3/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-3-borrow-USDM-collateral-ADA) | [`journey-4/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-4-borrow-ADA-collateral-USDM) |
 
 Two open items recur across the sessions and are stated once, at the end:
 [**OI-1** (the *Deposit* / *Fee* preview line)](#open-items-common-to-more-than-one-session) and
 [**OI-2** (which token the refinance burns)](#open-items-common-to-more-than-one-session).
+
+Defect IDs run **once across the whole file**, not per session: **D-1 … D-3** are journey 3's and
+**D-4 … D-6** are journey 4's, so a reference to "D-1" means the same defect everywhere it appears.
 
 ---
 
@@ -434,9 +438,9 @@ transactions above. It is recorded here so the recording is not misread.
 
 | ID | Severity | What happened |
 |---|---|---|
-| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. ⬜ **Root cause not established** — reported as open, not as fixed. |
+| **D-1** | **major (recoverable)** | **The first refinance submit failed.** After the signature, the app showed *"Submit failed: Your wallet may not have finished syncing. Please wait a moment or reload the page, then try again."* The tester clicked **Retry**, signed a second time, and the refinance settled. Cost: one extra signature and about 2½ minutes. Nothing was double-submitted — the chain holds exactly one refinance. The message is honest but puts the cause on the user's wallet; the tester had no way to tell whether the first signature had cost them anything. **Cause established — see [Root causes](#root-causes-established-after-the-sessions); no fix shipped yet.** |
 | **D-2** | minor | While the repay preview loads, the dialog reads *"Minimum amount to repay is **--** fUSDM"* and shows skeleton bars for several seconds before the real numbers appear (`10` is the loaded state; the skeleton is visible in the recording at 5:08–5:12). |
-| **D-3** | observation | The repay of the Dano loan took **~1 min 40 s** between signing and the confirmation clearing (5:35 → 7:08), with the dialog showing *"Waiting for confirmation…"* throughout. The block itself settled at 08:29:15; the wait is the app polling, not the chain. |
+| **D-3** | observation — **closed, not a product defect** | The repay of the Dano loan took **~1 min 40 s** between signing and the confirmation clearing (5:35 → 7:08), with the dialog showing *"Waiting for confirmation…"* throughout. **The wait is the chain, not the app.** Signing is at 5:35 ≈ 08:27:37; Koios puts the transaction in block **5,190,743 at 08:29:15 UTC**, 1 min 38 s later, and the dialog cleared at 7:08 ≈ 08:29:10 — the same moment within the few seconds of slop in the recording's zero point. See [Root causes](#root-causes-established-after-the-sessions). |
 | **OI-1** | carried over | the *Deposit 5 ADA* / *Fee 5 fUSDM ($5.00)* line again, against a loan of **11 fUSDM of debt for 11.000000 fUSDM disbursed** — see [Open items](#open-items-common-to-more-than-one-session) |
 
 Stability: no crash, white screen or unrecoverable state — the one failure (D-1) recovered inside the
@@ -585,9 +589,9 @@ tester's other positions untouched (UAT4-TC-35, TC-36).
 |---|---|---|
 | **OI-1** | carried over | the *Deposit 5 ADA* / *Fee 9.05 ADA ($2.76)* line again — here the whole difference between the **905.004000 ₳** the pools paid out and the **896.997892 ₳** the wallet received is network fee plus min-UTxO, and the resulting debt is **905.004 ADA**, not 914.054. See [Open items](#open-items-common-to-more-than-one-session) |
 | **OI-2** | carried over | the two **Fluid borrower NFTs** minted at open (`eadc69a5….4a22b7f2…` and `eadc69a5….647d5a96…`) are **still in the wallet** after both refinances — neither refinance burns them, although both Fluid loans are gone. See [Open items](#open-items-common-to-more-than-one-session) |
-| **D-1** | minor | The loan list and the loan dialogs show the second loan as **885 ADA**; its actual principal is **885.004000 ADA**, and it settled at **885.004206**. Rounding in the display only — every figure the user confirms before signing is exact. |
-| **D-2** | observation | Both Dano loan UTxOs carry a loan token with the **same** asset name (`8de34f17….ea5041c0ae6b0969…`); the two loans are told apart by their distinct **Borrower NFTs** (`04df3b10…`, `58939170…`). This looks like a pool identifier rather than a per-loan id, and the loans are separable either way — ⬜ *for the team to confirm as intended*. |
-| **D-3** | observation | Loan Details quotes the health factor falling from **197** to **32.3** / **35.5** on refinance, with *both* labelled **Healthy**, next to the line *"Same loan, Same collateral"*. Nothing in the card explains why an unchanged position's health factor drops six-fold; a user cannot tell from the screen whether the two numbers are on the same scale. This session did not re-open the Dano loans, so the resulting health factor is not confirmed here either — ⬜ *for the team to explain in the UI, or correct*. |
+| **D-4** | minor | The loan list and the loan dialogs show the second loan as **885 ADA**; its actual principal is **885.004000 ADA**, and it settled at **885.004206**. Rounding in the display only — every figure the user confirms before signing is exact. |
+| **D-5** | observation | Both Dano loan UTxOs carry a loan token with the **same** asset name (`8de34f17….ea5041c0ae6b0969…`); the two loans are told apart by their distinct **Borrower NFTs** (`04df3b10…`, `58939170…`). This looks like a pool identifier rather than a per-loan id, and the loans are separable either way — **Open** — *for the team to confirm as intended*. |
+| **D-6** | observation — **behaves as specified**; see [Root causes](#root-causes-established-after-the-sessions) | Loan Details quotes the health factor falling from **197** to **32.3** / **35.5** on refinance, with *both* labelled **Healthy**, next to the line *"Same loan, Same collateral"*. Nothing in the card explains why an unchanged position's health factor drops six-fold; a user cannot tell from the screen whether the two numbers are on the same scale. This session did not re-open the Dano loans, so the resulting health factor is not confirmed here either — **Open** — *for the team to explain in the UI, or correct*. |
 
 Stability: no crash, white screen or unrecoverable state, and no failed submit (unlike journey 3
 D-1); every displayed value matched the chain; all three actions signed and submitted; the interface
@@ -610,9 +614,10 @@ loan that resulted does not carry them:
 | Journey 4 | Deposit 5 ADA · Fee 9.05 ADA ($2.76) | **905.004000 ₳** disbursed, **896.997892 ₳** received, and the whole **8.006108 ₳** difference is network fee (0.894608) plus min-UTxO (7.111500) — no payment to any Dano or Fluid fee address; debt afterwards **905.004 ADA** (not 914.054) |
 
 So whatever those two lines describe, it is **not** an amount deducted at open or capitalised into
-the loan. It is recorded as an open item rather than a pass. ⬜ **Root cause not established.** Note that the
-**refinance** fee is a different figure and does reconcile exactly, in every session: 2 ADA or
-2 fUSDM quoted, 2.000000 paid to the fee address, five times out of five.
+the loan. Note that the **refinance** fee is a different figure and does reconcile exactly, in every
+session: 2 ADA or 2 fUSDM quoted, 2.000000 paid to the fee address, five times out of five.
+
+**Cause established — see [Root causes](#root-causes-established-after-the-sessions); no fix shipped yet.**
 
 **OI-2 · Which token the refinance burns, and what is left behind.** Two related observations:
 
@@ -634,9 +639,89 @@ the loan. It is recorded as an open item rather than a pass. ⬜ **Root cause no
 
 What remains open is therefore not *which* token the pairing uses — the ledger answers that — but
 whether leaving the `eadc69a5…` borrower NFT in the wallet after the position is gone is intended.
-⬜ *For the team to confirm.*
+**Open** — *for the team to confirm.*
 
 ---
+
+## Root causes, established after the sessions
+
+The sessions recorded what happened on screen. Four of the items they raised have since been traced,
+**after the fact**, to a specific line of behaviour — in the application source, in the wallet's own
+CIP-30 behaviour, or in the chain. Each one below states what can be checked and how. Two are
+product defects with no fix shipped yet; two turn out not to be defects at all.
+
+### D-1 — the failed submit: the wallet offered stale collateral
+
+The message the tester saw is not a generic error. It appears **exactly once in the entire
+application source**, in the Cardano CIP-30 adapter's table of known ledger failures, and it is
+emitted for **one** underlying condition:
+
+> Ogmios 3129 / ledger `ScriptsNotPaidUTxO` — `Invalid choice of collateral: an input provided for
+> collateral is locked by script`.
+
+So the first submit was rejected **by the ledger, at submission**, because one of the UTxOs offered
+as collateral was no longer a plain wallet output. The app does not choose those UTxOs: it asks the
+wallet for them over CIP-30 `getCollateral()` and passes what it is given to the transaction builder.
+The tester had opened the Fluid loan **1 min 50 s earlier** — the open
+[`69e04600…b84b8`](https://preprod.cardanoscan.io/transaction/69e04600fa218dfd3e6826eace41b14d241987783a2942cc8243a8a9f93b84b8)
+is in block **5,190,728 at 08:23:32 UTC**, the refinance that succeeded in block **5,190,735 at
+08:25:22 UTC** — so Eternl's collateral set still reflected the wallet as it was before that open. *Retry* succeeded because by then the wallet had re-synced.
+
+- **Why nothing was double-submitted, provably.** A transaction rejected at submission never enters
+  the chain. Koios shows the wallet's whole history in this window as **three** transactions — one
+  open, one refinance, one repay — and one refinance only (UAT3-TC-06).
+- **Why it is still a defect.** The failure is the wallet's, but the consequence is the product's:
+  the user is asked to sign twice and told to check their own wallet, with no indication that the
+  first signature cost them nothing. **No fix has shipped.** The application-side mitigations
+  available — re-requesting collateral after a state-changing transaction, or retrying once without
+  a second signature — are not implemented.
+
+### OI-1 — *Deposit* and *Fee*: pool constraints, not transaction values
+
+Both lines come from the **pool's configuration as the back end reports it**, not from the
+transaction the app is about to build.
+
+- **Fee** is `max(amount × originationFeePct, originationFeeMinNative)`. The three quoted values fit
+  one pair of constants exactly: **1.0% with a 5-unit minimum** — 25 → 5, 11 → 5, and
+  905.004 → **9.05005**, which is what journey 4 shows. That is the **Dano** origination-fee model
+  applied to a **Fluid** borrow, and the source itself says it should not be: the rule that decides
+  whether the Fee row renders at all is documented as *"a pool with no origination fee (Liqwid,
+  Fluid) charges nothing on Create / Increase either."* The row should not appear on this route. It
+  does, because the pool constraints served for the Fluid pool carry a non-zero fee.
+- **Deposit** is a single static per-pool figure, not the min-UTxO the transaction will actually
+  lock. Journey 4 settles it: one borrow, **two** loan UTxOs, **7.111500 ₳** of min-UTxO on chain —
+  neither the 5 quoted nor a multiple of it.
+
+Neither figure is ever charged: in all four sessions the borrower's debt afterwards equals the amount
+borrowed, and no payment reaches any fee address at open. **The defect is display-only, and no fix
+has shipped.** The refinance fee, computed server-side on a different path, reconciles exactly five
+times out of five.
+
+### D-3 — the 1 min 40 s wait was the chain, not the app
+
+This one closes as **not a product defect**, and the earlier reading of it in this file was wrong.
+Signing is at 5:35 in the recording ≈ **08:27:37 UTC**. Koios puts the repay,
+[`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed),
+in block **5,190,743 at 08:29:15 UTC** — **1 min 38 s** after the signature. The dialog cleared at
+7:08 ≈ 08:29:10, which is the same moment within the few seconds of slop in the recording's zero
+point. The app surfaced the confirmation as soon as the block existed; the wait was Cardano preprod
+block time. Anyone can re-run this check: the block timestamp is public.
+
+### D-6 — both health factors labelled *Healthy* is the specified behaviour
+
+The band is an **absolute** risk label, not a measure of change: `HEALTHY` above 1.6, `FAIR` from 1.2,
+`VULNERABLE` down to the protocol's own liquidation floor, `CRITICAL` below it. 197 and 32.3 are both
+above 1.6, so both are correctly *Healthy*. There is **no computation error here** — the figures
+themselves reconcile to the chain. What the session raises is a product question, not a bug: whether
+a 6× fall in health factor should be visible as more than an unchanged word, particularly next to
+the line *"Same loan, Same collateral"*. **Open as a product decision**, and it is the one item in
+these sessions that touches how understandable the screen is — which is why it is also in
+[`07` §E](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#e-what-is-open-stated-here-rather-than-left-to-be-found).
+
+### What is still open after this
+
+**OI-2** — whether leaving the Fluid borrower NFT in the wallet after the position is gone is
+intended — is a question for the **counterparty protocol**, not for this codebase, and is unchanged.
 
 ## What the four sessions establish together
 
@@ -661,7 +746,7 @@ Four sessions, three Eternl accounts, one day, **123 QC checks, 123 hold**.
   borrower fund 0.954728 ₳ of the fee out of pocket — correction
   [C-4](./08_CORRECTIONS.md#c4--corrected-the-borrower-contributes-only-the-network-fee-was-over-stated).
 - **Defects are published, not edited out.** Journey 3's refinance failed to submit on the first
-  attempt and needed a *Retry* (D-1); journey 4 records four smaller items. Two questions recur and
+  attempt and needed a *Retry* (D-1); journey 4 records three smaller items (D-4, D-5, D-6). Two questions recur and
   are stated once, as OI-1 and OI-2, rather than four times as passes.
 - **What none of this shows** is whether an independent user finds the interface intuitive. Journey 3
   was run by someone outside the walkthroughs, but **who the testers of journeys 3 and 4 were, what
