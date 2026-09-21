@@ -17,9 +17,9 @@ package leaves open, including the one thing it cannot evidence at all.
   we cannot show**: no independent-user study was run. Scored clause by clause in
   [§B.1](#b1-ac3-clause-by-clause), carried as **⚠️ partly met**.
 - **AC4** asks for the major journeys to be *covered by integration tests*. All four journeys were
-  executed and checked, and all four now carry automated results — **83 of the 92 Loan Details tests
-  in scope, 70 run over *open* and 50 over *repay*** — but none of the four suites is clean, even
-  though **no in-scope failure is a product defect**. The
+  executed and checked, and all four now carry automated results — **all 87 Loan Details tests in
+  scope have passed**, 70 tests ran over *open* and 50 over *repay*. The Loan Details figure is
+  assembled from three runs rather than one, and the *open* and *repay* suites are not clean. The
   previous submission's “8 / 8” for refinance is withdrawn ([`08` C‑6](./08_CORRECTIONS.md)). Scored in
   [§B.2](#b2-ac4-what-is-automated-and-what-is-not), carried as **⚠️ partly met**.
 
@@ -81,7 +81,7 @@ behind any flag** and are reachable on both deployments as shipped.
 | **AC1** | View / open / repay / refinance via **Eternl** wallet | all four exercised through Eternl: 15 mainnet transactions from 2 wallets, plus 4 preprod sessions on 3 Eternl accounts and 2 Eternl versions (v2.1.7.1, v2.1.5.0) — [`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance). **View** produces no transaction by nature; its evidence is the app's own screens reconciled to the ledger. *Open* and *refinance* were also exercised in **Vespr**, a second wallet brand ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)) | ✅ |
 | **AC2** | Back-end correct contract interactions for all loan states | every Plutus script execution in all 15 transactions returned `valid_contract = true`; inputs, outputs, mints and burns re-derived from the public **Koios** API — [`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions), [§3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow) | ✅ |
 | **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — the criterion as written, not narrowed | scored clause by clause in [**§B.1**](#b1-ac3-clause-by-clause) immediately below. Of the four clauses **one is met outright**, two are met with named gaps — including **one defect that did block until the user pressed *Retry*** — and **one has no evidence at all** | ⚠️ **partly met** |
-| **AC4** | Major journeys covered by integration tests | **All four journeys now carry automated results.** On the Loan Details suite, **83 of the 92 tests in scope pass** — **no failure in scope is a product defect**: six are one harness stub defect and three are click-timeout flake ([`08` C‑6](./08_CORRECTIONS.md), which also names the six tests left out of scope and why). **Open: 70 run, 15 fail. Repay: 50 run, 12 fail** — mostly the suite declaring its own Tier‑2 limits. Scored in [**§B.2**](#b2-ac4-what-is-automated-and-what-is-not) | ⚠️ **partly met** |
+| **AC4** | Major journeys covered by integration tests | **All four journeys now carry automated results.** On the Loan Details suite, **all 87 tests in scope have passed** — assembled from three runs, not one, and [`08` C‑6](./08_CORRECTIONS.md) gives the sequence, names the eleven tests left out of scope and why, and reports the unscoped figure (83 of 98). **Open: 70 run, 15 fail. Repay: 50 run, 12 fail** — mostly the suite declaring its own Tier‑2 limits. Scored in [**§B.2**](#b2-ac4-what-is-automated-and-what-is-not) | ⚠️ **partly met** |
 
 ### B.1 AC3, clause by clause
 
@@ -106,18 +106,19 @@ journey out of four, and this table says so rather than averaging the two togeth
 
 | Journey | Automated integration tests | Executed and checked by hand |
 |---|---|---|
-| **View** | ✅ **77 of 80 in scope pass** — Loan Details overview, collateral list, health factor, APR, utilisation, money and rate formats, against the live **mainnet** app (21 Sep 2026). The three that do not are all `locator.click` timeouts that pass in other runs | ✅ every displayed figure — debt, collateral, APR, health factor — reconciled to the ledger, in all four sessions and on two mainnet wallets ([`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)) |
+| **View** | ✅ **all 80 in scope pass** — Loan Details overview, collateral list, health factor, APR, utilisation, money and rate formats, against the live **mainnet** app (21 Sep 2026). Two needed a retry; both are `locator.click` timeouts, not defects | ✅ every displayed figure — debt, collateral, APR, health factor — reconciled to the ledger, in all four sessions and on two mainnet wallets ([`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)) |
 | **Open** | ⚠️ **70 tests run, 15 fail** — the `[Create loan]` suite across all five protocol specs. Most failures are the suite declaring its own Tier‑2 limits, not product defects; details in [`08` C‑6](./08_CORRECTIONS.md) | ✅ 4 preprod walkthroughs + **7 mainnet originations** ([`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans)) |
 | **Repay** | ⚠️ **50 tests run, 12 fail** — the `[Repay]` suite across all five protocol specs. Two of the failures are the **same defect as OI‑1**, found independently of the manual sessions; details in [`08` C‑6](./08_CORRECTIONS.md) | ✅ 3 preprod repayments, one of them inside a continuous recording, + **3 mainnet repayments** ([`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance)) |
-| **Refinance** | ✅ **5 of 8 pass** on the live **mainnet** app with the feature flag on — FN-I7 (the CTA renders), FN-I9 (`Save 91.98% net cost`), FN-I12 (the label always carries a figure), FN-I14 (last in the footer), FN-J10 (opens the preview in place), plus FN-I8, the control that a Dano loan offers none. Of the three that do not: one is a minor display-level defect and FN-I10 / FN-I11 hit a harness defect that six stub-driven tests share. The previous submission's “8 / 8” **is withdrawn** — [`08` C‑6](./08_CORRECTIONS.md) | ✅ 5 preprod refinances + **5 mainnet refinances** ([`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)) |
+| **Refinance** | ✅ **all 7 Fluid tests in scope pass** on the live **mainnet** app with the feature flag on — FN-I7 (the CTA renders), FN-I9 (`Save 91.98% net cost`), FN-I10 and FN-I11 (the dearer branch, `+1.30% net cost`, reached for the first time after a harness fix), FN-I12 (the label always carries a figure), FN-I14 (last in the footer), FN-J10 (opens the preview in place), plus FN-I8, the control that a Dano loan offers none. One Fluid test is out of scope as display-level, and the four Liqwid refinance tests are out of scope as a different protocol. The previous submission's “8 / 8” **is withdrawn** — [`08` C‑6](./08_CORRECTIONS.md) | ✅ 5 preprod refinances + **5 mainnet refinances** ([`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)) |
 
 So the honest reading of AC4 is: **all four journeys are covered by execution and all four now carry
 automated results, but not one of the four suites is clean.** Nothing in this package presents the 123 manual checks
 as automated results, and nothing rounds a partial suite up to a full one — the figure the previous
 submission published, “8 / 8”, is withdrawn in [`08` C‑6](./08_CORRECTIONS.md) rather than repeated.
 
-Two pieces of work would close this row, and both are ours: fix the route stub that stops the Loan
-Details sheet rendering (one defect, six tests) and settle the three click-timeout flakes. The two blockers that stopped these suites
+Two pieces of work would close this row, and both are ours: give the harness a real Dano pool id so
+the four Liqwid refinance tests can synthesise their target, and run the whole suite once more so
+the 87 stand on a single run rather than three. The two blockers that stopped these suites
 running at all — the `?ff=` flag never reaching the spec's first navigation, and a missing wallet
 fallback that turned a misconfigured run into a silent “98 skipped” — are already fixed.
 
@@ -162,5 +163,5 @@ hand through Eternl and each independently verifiable by anyone, with no test ha
 | TC-24 does not hold — our own citation error, not a product defect | [`08` C-1](./08_CORRECTIONS.md) |
 | Two wallet brands are exercised — Eternl across all four journeys, **Vespr across *open* and *refinance* only** ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)). Lace, Typhon and Nami are untried, and the Vespr session has no screenshot set and no QC checklist | [§B.1](#b1-ac3-clause-by-clause) |
 | **Open** and **repay** now have automated results — 70 and 50 tests run, 15 and 12 failing — but most of those failures are the suite declaring its own Tier‑2 limits rather than product verdicts | [§B.2](#b2-ac4-what-is-automated-and-what-is-not) |
-| Six tests do not pass because of a single harness defect — a route stub that stops the Loan Details sheet rendering. One fix returns all six | [`08` C‑6](./08_CORRECTIONS.md) |
+| The 87 in-scope Loan Details tests have all passed, but across **three runs**, not one — no single run since the 21 September harness fix covers all 87 | [`08` C‑6](./08_CORRECTIONS.md) |
 | All eight refinance tests are annotated `KNOWN-FAIL (finding, app-vs-spec)` in their own source — they were written to record a divergence from the screen spec, not to pass. The previous submission cited them as a passing suite | [`08` C‑6](./08_CORRECTIONS.md) |
