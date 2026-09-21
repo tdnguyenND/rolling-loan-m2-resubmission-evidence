@@ -7,7 +7,11 @@ loan from the Danogo front end with the user's own wallet.
 (https://preprod.danogo.io) on **18 September 2026**, on **three different wallet accounts — all
 Eternl**, two of them separate installations running different versions — v2.1.7.1 and v2.1.5.0;
 the version used for journey 4 was not recorded — against
-**Cardano preprod** and the **Fluid preprod** smart contracts. Each session is captured screen by
+**Cardano preprod** and the **Fluid preprod** smart contracts. A fifth item, **Journey 5**, is added
+at the end and is **not** one of those four: it is a shorter session run three days later, on
+21 September 2026, signed in **Vespr** instead of Eternl — *open* and *refinance* only, with a
+recording and two settled transactions but no screenshot set and no QC checklist. Every count in
+this file — the four sessions, the 123 QC checks — excludes it. Each session is captured screen by
 screen — every screen from the first click to the settled transaction, a screen recording of the
 whole session, the wallet signing dialog for each signature, and the public-explorer record of each
 transaction — and each is then checked, line by line, against what the chain actually recorded.
@@ -47,7 +51,9 @@ transaction — and each is then checked, line by line, against what the chain a
 
 Two open items recur across the sessions and are stated once, at the end:
 [**OI-1** (the *Deposit* / *Fee* preview line)](#open-items-common-to-more-than-one-session) and
-[**OI-2** (which token the refinance burns)](#open-items-common-to-more-than-one-session).
+[**OI-2** (which token the refinance burns)](#open-items-common-to-more-than-one-session). **OI-2
+recurs in Journey 5 too**, through a different wallet application — so it is a property of the
+protocol, not of Eternl.
 
 Defect IDs run **once across the whole file**, not per session: **D-1 … D-3** are journey 3's and
 **D-4 … D-6** are journey 4's, so a reference to "D-1" means the same defect everywhere it appears.
@@ -600,6 +606,72 @@ at a time without touching the other.
 
 ---
 
+## Journey 5 — **Open → Refinance through a second wallet brand** (Vespr)
+
+Journeys 1–4 all ran through Eternl, which leaves one obvious question: does the integration work
+through a different CIP-30 wallet, or only through that one? This session answers it.
+
+**Session:** one continuous recording of **2 min 26 s**, 08:06:41 → 08:09:07 UTC on
+**21 September 2026**, on **preprod**, signed in **Vespr** —
+[`05.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/05-refinance-via-vespr-second-wallet-brand.mp4).
+Two transactions settled inside it, **1 min 45 s apart**.
+
+**Whose account:** `addr_test1qqv2pd7…027ghs` — the **same address as journey 3**. This is one
+account reached through **two different wallet applications**, not a new account and not a new
+tester. That is what the criterion asks about: the wallet integration, not the identity behind it.
+
+### 5.1 The two transactions
+
+| | **Open** | **Refinance** |
+|---|---|---|
+| Hash | [`6f68ac98…eb38`](https://preprod.cardanoscan.io/transaction/6f68ac98039b84e48f65e3d0921b53e513c3ddeeb3f4f8d479f7c2f52976eb38) | [`b2937327…7bf4`](https://preprod.cardanoscan.io/transaction/b2937327cc0661395029834652ad9f076eed677248f95f51fcdb9f76a2ab7bf4) |
+| Block · time | 5,202,361 · **08:07:18 UTC** | 5,202,363 · **08:09:03 UTC** |
+| Memo (CIP-20 label 674) | *"Dano Finance: Borrow from Fluid"* | *"Dano Finance: Create Loan"* |
+| Shape | 2 inputs → 4 outputs | 3 inputs → 6 outputs |
+| Network fee | 0.743028 ₳ | 1.576919 ₳ |
+| Plutus scripts | **6, all `valid_contract = true`** | **7, all `valid_contract = true`** |
+
+**Open.** Mints the **three Fluid tokens that share one asset name** — `8dfb447e…`, `bcd713bb…` and
+`eadc69a5…`, all named `f4bd6eeb95e3…`, exactly the pattern
+[`05` §2.2](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#22-the-three-fluid-tokens-minted-at-open-and-which-one-the-pairing-uses)
+documents on mainnet. Locks **200.000000 ₳** of collateral at the Fluid loan script and disburses
+**20.000000 fUSDM** to the wallet; the wallet's ADA falls by **202.036028**.
+
+**The interface agrees, before signing.** The recording's *Borrow Market* screen quotes
+**You Borrow 20 fUSDM** and **Collateral 200 ADA**. The chain holds exactly those two figures.
+
+**Refinance.** Burns the Fluid position NFT `8dfb447e….f4bd6eeb95e3` (−1) and mints the Dano loan
+token `8de34f17….991d751a96b5` plus the Borrower NFT `8de34f17….8b30d1b42301`:
+
+| | |
+|---|---|
+| **Collateral carried across** | **200.000000 ₳** leaves the Fluid loan script `addr_test1zpyg…` and **200.000000 ₳** arrives at the Dano loan contract `addr_test1zzx7…` — to the lovelace |
+| **Fluid debt settled** | **fUSDM 20.000002** to the lender `addr_test1qr9e…` |
+| **Origination fee** | **fUSDM 2.000000** to the fee address `addr_test1qrrr…` — exactly 2, as in every other refinance in this package |
+| **Pool disbursement** | pool fUSDM **5,464.211140 → 5,442.211127** = **22.000013** = settlement + fee + 0.000011 dust |
+| **Borrower's own outlay** | wallet ADA net **−4.693049 ₳** = network fee **1.576919** + min-UTxO **3.116130**. No capital of the borrower's own settles the debt |
+
+**The wallet dialog agrees too.** Vespr's *Review order* screen in the recording shows
+**Cardano −₳4.693049** and the asset `8b30d1b42301… +1` — the same net movement and the same
+Borrower NFT the chain records. That is the figure being shown to the user *before* they approve.
+
+### 5.2 What this adds, and what it does not
+
+**Adds.** A second wallet brand across **two** journeys, end to end: Vespr is detected by the app,
+receives each built transaction, shows the user its real net movement, signs, and both settle with
+the same value flow as the Eternl sessions. [`07` §B.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#b1-ac3-clause-by-clause)
+scores AC3's *across supported wallets* clause on this.
+
+**Does not add.** **View and repay were not exercised** in Vespr — the session ends at the settled
+refinance. There is **no screen-by-screen screenshot set and no QC checklist** of its own, so this
+journey contributes **nothing to the 123 QC checks**; the recording plus the two ledger records are
+the whole of it. Lace, Typhon and Nami remain untried.
+
+**Reproduces OI-2 on a second wallet brand.** The Fluid borrower NFT `eadc69a5….f4bd6eeb95e3` is
+**not** burned and stays in the wallet in a 1.245590 ₳ UTxO after the position is gone — the same
+behaviour journeys 2 and 4 recorded through Eternl. OI-2 is a property of the protocol, not of the
+wallet.
+
 ## Open items common to more than one session
 
 **OI-1 · The *Deposit* and *Fee* lines in the Borrow Market preview are not reconciled.** Before the
@@ -725,7 +797,9 @@ intended — is a question for the **counterparty protocol**, not for this codeb
 
 ## What the four sessions establish together
 
-Four sessions, three Eternl accounts, one day, **123 QC checks, 123 hold**.
+Four sessions, three Eternl accounts, one day, **123 QC checks, 123 hold** — plus, three days later
+and counted separately, an *open* and a *refinance* run through a **second wallet brand**
+([Journey 5](#journey-5--open--refinance-through-a-second-wallet-brand-vespr)).
 
 - **All four journeys are captured end to end.** Three sessions run *open → view → refinance → view →
   repay* on a single loan, from the first click to the settled repayment: journeys 1 and 2 in

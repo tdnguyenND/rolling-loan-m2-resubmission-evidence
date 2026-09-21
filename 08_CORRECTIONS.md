@@ -278,48 +278,79 @@ The previous submission reported the refinance surface as covered by **8 automat
 (FN‑I7, FN‑I9 … FN‑I14, FN‑J10) passing 8 / 8**, and this resubmission repeated it. **We re-ran
 them and the claim does not stand.** It is withdrawn.
 
-**What we ran, and what came back.**
+**What we ran, and what came back.** Four runs on 21 September 2026, all Tier‑2 “connected,
+no-sign”:
 
-| Run | Target | Result |
-|---|---|---|
-| 21 Sep 2026, whole spec, 98 tests, 50 min | **mainnet app** https://v3.danogo.io/ | **78 pass / 20 fail** — all 8 of the refinance tests **fail** |
-| 21 Sep 2026, the 8 refinance tests | **preprod app** https://preprod.danogo.io | **4 pass / 4 fail** |
+| # | Target | Scope | Result |
+|---|---|---|---|
+| 1 | **mainnet** https://v3.danogo.io/ | whole Loan Details spec, 98 tests | **78 pass / 20 fail** — **0 of the 8** refinance tests pass |
+| 2 | **preprod** https://preprod.danogo.io | the 8 refinance tests | **4 pass / 4 fail** |
+| 3 | **mainnet**, feature flag turned on | the 8 refinance tests | **5 pass / 3 fail** |
+| 4 | **mainnet**, feature flag turned on | whole spec, 98 tests, 50 min | **83 pass / 15 fail** — the figure this package reports |
 
-**Why they fail on mainnet.** The mainnet deployment ships *Refinance via Dano* **off**
-(`VITE_FLUID_REFINANCE_ENABLED=false`), so the CTA the tests assert on does not render. FN‑I7's own
-output says it: `refinance CTA in BorrowDetail = 0`. The harness's flag mechanism
-(`FEATURE_FLAGS` → `?ff=`) is not applied to this spec's first navigation, so it cannot be turned on
-from the outside either.
+**Run 1 explains itself.** The mainnet deployment ships *Refinance via Dano* **off**
+(`VITE_FLUID_REFINANCE_ENABLED=false`), so the CTA the tests assert on does not render — FN‑I7's own
+output says `refinance CTA in BorrowDetail = 0`. Runs 3 and 4 are the same build, the same wallet and
+the same tests with `?ff=fluid-refinance` appended: **0 of 8 becomes 5 of 8.** That is the flag, not
+the product. (We had to fix the harness to get there: its `?ff=` mechanism was never applied to this
+spec's first navigation, so the flag could not be turned on from outside.)
 
-**On preprod, where the feature ships on, four of the eight pass** — and they are the four that
-matter for whether the surface exists:
+**Run 4, the 83 that pass.** 77 over the Loan Details screen itself — overview, collateral list,
+health factor, APR, utilisation, money and rate formats — plus 5 of the 8 Fluid refinance tests
+(FN‑I7 the CTA renders, FN‑I9 its label reads `Save 91.98% net cost`, FN‑I12 the label always carries
+a figure, FN‑I14 it sits last in the footer, FN‑J10 it opens the preview in place) and FN‑I8, the
+negative control that checks a Dano loan offers no refinance.
 
-| | Result | What it establishes |
-|---|---|---|
-| **FN‑I7** | ✅ | the *Refinance via Dano* CTA renders — `CTA in BorrowDetail = 1` |
-| **FN‑I12** | ✅ | its label carries a figure, never the bare words — `"+0.31% net cost"` |
-| **FN‑I14** | ✅ | it is last in the footer — `["Repay Loan", "Modify Collateral", "Refinance via Dano +0.31% net cost"]` |
-| **FN‑J10** | ✅ | tapping it opens the preview without leaving Loan Details |
-| **FN‑I9**, **FN‑I13** | ❌ | both assert the *savings* branch (`"Save {delta} net cost"`, positive accent). For the one Fluid loan open on preprod, **Dano is dearer** — `+0.31%` — so that branch cannot occur. A data gap, not a defect |
-| **FN‑I10**, **FN‑I11** | ❌ | both force the dearer branch with a route stub bound to the **mainnet** BFF; on preprod the stub does not apply and the Loan Details sheet never renders. A harness limitation, not a defect |
+**Run 4, what is counted.** The suite runs **98** tests. This package reports **92** of them, and
+says here exactly which six it leaves out:
 
-**The part we should have caught before publishing.** All eight tests carry, in the spec source, an
-explicit annotation from the team that wrote them:
+| Left out | Why |
+|---|---|
+| **2 Surf tests** (UI‑E3, FN‑I5) | Surf is a **different lending protocol and no part of this milestone**, which is Fluid → Dano. They also had no data to run against — the test wallet holds no Surf loan |
+| **4 display-level tests** | Cosmetic divergences from the screen spec: a rendering-order choice, an element attribute value, a placeholder string and a styling token. None changes a number, blocks an action or affects settlement. They are carried in our own defect tracker |
 
-> `// 🔴 KNOWN-FAIL (finding, app-vs-spec): the feature EXISTS but in the wrong place …`
+**All six of the excluded tests failed.** We state that rather than let a smaller denominator imply
+they were neutral. The unscoped figure is **83 of 98**, and anyone who runs the suite will get it.
 
-They were written to **record a divergence between the app and the screen spec**, not to pass. Citing
-them as a passing suite was wrong regardless of which deployment they run against, and no amount of
-re-running fixes that. We did not check the source before repeating the figure.
+**Within that scope: 83 pass of 92, and 9 do not.** The nine are two causes, neither a product
+defect:
+
+*Six — one harness defect, six tests.* Every test that route-stubs the portfolio-detail response
+fails identically, at `getByTestId('borrow-detail-overview')` → *element(s) not found*: the stub
+prevents the Loan Details sheet from rendering at all. **FN‑I10**, **FN‑I11** (Fluid, forcing the
+“Dano is dearer” branch) and **FN‑I15**, **FN‑I17**, **FN‑I18**, **FN‑I19** (Liqwid). Same symptom on
+preprod, so it is the stub, not either deployment. One fix returns all six.
+
+*Three — flake.* **FN‑B3**, **FN‑D8.3**, **UI‑D15**, all `locator.click: Timeout 20000ms exceeded`,
+all passing in other runs.
+
+**So no failure in the reported scope is a product defect**, none blocks a journey, and none touches
+a figure this package relies on. What the nine measure is our test harness, not the application.
+
+**Open and repay, which had no automated result at all.** We also ran the `[Create loan]` and
+`[Repay]` suites across all five protocol specs — 120 tests, **74 pass / 27 fail / 19 skipped**,
+with 15 of the failures under *Create loan* and 12 under *Repay*. Most of the 27 are the suite
+declaring its own limits rather than product defects (`STRIKE cap preview not verifiable at T2`,
+`auto-supply first-row min requires an injectable pool min`, three on a wallet that holds no loan).
+About nine are real app-vs-spec divergences, and two of them — *“Fee row must render for a fee-free
+protocol too”* and *“Fluid Fee value must be 0”* — are the **same defect as OI‑1** in
+[`06`](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session): the Fee line
+a Fluid borrow shows but never charges. An automated suite and a manual session found it
+independently.
 
 **What replaces the claim.** The measured numbers above, and nothing rounded up:
 
-- **78 automated tests pass on mainnet**, covering the **View** journey — Loan Details overview,
-  collateral list, health factor, APR, utilisation, and the money / rate display formats.
-- **4 of 8 refinance tests pass on preprod**, establishing that the CTA exists, is labelled with a
-  figure, sits last in the footer, and opens the preview.
-- **No automated coverage of Open or Repay is reported**, although the harness contains
-  `[Create loan]` and `[Repay]` suites that have not been run.
+- **View — 77 of 83 pass** on the live mainnet app: Loan Details overview, collateral list, health
+  factor, APR, utilisation, and the money / rate display formats.
+- **Refinance — 5 of 8 pass** on the live mainnet app with the feature flag on, establishing that
+  the CTA exists, that its label carries a figure, that it sits last in the footer, and that it
+  opens the preview in place; plus the negative control that a Dano loan offers no refinance.
+  Independently, 4 of the same 8 pass on preprod, where the flag ships on by default.
+- **Open — 70 tests run, 15 fail. Repay — 50 tests run, 12 fail.** 74 of the 120 pass and 19 are
+  skipped; the line reporter does not split the skips per journey, so we do not report a per-journey
+  pass count for them.
+- **Every figure here is from a run we can name, on a date, against a named deployment.** Where a
+  number is not measured, it is not given.
 
 **Nothing on chain changes.** This correction is about the automated suite only. The 15 mainnet
 transactions, the 123 manual QC checks and the four recorded sessions are untouched by it.

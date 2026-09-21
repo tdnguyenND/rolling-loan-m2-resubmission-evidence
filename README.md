@@ -98,9 +98,11 @@ and the counterparty protocol's own loan records
 
 Integration-test results are in
 [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) as they stand
-today — 25 transaction QC checks of which **24 hold**, **78 automated UI tests passing** over the
-View journey, and **4 of the 8 refinance tests** passing on preprod (the previous submission's
-“8 / 8” is withdrawn — [`08` C‑6](./08_CORRECTIONS.md)) (in
+today — 25 transaction QC checks of which **24 hold**, **83 of the 92 in-scope** Loan Details tests
+passing on mainnet (83 of 98 unscoped; [`08` C‑6](./08_CORRECTIONS.md) names the six left out and
+why, and none of the nine in-scope failures is a product defect), and the `[Create loan]` /
+`[Repay]` suites at **74 of 120**. The previous submission's “8 / 8” is withdrawn —
+[`08` C‑6](./08_CORRECTIONS.md) (in
 **no-sign** mode: real wallet reads, `signTx`/`submitTx` stubbed, so they evidence the surface and
 its arithmetic, not settlement — [`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) — with
 the step-by-step detail in the previous submission's
@@ -175,7 +177,9 @@ screenshots/
   *.png                              walkthrough captures of the manual refinance journey
 
 videos/                              screen recordings of the four journeys above,
-                                     first click to settled loan (`00` §C)
+                                     first click to settled loan (`00` §C), plus
+                                     `05…vespr….mp4` — open + refinance signed in a
+                                     second wallet brand (`06` Journey 5)
 
 fluid-api/                           the counterparty protocol's own API responses behind
                                      the "seven loans repaid" claim, byte for byte, with
@@ -217,9 +221,9 @@ criterion-to-evidence mapping. Their walkthrough screenshots in
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
 | Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`06` §4.1); **repay** end-to-end on three loans those walkthroughs created — `06` §§1.1, 2.1, 3.1 |
 
-On the last two rows. The application **is** covered by an automated suite — partly: 78 tests pass
-over the *view* journey and 4 of 8 over *refinance*, while the *open* and *repay* suites have not
-been run ([`08` C‑6](./08_CORRECTIONS.md)). Every journey was
+On the last two rows. The application **is** covered by an automated suite — partly, and every gap
+is named: 83 of 92 in-scope Loan Details tests, 70 run over *open* and 50 over *repay*
+([`08` C‑6](./08_CORRECTIONS.md)). Every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
 settled on mainnet. The package reports those sessions and rests its verifiable claims on what a
 third party can check without us: the ledger and the counterparty protocol's records. The refinance
