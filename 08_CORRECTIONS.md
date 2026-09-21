@@ -310,18 +310,31 @@ of the eleven it leaves out:
 | **Liqwid refinance** (FN‑I15, FN‑I17, FN‑I18, FN‑I19) | 4 | Liqwid is likewise **a different protocol**. These four also cannot run yet: they must synthesise a refinance target, and doing so needs a real Dano pool id the harness does not have |
 | **Display-level** | 5 | Cosmetic divergences from the screen spec: a rendering-order choice, an element attribute value, a placeholder string, a styling token and a fallback avatar. None changes a number, blocks an action or affects settlement. Carried in our own defect tracker |
 
-**Every one of the eleven excluded tests has failed at least once.** We say so rather than let a
-smaller denominator imply they were neutral. **Unscoped, the last full run was 83 of 98**, and
-anyone who runs the suite will get a figure of that order.
+**All eleven excluded tests failed in the last full run.** We say so rather than let a smaller
+denominator imply they were neutral. **Unscoped, that run was 83 of 98**, and anyone who runs the
+suite will get a figure of that order.
 
-**Within the 87 in scope, every test has passed — but not all in one run.** That distinction
-matters, so here is the actual sequence:
+**How the 87 split, so the two journey figures add up.** **80 belong to *view*** — the Loan Details
+screen itself, plus **FN‑I8**, the negative control that a Dano loan offers no refinance, which
+asserts on that screen and is counted there. **7 belong to *refinance*** — FN‑I7, FN‑I9, FN‑I10,
+FN‑I11, FN‑I12, FN‑I14 and FN‑J10. 80 + 7 = 87. Where this package says “all 7 refinance tests in
+scope pass”, FN‑I8 is not one of the seven.
+
+**87 of 87 in-scope tests have passed — across three runs, not one.** That distinction matters
+enough that we write it into every figure in this package rather than only here. The actual
+sequence:
 
 | When | What ran | Result |
 |---|---|---|
 | 21 Sep, 14:11 | the full suite, 98 tests, 50 min | **83 pass / 15 fail**. Of the 15, eleven are the excluded set above; **four were in scope**: FN‑D8.3, UI‑D15, FN‑I10, FN‑I11 |
 | 21 Sep, ~15:45 | the failures, with `--retries=2` | **FN‑D8.3** and **UI‑D15** pass — both were `locator.click` timeouts, not defects |
 | 21 Sep, 16:22 | FN‑I10, FN‑I11 after a harness fix | **both pass**, and for the first time reach their own assertion: `net-cost label when Dano is dearer (3.80 → 5.10; live netCost was 4.81) = "+1.30% net cost"` |
+
+**On the retry.** A `--retries=2` re-run is how this harness separates a flake from a failure: it
+repeats the test unchanged. FN‑D8.3 and UI‑D15 were `locator.click` timeouts — the browser never
+delivered the click — and they pass in other runs too. FN‑I10 and FN‑I11 were **not** retried:
+retrying them would have failed again, because the defect was in the harness. They were fixed, and
+then passed.
 
 **The harness fix, and what it says about the old “8 / 8”.** FN‑I10 and FN‑I11 build the “Dano is
 dearer” case by rewriting the live BFF response. The rewrite set the refinance target's `poolId`
@@ -332,8 +345,10 @@ an error state, and the tests timed out **without ever reaching the assertion th
 could not have passed. A suite reported as **8 / 8** contained two tests that had never run to their
 own check — which is the clearest single reason that figure had to be withdrawn.
 
-**So: 87 in scope, 87 have passed, assembled from three runs.** No single run since the fix covers
-all 87, and we would rather write that sentence than imply one does.
+**So: 87 of 87 in-scope tests have passed — across three runs, not one.** No single run since the
+fix covers all 87, and we would rather write that sentence than imply one does. Re-running the full
+suite once more, so the figure stands on a single run, is named as outstanding work in
+[`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-ac4-what-is-automated-and-what-is-not).
 
 **Open and repay, which had no automated result at all.** We also ran the `[Create loan]` and
 `[Repay]` suites across all five protocol specs — 120 tests, **74 pass / 27 fail / 19 skipped**,
@@ -354,8 +369,8 @@ independently.
 - **Refinance — all 7 Fluid tests in scope pass** on the live mainnet app with the feature flag on:
   the CTA exists, its label carries a figure in both directions (`Save 91.98% net cost` and, on the
   synthesised dearer branch, `+1.30% net cost`), it sits last in the footer, it opens the preview in
-  place, and a Dano loan correctly offers none. Independently, 4 of them also pass on preprod, where
-  the flag ships on by default.
+  place. Independently, 4 of them also pass on preprod, where the flag ships on by default. (The
+  control that a Dano loan offers no refinance also passes, and is counted under *view* above.)
 - **Open — 70 tests run, 15 fail. Repay — 50 tests run, 12 fail.** 74 of the 120 pass and 19 are
   skipped; the line reporter does not split the skips per journey, so we do not report a per-journey
   pass count for them.

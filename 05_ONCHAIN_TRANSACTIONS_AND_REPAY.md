@@ -17,7 +17,7 @@ transactions: they are part of the refinances already counted in §1.
 
 The front-end half of the evidence is in [`04_USER_JOURNEYS_AND_APP_STATE.md`](./04_USER_JOURNEYS_AND_APP_STATE.md).
 
-**Five terms, once:**
+**The terms used below**, repeated here so this file stands alone; the full glossary, including `Tier 2` and the identifier prefixes, is in [`README`](./README.md#terms-and-labels-used-across-this-package):
 
 - **UTxO** — an on-chain transaction output: a parcel of value sitting at an address, spendable once.
 - **Mint / burn** — creating or destroying a token. A burn of `−1` destroys that token permanently.
@@ -328,7 +328,7 @@ contradicts; see [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑1.
 
 ---
 
-## 5. Evidence for repayment: two direct-repay flows, and repayment within a refinance
+## 5. Evidence for repayment: three direct repayments, and repayment within a refinance
 
 The approved **Repay** journey is the direct user action — **R‑A** and **R‑B** below, where the
 borrower opens the sheet and settles the debt from their own funds. **R‑C** is not a second repay

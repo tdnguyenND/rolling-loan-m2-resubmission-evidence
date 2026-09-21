@@ -39,12 +39,76 @@ has no interface capture of its own, the cell says so rather than describing a s
 
 ### 1.2 The matrix
 
-| Journey | E1 · Eternl front end | E2 · On-chain mainnet |
+Each journey carries **two independent classes of evidence**. The detail behind every cell is in the
+four subsections that follow.
+
+| Journey | E1 · Eternl front end | E2 · On-chain mainnet | Detail |
+|---|---|---|---|
+| **1. View** — see my loans, debt, collateral, health factor, APR | ✅ *My Account → Loans*, captured on two connected mainnet wallets | ✅ every displayed borrowed amount reconciled to the ledger | [§1.2.1](#121-view--in-detail) |
+| **2. Open** — originate a loan against collateral | ✅ captured screen by screen in four preprod walkthroughs | ✅ **7 mainnet transactions of its own** | [§1.2.2](#122-open--in-detail) |
+| **3. Repay** — settle a loan | ✅ captured screen by screen three times on preprod | ✅ **3 mainnet transactions of its own**, plus the settlement leg in all 5 refinances | [§1.2.3](#123-repay--in-detail) |
+| **4. Refinance** — roll a Fluid loan into a Dano loan | ✅ captured end-to-end, including the Eternl signing dialog | ✅ **5 signed mainnet refinances** | [§1.2.4](#124-refinance--in-detail) |
+
+#### 1.2.1 View — in detail
+
+**In the interface (E1).** *My Account → Loans*, captured from the live app on two connected mainnet
+wallets — [§2.1](#21-the-two-screenshots).
+
+**On the ledger (E2).** Every displayed borrowed amount re-derived from the chain —
+[§2.4](#24-row-by-row-the-displayed-amount-is-the-ledger-amount). The number of loans the app lists
+equals the number of Borrower NFTs each wallet holds on chain, 2 and 4 — [§2.3](#23-how-the-application-knows-which-loans-to-show).
+
+#### 1.2.2 Open — in detail
+
+**In the interface (E1).** A full walkthrough, screen by screen: *Borrow Market* with the amounts
+entered → Eternl signing *"Dano Finance: Borrow from Fluid"* → the new loan in *Portfolio* and
+*My Account*. Captured in two opposite asset directions on preprod, and once at a size that fills
+two pools and opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen).
+
+⚠️ The **seven mainnet** originations have no sheet capture of their own — see §1.4. What
+corroborates them in the app is that the loans they opened are listed and still open — [§2.3](#23-how-the-application-knows-which-loans-to-show).
+
+**On the ledger (E2).** **7 mainnet transactions** — six *"Dano Finance: Borrow from Fluid"* and one
+*"Create Loan"* opening a Dano loan directly ([`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans)).
+Each mints that loan's position token and locks its collateral. The refinances separately minted
+**5 distinct Borrower NFTs** ([`05` §2.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#21-two-danogo-tokens-and-which-one-identifies-a-loan)).
+
+#### 1.2.3 Repay — in detail
+
+**In the interface (E1).** Captured screen by screen on preprod **three times** — the *Repay Loan*
+quote (*"27.000474 ADA … ↘ Repaid"*), the Eternl dialog burning the loan token and returning the
+collateral, and the settled transaction. Each one closes the very loan that walkthrough had just
+opened and refinanced:
+
+| | Transaction | How it is captured |
 |---|---|---|
-| **1. View** — see my loans, debt, collateral, health factor, APR | ✅ *My Account → Loans*, captured from the live app on two connected mainnet wallets — [§2.1](#21-the-two-screenshots) | ✅ every displayed borrowed amount reconciled to the ledger — [§2.4](#24-row-by-row-the-displayed-amount-is-the-ledger-amount) |
-| **2. Open** — originate a loan against collateral | ✅ **full walkthrough captured, screen by screen** — *Borrow Market* with the amounts entered → Eternl signing *Dano Finance: Borrow from Fluid* → the new loan in *Portfolio* and *My Account*, in two opposite asset directions on preprod, and once at a size that fills two pools and opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) · the **seven mainnet** originations below have no sheet capture of their own — §1.4 · ✅ *corroborating:* the loans they opened are listed in the app and still open — §2.3 | ✅ **7 mainnet transactions of its own** — six *"Dano Finance: Borrow from Fluid"*, one *"Create Loan"* opening a Dano loan directly — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) · ✅ each mints that loan's position token and locks its collateral · ✅ **5 distinct Borrower NFTs** minted by the refinances — [`05` §2.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#21-two-danogo-tokens-and-which-one-identifies-a-loan) |
-| **3. Repay** — settle a loan | ✅ **captured screen by screen** on preprod — the *Repay Loan* quote (*"27.000474 ADA … ↘ Repaid"*), the Eternl dialog burning the loan token and returning the collateral, and the settled transaction — **twice**, [`e134b85e…1416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) and [`bae9a9c9…5b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d), each closing the very loan its walkthrough had just opened and refinanced — [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) §1.1 and [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) §2.1, steps 11–13 · ✅ **and once inside a continuous screen recording** — [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) §3.1, where *Repay* is steps 9–13 of one unbroken 7 min 29 s take, [`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed) · ⚠️ in journeys 1 and 2 the repay is screenshots only, not on those recordings, and no journey captures the app state *after* the repay · the signed mainnet repayment transactions are listed in [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance) — §1.4 · ✅ *corroborating:* the settled loans are **absent** from the post-refinance screens — §2.5 · ✅ *corroborating:* **Fluid's own dashboard marks them `REPAID`** — [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid) | ✅ **3 mainnet transactions of its own**, debt paid from the borrower's own funds — `17c23dde…`, `ea823365…`, and **`77748bd9…` on Danogo's own `Repay Loan` path**, which burns the borrower's title to the loan — [`05` §5.5–§5.6](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#55-repaying-an-external-loan-on-mainnet-two-transactions) · ✅ **5 Fluid loans repaid in full** as the settlement leg of a refinance · ✅ the counterparty's own indexer reports **seven** loans `loan_repaid`, `remainingDebt: 0` |
-| **4. Refinance** — roll a Fluid loan into a Dano loan | ✅ **full walkthrough**: refinance card and preview → **Eternl signing dialog with inputs and outputs** → confirmation → portfolio after, screenshotted end-to-end — [`01` §1](./01_Integration_Test_Report_M2.md) · ✅ **captured again, four times over, in the preprod session recordings** — [`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance) · the **resulting** Dano loans shown in the app — §2 | ✅ **5 signed mainnet refinances**, 2 wallets, 3 collateral assets, 2 borrowed assets, 9 days — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
+| [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) §1.1, steps 11–13 | [`e134b85e…1416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) | screenshots |
+| [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) §2.1, steps 11–13 | [`bae9a9c9…5b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d) | screenshots |
+| [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) §3.1, steps 9–13 | [`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed) | **inside one unbroken 7 min 29 s recording** |
+
+⚠️ **Not captured:** in journeys 1 and 2 the repay is screenshots only, not on those recordings; and
+no journey captures the app state *after* the repay. See §1.4.
+
+**On the ledger (E2).** **3 mainnet transactions**, the debt paid from the borrower's own funds:
+`17c23dde…`, `ea823365…`, and **`77748bd9…` on Danogo's own `Repay Loan` path**, which burns the
+borrower's title to the loan ([`05` §5.5–§5.6](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#55-repaying-an-external-loan-on-mainnet-two-transactions)).
+Separately, **5 Fluid loans were repaid in full** as the settlement leg of a refinance
+([`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance)).
+
+**Corroborating.** The settled loans are **absent** from the post-refinance screens — [§2.5](#25-what-is-absent-from-the-screenshots-and-why-that-is-the-point).
+**Fluid's own dashboard marks them `REPAID`**, and its indexer reports **seven** loans
+`loan_repaid`, `remainingDebt: 0` — [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid).
+
+#### 1.2.4 Refinance — in detail
+
+**In the interface (E1).** A full walkthrough: refinance card and preview → **the Eternl signing
+dialog with inputs and outputs** → confirmation → portfolio after, screenshotted end-to-end
+([`01` §1](./01_Integration_Test_Report_M2.md)) — and captured again, four times over, in the
+preprod session recordings ([`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance)).
+The resulting Dano loans are shown in the app in §2.
+
+**On the ledger (E2).** **5 signed mainnet refinances** — 2 wallets, 3 collateral assets,
+2 borrowed assets, 9 days — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions).
 
 ### 1.3 The user path for each journey
 
@@ -91,7 +155,7 @@ The recorded repayment examples cover **Fluid** and **Dano** loans: this journey
 mainnet in its own right — twice against Fluid and once against Danogo's own contracts — and
 additionally as the settlement leg of each refinance. Protocol-specific behaviour outside those
 examples is outside the scope of this resubmission. See
-[`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance).
+[`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance).
 
 **Journey 4 — Refinance**
 
@@ -131,7 +195,8 @@ Stated explicitly, so the reviewer does not have to work out where each claim st
    The previous submission's demo video is withdrawn as evidence — [`07` §A](./07_ACCEPTANCE_CRITERIA_M2.md#a-milestone-outputs).
    The **open** journey is captured end-to-end as well, in the four
    preprod walkthroughs added for this resubmission — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) — which
-   run *Open → View → Refinance → View* with a screenshot of every screen and a screen recording of
+   run *Open → View → Refinance → View* — and *→ Repay* in three of the four — with a screenshot of
+   every screen and a screen recording of
    the whole session, one of them at a size that fills **two** pools and opens **two** loans
    ([`06` Journey 4](./06_UAT_Reports_Four_Journeys_M2.md#journey-4--one-borrow-two-pools-two-loans)); the seven mainnet **Open** transactions themselves have
    no sheet capture and are carried by their transactions and by the resulting state in the app (§2).
@@ -141,7 +206,7 @@ Stated explicitly, so the reviewer does not have to work out where each claim st
    and [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) §3.1 steps 10–13) — and only
    [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) records it inside a screen recording; the app state after
    each repayment was not captured. Its mainnet evidence remains the three signed repayments in
-   [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance).
+   [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance).
 3. **Journeys are not double-counted.** Five transactions each perform a repay *and* a refinance.
    That is five refinances and five settlement legs, not ten demonstrations. The three separately
    evidenced **Repay** transactions are `17c23dde…`, `ea823365…` and `77748bd9…`; the seven
@@ -173,14 +238,15 @@ is not, this table says so.
 | What was tested | Current result | Detail |
 |---|---|---|
 | **25 transaction QC checks** against the executed refinance (TC‑01 … TC‑25) | **24 of 25 hold.** TC‑24 does **not**: the transaction it cites as the zero-origination-fee example, `88579a30…`, pays a **2 ADA** fee — [`08`](./08_CORRECTIONS.md) C‑1. The zero-fee case is `0e26cc58…`, which has no fee leg at all | [`01` §2](./01_Integration_Test_Report_M2.md) |
-| **The refinance-surface tests** (FN‑I7, FN‑I9 … FN‑I14, FN‑J10), Tier‑2 with a connected wallet — **no-sign**: the wallet's balance/UTxO reads are real, but `signTx` and `submitTx` are stubbed, so nothing is signed or broadcast ([`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) | **All 7 in scope pass** on mainnet with the feature flag on; **0 of 8** with it off, which is how the deployment ships. The previous submission's **8 / 8 is withdrawn** — two of those eight had never reached their own assertion | [`08` C‑6](./08_CORRECTIONS.md) |
-| **The Loan Details suite** — Tier‑2, against the live **mainnet** app with the flag on. 98 tests run, **87 in scope** (2 Surf and 4 Liqwid are other protocols, 5 are display-level — [`08` C‑6](./08_CORRECTIONS.md) says which and why) | **All 87 in scope have passed**, across three runs rather than one; C‑6 gives the sequence. Unscoped, the last full run was 83 of 98 | [`08` C‑6](./08_CORRECTIONS.md) |
+| **The refinance-surface tests** (FN‑I7, FN‑I9 … FN‑I14, FN‑J10), [Tier‑2](./README.md#terms-and-labels-used-across-this-package) with a connected wallet — **no-sign**: the wallet's balance/UTxO reads are real, but `signTx` and `submitTx` are stubbed, so nothing is signed or broadcast ([`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) | **All 7 in scope pass** on mainnet with the feature flag on; **0 of 8** with it off, which is how the deployment ships. The previous submission's **8 / 8 is withdrawn** — two of those eight had never reached their own assertion | [`08` C‑6](./08_CORRECTIONS.md) |
+| **The Loan Details suite** — Tier‑2, against the live **mainnet** app with the flag on. 98 tests run, **87 in scope** (2 Surf and 4 Liqwid are other protocols, 5 are display-level — [`08` C‑6](./08_CORRECTIONS.md) says which and why) | **87 of 87 in-scope tests have passed — across three runs, not one.** The last full-suite run was **83 of 98**; C‑6 gives the sequence | [`08` C‑6](./08_CORRECTIONS.md) |
 | **The `[Create loan]` and `[Repay]` suites** — 120 tests across five protocol specs | **74 pass / 27 fail / 19 skipped**; 15 failures under *Create loan*, 12 under *Repay*. Two are the same defect as **OI‑1** — the Fee line a Fluid borrow shows but never charges | [`08` C‑6](./08_CORRECTIONS.md) |
 | **Manual end-to-end refinance journey** on mainnet, step by step | pass — loan row → refinance card → Eternl signing dialog with inputs and outputs → confirmation → portfolio after | [`01` §1](./01_Integration_Test_Report_M2.md) |
-| **Four manual end-to-end walkthroughs** on preprod, *Open → View → Refinance → View*, in opposite asset directions, on three Eternl accounts, one of them filling two pools | pass — and the fee, health factor and resulting debt the interface quoted **before** signing are the ones the chain holds afterwards | [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) · [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) · [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) · [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) · [`06` Journey 4](./06_UAT_Reports_Four_Journeys_M2.md#journey-4--one-borrow-two-pools-two-loans) |
+| **Four manual end-to-end walkthroughs** on preprod, *Open → View → Refinance → View* — and *→ Repay* in three of the four — in opposite asset directions, on three Eternl accounts, one of them filling two pools | pass — and the fee, health factor and resulting debt the interface quoted **before** signing are the ones the chain holds afterwards | [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) · [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) · [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) · [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) · [`06` Journey 4](./06_UAT_Reports_Four_Journeys_M2.md#journey-4--one-borrow-two-pools-two-loans) |
 | **The four journeys, per journey** | evidence and result for each, one row apiece | §1.2 above |
 
-**The automated suite reaches all four journeys.** All 87 Loan Details tests in scope have passed;
+**The automated suite reaches all four journeys.** On Loan Details, **87 of 87 in-scope tests have
+passed — across three runs, not one** (the last full-suite run was 83 of 98);
 *open* ran 70 tests with 15 failing and *repay* 50 with 12, most of those the suite declaring its own
 Tier‑2 limits. No product defect is outstanding inside the reported scope.
 [`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-ac4-what-is-automated-and-what-is-not) scores the

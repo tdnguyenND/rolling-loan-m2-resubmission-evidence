@@ -55,7 +55,7 @@ Three things a reviewer can check from these files alone:
 
 - **Every `finishingTxHash` is a transaction this application built** — each one is in
   [`05` §1](../05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) or
-  [§5](../05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-two-direct-repay-flows-and-repayment-within-a-refinance),
+  [§5](../05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance),
   and settled on Cardano mainnet.
 - **Every `details.nft` is under policy `30f1095a…`** — the Fluid position NFT held by the loan
   script, the same token the transaction burns. That is what makes Fluid's record and our burn
