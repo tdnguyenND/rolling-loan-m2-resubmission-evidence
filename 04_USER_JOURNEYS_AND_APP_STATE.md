@@ -63,7 +63,7 @@ equals the number of Borrower NFTs each wallet holds on chain, 2 and 4 — [§2.
 **In the interface (E1).** A full walkthrough, screen by screen: *Borrow Market* with the amounts
 entered → Eternl signing *"Dano Finance: Borrow from Fluid"* → the new loan in *Portfolio* and
 *My Account*. Captured in two opposite asset directions on preprod, and once at a size that fills
-two pools and opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen).
+two pools and opens two loans — [`00` Output 4](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions).
 
 ⚠️ The **seven mainnet** originations have no sheet capture of their own — see §1.4. What
 corroborates them in the app is that the loans they opened are listed and still open — [§2.3](#23-how-the-application-knows-which-loans-to-show).
@@ -194,7 +194,7 @@ Stated explicitly, so the reviewer does not have to work out where each claim st
    recordings walks the same flow end to end ([`06`](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance)).
    The previous submission's demo video is withdrawn as evidence — [`07` §A](./07_ACCEPTANCE_CRITERIA_M2.md#a-milestone-outputs).
    The **open** journey is captured end-to-end as well, in the four
-   preprod walkthroughs added for this resubmission — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) — which
+   preprod walkthroughs added for this resubmission — [`00` Output 4](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions) — which
    run *Open → View → Refinance → View* — and *→ Repay* in three of the four — with a screenshot of
    every screen and a screen recording of
    the whole session, one of them at a size that fills **two** pools and opens **two** loans
@@ -238,23 +238,20 @@ is not, this table says so.
 | What was tested | Current result | Detail |
 |---|---|---|
 | **25 transaction QC checks** against the executed refinance (TC‑01 … TC‑25) | **24 of 25 hold.** TC‑24 does **not**: the transaction it cites as the zero-origination-fee example, `88579a30…`, pays a **2 ADA** fee — [`08`](./08_CORRECTIONS.md) C‑1. The zero-fee case is `0e26cc58…`, which has no fee leg at all | [`01` §2](./01_Integration_Test_Report_M2.md) |
-| **The refinance-surface tests** (FN‑I7, FN‑I9 … FN‑I14, FN‑J10), [Tier‑2](./README.md#terms-and-labels-used-across-this-package) with a connected wallet — **no-sign**: the wallet's balance/UTxO reads are real, but `signTx` and `submitTx` are stubbed, so nothing is signed or broadcast ([`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)) | **All 7 in scope pass** on mainnet with the feature flag on; **0 of 8** with it off, which is how the deployment ships. The previous submission's **8 / 8 is withdrawn** — two of those eight had never reached their own assertion | [`08` C‑6](./08_CORRECTIONS.md) |
-| **The Loan Details suite** — Tier‑2, against the live **mainnet** app with the flag on. 98 tests run, **87 in scope** (2 Surf and 4 Liqwid are other protocols, 5 are display-level — [`08` C‑6](./08_CORRECTIONS.md) says which and why) | **87 of 87 in-scope tests have passed — across three runs, not one.** The last full-suite run was **83 of 98**; C‑6 gives the sequence | [`08` C‑6](./08_CORRECTIONS.md) |
-| **The `[Create loan]` and `[Repay]` suites** — 120 tests across five protocol specs | **74 pass / 27 fail / 19 skipped**; 15 failures under *Create loan*, 12 under *Repay*. Two are the same defect as **OI‑1** — the Fee line a Fluid borrow shows but never charges | [`08` C‑6](./08_CORRECTIONS.md) |
 | **Manual end-to-end refinance journey** on mainnet, step by step | pass — loan row → refinance card → Eternl signing dialog with inputs and outputs → confirmation → portfolio after | [`01` §1](./01_Integration_Test_Report_M2.md) |
-| **Four manual end-to-end walkthroughs** on preprod, *Open → View → Refinance → View* — and *→ Repay* in three of the four — in opposite asset directions, on three Eternl accounts, one of them filling two pools | pass — and the fee, health factor and resulting debt the interface quoted **before** signing are the ones the chain holds afterwards | [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) · [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) · [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) · [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) · [`06` Journey 4](./06_UAT_Reports_Four_Journeys_M2.md#journey-4--one-borrow-two-pools-two-loans) |
+| **Four manual end-to-end walkthroughs** on preprod, *Open → View → Refinance → View* — and *→ Repay* in three of the four — in opposite asset directions, on three Eternl accounts, one of them filling two pools | pass — and the fee, health factor and resulting debt the interface quoted **before** signing are the ones the chain holds afterwards | [`00` Output 4](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions) · [`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm) · [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada) · [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) · [`06` Journey 4](./06_UAT_Reports_Four_Journeys_M2.md#journey-4--one-borrow-two-pools-two-loans) |
 | **The four journeys, per journey** | evidence and result for each, one row apiece | §1.2 above |
 
-**The automated suite reaches all four journeys.** On Loan Details, **87 of 87 in-scope tests have
-passed — across three runs, not one** (the last full-suite run was 83 of 98);
-*open* ran 70 tests with 15 failing and *repay* 50 with 12, most of those the suite declaring its own
-Tier‑2 limits. No product defect is outstanding inside the reported scope.
-[`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-ac4-what-is-automated-and-what-is-not) scores the
-criterion as partly met on exactly that ground, and
-[`08` C‑6](./08_CORRECTIONS.md) records why the previously published “8 / 8” is withdrawn.
+**The previous submission's automated figure — “the 8 refinance tests pass 8 / 8” — is withdrawn**,
+and **no automated-test pass rate is claimed in its place**
+([`08` C‑6](./08_CORRECTIONS.md)). What this package reports is the table above: checks published
+with the figure each asserts and the public source it was re-derived from, including the one that
+does not hold.
 
-The first three rows are our own reporting about our own work, and are named as such. The
-primary verifiable evidence is the ledger and the counterparty's records — column E2 of §1.2.
+The manual rows are our own reporting about our own work, and are named as such. The primary
+verifiable evidence is the ledger and the counterparty's records — column E2 of §1.2.
+[`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-the-integration-testing-this-package-publishes)
+maps this to the acceptance criterion.
 
 ## 2. The post-refinance state in the app, reconciled to the ledger
 

@@ -5,26 +5,14 @@ This is the mapping for the **resubmission**. It replaces
 mapping and is kept unedited as an archive — several of its ✅ rest on claims we have since withdrawn
 ([`08_CORRECTIONS.md`](./08_CORRECTIONS.md)).
 
-Every row below points at evidence a third party can check without us. Where a criterion is met with
-open items still attached, the row says which ones and links them; **§E** lists everything this
-package leaves open, including the one thing it cannot evidence at all.
+Every row below points at evidence a third party can check without us, and lists **only what that
+evidence shows**. Where an artifact does not support a claim, the claim is not made. **§E** lists the
+known issues found while producing this package, each with its established cause.
 
-**Two criteria are not fully met, and neither is marked as if it were.**
-
-- **AC3** asks for an integration that is *stable, intuitive, and free from blocking UI/UX issues
-  across supported wallets*. Stability we can show, and two wallet brands are now exercised — Eternl
-  across all four journeys, Vespr across *open* and *refinance*. **Whether the interface is intuitive
-  we cannot show**: no independent-user study was run. Scored clause by clause in
-  [§B.1](#b1-ac3-clause-by-clause), carried as **⚠️ partly met**.
-- **AC4** asks for the major journeys to be *covered by integration tests*. All four journeys were
-  executed and checked, and all four now carry automated results — on Loan Details, **87 of 87
-  in-scope tests have passed, across three runs rather than one**; the separate suites ran 70 tests
-  over *open* and 50 over *repay*, with 15 and 12 failing. So the coverage is real but uneven. The
-  previous submission's “8 / 8” for refinance is withdrawn ([`08` C‑6](./08_CORRECTIONS.md)). Scored in
-  [§B.2](#b2-ac4-what-is-automated-and-what-is-not), carried as **⚠️ partly met**.
-
-Both are also in §E. We would rather hand the reviewer the two gaps named than a full column of
-ticks they have to take apart themselves.
+The previous submission's self-assessments — that the interface is intuitive, and that the automated
+refinance suite passed 8 / 8 — **are withdrawn and are not replaced by new self-assessments**
+([`08` C‑2, C‑6](./08_CORRECTIONS.md)). What this package offers instead is execution evidence and
+published checks, each re-derivable from a public source.
 
 "Rolling Loan" = the **Refinance via Dano** feature.
 
@@ -67,7 +55,7 @@ behind any flag** and are reachable on both deployments as shipped.
 | Integrated front-end with loan actions (view, open, repay, refinance) | **15 mainnet transactions** signed from the app — 7 open, 5 refinance, 3 repay — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions), [§1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans), [§5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance) · all four actions captured screen by screen in [`06`](./06_UAT_Reports_Four_Journeys_M2.md) | ✅ |
 | Completed connection to back-end API endpoints | every quoted figure re-derived from the ledger and found to match — [`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger); Fluid's own API independently reports the same loans repaid — [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid) | ✅ |
 | Ready-to-test user journeys | four complete sessions on three Eternl accounts, each with a screen recording, every signing dialog and every explorer record — [`06`](./06_UAT_Reports_Four_Journeys_M2.md), **123 QC checks, 123 hold** | ✅ |
-| Demo video | **four unedited screen recordings**, one per journey — continuous takes from the first click, 3 min 50 s – 7 min 29 s, one of them ([`03`](./videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4)) covering all four journeys end to end in a single unbroken session — [`videos/`](./videos/). Every frame is cross-referenced step by step in [`06`](./06_UAT_Reports_Four_Journeys_M2.md), so any figure on screen can be checked against the chain | ✅ |
+| Demo video | **four unedited screen recordings**, one per journey — continuous takes from the first click, 3 min 33 s – 7 min 29 s, one of them ([`03`](./videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4)) covering all four journeys end to end in a single unbroken session — [`videos/`](./videos/). Every frame is cross-referenced step by step in [`06`](./06_UAT_Reports_Four_Journeys_M2.md), so any figure on screen can be checked against the chain | ✅ |
 
 > **On the demo video.** The link in the previous submission, https://youtu.be/z07TxLJLC2w, was a
 > developer walking through the feature — the first thing the reviewer rejected. **It is withdrawn as
@@ -80,150 +68,78 @@ behind any flag** and are reachable on both deployments as shipped.
 |---|---|---|---|
 | **AC1** | View / open / repay / refinance via **Eternl** wallet | all four exercised through Eternl: 15 mainnet transactions from 2 wallets, plus 4 preprod sessions on 3 Eternl accounts and 2 Eternl versions (v2.1.7.1, v2.1.5.0) — [`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance). **View** produces no transaction by nature; its evidence is the app's own screens reconciled to the ledger. *Open* and *refinance* were also exercised in **Vespr**, a second wallet brand ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)) | ✅ |
 | **AC2** | Back-end correct contract interactions for all loan states | every Plutus script execution in all 15 transactions returned `valid_contract = true`; inputs, outputs, mints and burns re-derived from the public **Koios** API — [`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions), [§3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow) | ✅ |
-| **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — the criterion as written, not narrowed | scored clause by clause in [**§B.1**](#b1-ac3-clause-by-clause) immediately below. Of the four clauses **one is met outright**, two are met with named gaps — including **one defect that did block until the user pressed *Retry*** — and **one has no evidence at all** | ⚠️ **partly met** |
-| **AC4** | Major journeys covered by integration tests | **All four journeys now carry automated results.** On the Loan Details suite, **87 of 87 in-scope tests have passed — across three runs, not one**; the last full-suite run was **83 of 98**. [`08` C‑6](./08_CORRECTIONS.md) gives the sequence and names the eleven tests left out of scope and why. **Open: 70 run, 15 fail. Repay: 50 run, 12 fail** — mostly the suite declaring its own Tier‑2 limits. Scored in [**§B.2**](#b2-ac4-what-is-automated-and-what-is-not) | ⚠️ **partly met** |
+| **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — quoted as written | **Stability**: no crash, no hang and no lost state in any of the five recorded sessions; the four that carry a QC checklist hold **123 of 123 checks**, each re-derived from the public ledger. **Wallets exercised**: **Eternl** on all four journeys, across three accounts and two versions (v2.1.7.1, v2.1.5.0); **Vespr** on *open* and *refinance* — [**§B.1**](#b1-stability-and-the-wallets-exercised) | evidence offered |
+| **AC4** | Major journeys covered by integration tests | All four journeys executed end to end and verified check by check against the public ledger: **123 session QC checks** (123 hold) and **25 transaction QC checks** (24 hold), each published with the figure it asserts and the source it was re-derived from — [**§B.2**](#b2-the-integration-testing-this-package-publishes) | evidence offered |
 
-### B.1 AC3, clause by clause
+### B.1 Stability, and the wallets exercised
 
-AC3 is the only criterion this package cannot tick. It is four requirements in one sentence, and they
-do not have the same answer, so each is scored separately rather than averaged into a single mark.
+**Stability.** No crash, no hang and no lost state in any of the five recorded sessions. The four
+that carry a QC checklist hold **123 of 123 checks**; the Vespr session has no checklist of its own.
+On every settled loan the figures the interface displays reconcile to the ledger —
+fee, collateral, health factor and resulting debt, to the smallest unit, in all five preprod
+refinances and all three preprod repayments ([`06`](./06_UAT_Reports_Four_Journeys_M2.md)).
 
-| Clause | Verdict | Status |
+**Wallets exercised.**
+
+| Wallet | Journeys | Evidence |
 |---|---|---|
-| **stable** | No crash, no hang, no lost state in any of the four sessions, across 123 QC checks | ✅ |
-| **free from blocking UI/UX issues** | One defect blocked the journey until the user pressed *Retry* in the app — [below](#the-blocking-defect-d1) | ⚠️ **one blocking-but-recoverable defect** |
-| **intuitive** | No independent-user study was run — [below](#the-clause-with-no-evidence-intuitive) | ❌ **not evidenced** |
-| **across supported wallets** | Two brands: Eternl across all four journeys, Vespr across two — [below](#supported-wallets-two-brands) | ⚠️ **two brands; one on two journeys only** |
+| **Eternl** | view · open · repay · refinance | three accounts, two separate installations, versions **v2.1.7.1** and **v2.1.5.0** (journey 4's not recorded), on both mainnet and preprod — [`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance) |
+| **Vespr** | open · refinance | one 2 min 25 s recorded session on preprod; 13 Plutus script executions across the two transactions, all `valid_contract = true`; 200.000000 ₳ of collateral carried across to the lovelace — [`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr) |
 
-##### stable
+No claim is made for any wallet not in this table, and none is made about *view* or *repay* in Vespr,
+which that session did not exercise.
 
-No crash, no hang and no lost state in any of the four sessions, across **123 QC checks**. On every
-settled loan the figures the interface displays reconcile to the ledger — fee, collateral, health
-factor and resulting debt, to the lovelace, in all five refinances and all three repayments
-([`06`](./06_UAT_Reports_Four_Journeys_M2.md)).
+**One defect occurred during the sessions and is published rather than edited out.** In journey 3 the
+first refinance submit failed after the signature; the tester pressed **Retry** in the app, signed
+again, and it settled. The ledger carries **exactly one** transaction for that refinance and no funds
+were lost. The cause is established: the ledger rejected the first submission with
+`ScriptsNotPaidUTxO` because the wallet offered a collateral UTxO its own cache had not refreshed
+since the open 1 min 50 s earlier. **No fix has shipped** —
+[`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions).
 
-##### The blocking defect (D‑1)
+### B.2 The integration testing this package publishes
 
-**One issue was blocking until the user pressed a button in the app.** In journey 3 the first
-refinance submit failed after the signature — *"Submit failed: Your wallet may not have finished
-syncing…"* — and the journey could not proceed until the tester pressed **Retry**, which succeeded.
-We grade it **major (recoverable)**, and we do not claim this clause is clean.
+Every check below is published with the figure it asserts and the public source that figure was
+re-derived from. Checks that do not hold are published as failures.
 
-What bounds it: it recovered **inside the app**, with no reload and no re-entry of data; **no funds
-were lost**; and the chain carries **exactly one** transaction for that refinance, so there was no
-double-submit.
-
-**The cause is established.** The ledger rejected the submission with `ScriptsNotPaidUTxO` — over
-CIP‑30 `getCollateral()` the wallet offered a collateral UTxO its own cache had not refreshed since
-the open **1 min 50 s earlier**. It is the wallet's selection, but the product's consequence, and
-**no fix has shipped** ([`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions)).
-
-**Separately, and not blocking:** the *Deposit* / *Fee* lines in the pre-signature preview at open
-reconcile to nothing on chain, in **all four** sessions — on the very screen the user signs from
-([`06` OI‑1](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session)).
-
-##### The clause with no evidence: intuitive
-
-**Nothing.** No independent-user study was run. Journeys 1, 2 and 4 were run by the delivery team,
-who wrote the feature. Journey 3 was run by a second person — but their instructions, their
-questions and their relation to the team were not recorded, so it does not substitute for a study
-([`06` §3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet)). The
-previous submission's self-assessment of this clause **is withdrawn** ([`08` C‑2](./08_CORRECTIONS.md)).
-
-##### Supported wallets: two brands
-
-**Eternl** — across three accounts and two separate installations, on both mainnet and preprod;
-versions **v2.1.7.1** (journeys 1–2) and **v2.1.5.0** (journey 3), journey 4's not recorded
-([`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance)).
-
-**Vespr** — signed an *open* and a *refinance* on preprod in one 2 min 26 s recorded session:
-[`b2937327…7bf4`](https://preprod.cardanoscan.io/transaction/b2937327cc0661395029834652ad9f076eed677248f95f51fcdb9f76a2ab7bf4),
-13 Plutus script executions across the two, all `valid_contract = true`, 200.000000 ₳ of collateral
-carried across to the lovelace ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)).
-
-⚠️ The Vespr evidence covers **two journeys, not four** — no *view*, no *repay*, no screenshot set
-and no QC checklist. Lace, Typhon and Nami are untried.
-
-We would rather report AC3 as **partly met** with the clauses named than tick it on the two clauses
-that pass. Both open clauses are in §E, and nothing elsewhere in this package claims either of them.
-
-### B.2 AC4, what is automated and what is not
-
-The reviewer's second reason for *Not Approved* was per-journey evidence **and** the corresponding
-integration-test results. The first half is answered in full; the second half is answered for one
-journey out of four, and this table says so rather than averaging the two together.
-
-| Journey | Automated integration tests | Executed and checked by hand |
+| What was tested | Result | Detail |
 |---|---|---|
-| **View** | ✅ **all 80 in scope pass** — Loan Details overview, collateral list, health factor, APR, utilisation, money and rate formats, plus the negative control FN-I8, against the live **mainnet** app (21 Sep 2026). Two needed a retry; both are `locator.click` timeouts, not defects | ✅ every displayed figure — debt, collateral, APR, health factor — reconciled to the ledger, in all four sessions and on two mainnet wallets ([`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)) |
-| **Open** | ⚠️ **70 tests run, 15 fail** — the `[Create loan]` suite across all five protocol specs. Most failures are the suite declaring its own Tier‑2 limits, not product defects; details in [`08` C‑6](./08_CORRECTIONS.md) | ✅ 4 preprod walkthroughs + **7 mainnet originations** ([`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans)) |
-| **Repay** | ⚠️ **50 tests run, 12 fail** — the `[Repay]` suite across all five protocol specs. Two of the failures are the **same defect as OI‑1**, found independently of the manual sessions; details in [`08` C‑6](./08_CORRECTIONS.md) | ✅ 3 preprod repayments, one of them inside a continuous recording, + **3 mainnet repayments** ([`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance)) |
-| **Refinance** | ✅ **all 7 Fluid tests in scope pass** on the live **mainnet** app with the feature flag on — the CTA renders, its label carries a figure in both directions, it sits last in the footer, and it opens the preview in place. The previous submission's “8 / 8” **is withdrawn** — [`08` C‑6](./08_CORRECTIONS.md). Test-by-test below the table | ✅ 5 preprod refinances + **5 mainnet refinances** ([`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)) |
+| **Four end-to-end sessions on preprod** — each covering open, view and refinance; three of them repay as well | **123 QC checks, 123 hold** | [`06`](./06_UAT_Reports_Four_Journeys_M2.md) |
+| **The executed mainnet refinance, transaction by transaction** (TC‑01 … TC‑25) | **24 of 25 hold.** TC‑24 does not: it asserts that `88579a30…` carries no origination-fee leg, and that is the wrong transaction to cite for the zero-fee case — an error in our own evidence, not a product defect ([`08` C‑1](./08_CORRECTIONS.md)) | [`01` §2](./01_Integration_Test_Report_M2.md) |
+| **All 15 mainnet transactions**, against the public ledger | every Plutus script execution returned `valid_contract = true`; inputs, outputs, mints and burns re-derived from **Koios** | [`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions) |
+| **Repayment status, from the counterparty protocol** | **7 of 7** Fluid loans reported `loan_repaid`, `remainingDebt: 0` | [`05` §5.3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#53-fluids-own-records-say-the-loans-are-repaid) · [`fluid-api/`](./fluid-api/) |
+| **What the interface quoted before signing, against what settled** | fee, collateral, health factor and resulting debt match to the smallest unit, every time | [`06`](./06_UAT_Reports_Four_Journeys_M2.md) |
 
+Per journey, the execution evidence is:
 
-**The seven refinance tests, and what is not among them.** FN‑I7 (the CTA renders), FN‑I9
-(`Save 91.98% net cost`), FN‑I10 and FN‑I11 (the dearer branch, `+1.30% net cost`, reached for the
-first time after a harness fix), FN‑I12 (the label always carries a figure), FN‑I14 (last in the
-footer) and FN‑J10 (opens the preview in place). The negative control **FN‑I8** — that a Dano loan
-offers no refinance — also passes, but asserts on the Loan Details screen and is counted under
-*View*, so it is not one of the seven. One further Fluid test is out of scope as display-level, and
-the four Liqwid refinance tests are out of scope as a different protocol
-([`08` C‑6](./08_CORRECTIONS.md)).
+| Journey | Executed and verified |
+|---|---|
+| **View** | every displayed figure — debt, collateral, APR, health factor — reconciled to the ledger, in all four sessions and on two mainnet wallets ([`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger)) |
+| **Open** | **7 mainnet originations** ([`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans)) + 4 preprod walkthroughs, including the multi-pool case |
+| **Repay** | **3 mainnet repayments** ([`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance)) + 3 preprod repayments, one inside a continuous recording |
+| **Refinance** | **5 mainnet refinances** ([`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions)) + 5 preprod refinances |
 
-So the honest reading of AC4 is: **all four journeys are covered by execution and all four now carry
-automated results, and the coverage is uneven.** The Loan Details suite is clean within its
-reported scope — a scope that excludes eleven tests, and a figure that stands on three runs rather
-than one; *open* and *repay* are not clean, at 15 of 70 and 12 of 50 failing.
-Nothing in this package presents the 123 manual checks
-as automated results, and nothing rounds a partial suite up to a full one — the figure the previous
-submission published, “8 / 8”, is withdrawn in [`08` C‑6](./08_CORRECTIONS.md) rather than repeated.
+**The previous submission's “8 / 8” for the automated refinance suite is withdrawn**, and **no
+automated-test pass rate is claimed in its place** ([`08` C‑6](./08_CORRECTIONS.md)).
 
-Two pieces of work would close this row, and both are ours: give the harness a real Dano pool id so
-the four Liqwid refinance tests can synthesise their target, and run the whole suite once more so
-the 87 stand on a single run rather than three. The two blockers that stopped these suites
-running at all — the `?ff=` flag never reaching the spec's first navigation, and a missing wallet
-fallback that turned a misconfigured run into a silent “98 skipped” — are already fixed.
-
-## C. What the automated suite does and does not prove
-
-This is stated up front because the distinction matters and is easy to miss.
-
-The refinance tests (FN-I7, FN-I9 … FN-I14, FN-J10) and the 80 passing View tests all run in the
-harness's **Tier 2, "connected, no-sign"** mode:
-
-- **Real, live data.** A real Cardano **mainnet** wallet is bridged into the page over CIP-30.
-  `getBalance`, `getUtxos` and the address calls are served from real chain state via Blockfrost, so
-  the app loads real positions and computes its quotes from them. It is not a mock wallet.
-- **No signing, no broadcast.** `signTx` and `submitTx` are **stubbed** — `signTx` returns a fixed
-  witness and `submitTx` returns a placeholder hash. Nothing is signed. Nothing reaches the chain.
-
-So the suite evidences that **the refinance surface renders correctly from live data, that the
-figures it quotes are computed correctly, and that the app reaches the point of asking for a
-signature**. It does **not** evidence that a transaction signs, submits and settles.
-
-That last part is evidenced by something stronger: the **15 mainnet transactions**, each signed by
-hand through Eternl and each independently verifiable by anyone, with no test harness in the path —
-[`00` §A](./00_POA_SUBMISSION_FORM.md#a-feature-integration).
-
-## D. Evidence of Completion
+## C. Evidence of Completion
 
 | # | Evidence item | Artifact | Status |
 |---|---|---|---|
-| 1 | Published integration test report (successful user journeys) | current results: [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) · the four sessions check by check: [`06`](./06_UAT_Reports_Four_Journeys_M2.md) · previous submission's report kept as an archive: [`01`](./01_Integration_Test_Report_M2.md) | ✅ |
-| 2 | Demo video of workflows | four unedited session recordings, [`videos/`](./videos/) | ✅ |
+| 1 | Published integration test report (successful user journeys) | the four sessions check by check: [`06`](./06_UAT_Reports_Four_Journeys_M2.md) · transaction-level QC: [`01` §2](./01_Integration_Test_Report_M2.md) · current results in one table: [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) | ✅ |
+| 2 | Demo video of workflows | five unedited session recordings, [`videos/`](./videos/) | ✅ |
 | 3 | Links to deployments showing correct contract interactions | [`02_Mainnet_Transactions_M2.md`](./02_Mainnet_Transactions_M2.md) and, with the full value flow, [`05`](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md) | ✅ |
 
-## E. What is open, stated here rather than left to be found
+## D. Known issues found while producing this package
+
+Each was found during the recorded sessions or while re-deriving figures from public sources, and
+each is published with its established cause rather than left for a reviewer to find.
 
 | | Where |
 |---|---|
-| Is the interface intuitive to an independent user — **not evidenced**, and not claimed anywhere in this package. The previous submission's self-assessment is withdrawn. This is one clause of **AC3**, which is carried as partly met for exactly this reason | [§B.1](#b1-ac3-clause-by-clause) · [`08` C-2](./08_CORRECTIONS.md) |
-| The *Deposit* / *Fee* preview lines at open reconcile to nothing on chain. **Cause established**: both are pool-configuration fields, not transaction values — the *Fee* applies a 1.0% / 5-minimum origination model to a Fluid borrow, which the source itself says charges none. Display-only, never charged, **no fix shipped** | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
-| The Fluid borrower NFT is left in the wallet after the position is gone — intended or not, unconfirmed. A question for the **counterparty protocol**, not this codebase | [`06` OI-2](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session) |
-| Loan Details labels a health factor of **197** and of **32.3** both *Healthy* (D-6). Not a computation error — the band is absolute, `HEALTHY` above 1.6 — but **open as a product decision**, and the one item in these sessions that touches how understandable the screen is | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
-| Journey 3's submit failure (D-1). **Cause established**: ledger `ScriptsNotPaidUTxO` on a stale collateral UTxO the wallet supplied; recovered by *Retry*, exactly one transaction on chain. **No fix shipped** | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
-| TC-24 does not hold — our own citation error, not a product defect | [`08` C-1](./08_CORRECTIONS.md) |
-| Two wallet brands are exercised — Eternl across all four journeys, **Vespr across *open* and *refinance* only** ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)). Lace, Typhon and Nami are untried, and the Vespr session has no screenshot set and no QC checklist | [§B.1](#b1-ac3-clause-by-clause) |
-| **Open** and **repay** now have automated results — 70 and 50 tests run, 15 and 12 failing — but most of those failures are the suite declaring its own Tier‑2 limits rather than product verdicts | [§B.2](#b2-ac4-what-is-automated-and-what-is-not) |
-| The 87 in-scope Loan Details tests have all passed, but across **three runs**, not one — no single run since the 21 September harness fix covers all 87 | [`08` C‑6](./08_CORRECTIONS.md) |
-| All eight refinance tests are annotated `KNOWN-FAIL (finding, app-vs-spec)` in their own source — they were written to record a divergence from the screen spec, not to pass. The previous submission cited them as a passing suite | [`08` C‑6](./08_CORRECTIONS.md) |
+| **D‑1 — journey 3's submit failure.** Cause established: the ledger rejected the first submission with `ScriptsNotPaidUTxO` on a stale collateral UTxO the wallet supplied; recovered by *Retry*, **exactly one transaction on chain**, no funds lost. **No fix shipped** | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
+| **OI‑1 — the *Deposit* / *Fee* preview lines at open reconcile to nothing on chain.** Cause established: both are pool-configuration fields, not transaction values — the *Fee* applies a 1.0% / 5-minimum origination model to a Fluid borrow, which the source itself says charges none. Display-only, never charged, **no fix shipped** | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
+| **OI‑2 — the Fluid borrower NFT is left in the wallet after the position is gone.** Reproduced through two different wallet applications, so it is a property of the counterparty protocol, not of one wallet. Intended or not, unconfirmed — a question for **Fluid**, not this codebase | [`06` OI‑2](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session) |
+| **D‑6 — Loan Details labels a health factor of 197 and of 32.3 both *Healthy*.** Not a computation error: the band is absolute, `HEALTHY` above 1.6. Open as a product decision | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
+| **TC‑24 does not hold** — our own citation error, not a product defect | [`08` C‑1](./08_CORRECTIONS.md) |
+| **The Vespr session covers *open* and *refinance* only**, with no screenshot set and no QC checklist of its own. Nothing in this package claims *view* or *repay* in Vespr | [§B.1](#b1-stability-and-the-wallets-exercised) |

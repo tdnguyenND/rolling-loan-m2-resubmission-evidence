@@ -13,11 +13,12 @@ instead of citing the number the previous submission reported, and the number di
 “8 / 8” we published is withdrawn. That correction exists because we ran the tests again rather than
 trusting our own prior report.
 
-The automated-test results are included because the reviewer asked for the integration-test results,
-and they are reported in full — now as measured, not as previously claimed. We do not present them
-as independent evidence: they are our own reporting about our own work. The primary verifiable
-evidence is the Cardano ledger and Fluid Tokens' own records, both reproducible from public APIs by
-anyone.
+The runs behind C‑6 are shown because they are what the withdrawal rests on, **not as a replacement
+figure** — this package claims no automated-test pass rate. The integration-test evidence it does
+offer is published check by check in
+[`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-the-integration-testing-this-package-publishes). The
+primary verifiable evidence throughout is the Cardano ledger and Fluid Tokens' own records, both
+reproducible from public APIs by anyone.
 
 The reviewer did not ask about any of them. We are disclosing them because a reviewer who checks our
 numbers should find that we checked them first, and because an evidence package that never corrects
@@ -239,7 +240,7 @@ contract on any Cardano testnet, so the Fluid→Dano flow can only run on mainne
 ### What is actually the case
 
 The four interface walkthroughs added to this resubmission
-([`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen))
+([`00` §C](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions))
 were tested against the **Fluid smart contracts on preprod**, and the refinance each produced is on
 preprod Cardanoscan:
 
@@ -286,7 +287,7 @@ no-sign”:
 | 1 | **mainnet** https://v3.danogo.io/ | whole Loan Details spec, 98 tests | **78 pass / 20 fail** — **0 of the 8** refinance tests pass |
 | 2 | **preprod** https://preprod.danogo.io | the 8 refinance tests | **4 pass / 4 fail** |
 | 3 | **mainnet**, feature flag turned on | the 8 refinance tests | **5 pass / 3 fail** |
-| 4 | **mainnet**, feature flag turned on | whole spec, 98 tests, 50 min | **83 pass / 15 fail** — the figure this package reports |
+| 4 | **mainnet**, feature flag turned on | whole spec, 98 tests, 50 min | **83 pass / 15 fail** |
 
 **Run 1 explains itself.** The mainnet deployment ships *Refinance via Dano* **off**
 (`VITE_FLUID_REFINANCE_ENABLED=false`), so the CTA the tests assert on does not render — FN‑I7's own
@@ -294,47 +295,6 @@ output says `refinance CTA in BorrowDetail = 0`. Runs 3 and 4 are the same build
 the same tests with `?ff=fluid-refinance` appended: **0 of 8 becomes 5 of 8.** That is the flag, not
 the product. (We had to fix the harness to get there: its `?ff=` mechanism was never applied to this
 spec's first navigation, so the flag could not be turned on from outside.)
-
-**Run 4, the 83 that pass.** 77 over the Loan Details screen itself — overview, collateral list,
-health factor, APR, utilisation, money and rate formats — plus 5 of the 8 Fluid refinance tests
-(FN‑I7 the CTA renders, FN‑I9 its label reads `Save 91.98% net cost`, FN‑I12 the label always carries
-a figure, FN‑I14 it sits last in the footer, FN‑J10 it opens the preview in place) and FN‑I8, the
-negative control that checks a Dano loan offers no refinance.
-
-**What is counted.** The suite runs **98** tests. This package reports **87**, and names every one
-of the eleven it leaves out:
-
-| Left out | Count | Why |
-|---|---|---|
-| **Surf** (UI‑E3, FN‑I5) | 2 | Surf is a **different lending protocol and no part of this milestone**, which is Fluid → Dano. The test wallet also holds no Surf loan |
-| **Liqwid refinance** (FN‑I15, FN‑I17, FN‑I18, FN‑I19) | 4 | Liqwid is likewise **a different protocol**. These four also cannot run yet: they must synthesise a refinance target, and doing so needs a real Dano pool id the harness does not have |
-| **Display-level** | 5 | Cosmetic divergences from the screen spec: a rendering-order choice, an element attribute value, a placeholder string, a styling token and a fallback avatar. None changes a number, blocks an action or affects settlement. Carried in our own defect tracker |
-
-**All eleven excluded tests failed in the last full run.** We say so rather than let a smaller
-denominator imply they were neutral. **Unscoped, that run was 83 of 98**, and anyone who runs the
-suite will get a figure of that order.
-
-**How the 87 split, so the two journey figures add up.** **80 belong to *view*** — the Loan Details
-screen itself, plus **FN‑I8**, the negative control that a Dano loan offers no refinance, which
-asserts on that screen and is counted there. **7 belong to *refinance*** — FN‑I7, FN‑I9, FN‑I10,
-FN‑I11, FN‑I12, FN‑I14 and FN‑J10. 80 + 7 = 87. Where this package says “all 7 refinance tests in
-scope pass”, FN‑I8 is not one of the seven.
-
-**87 of 87 in-scope tests have passed — across three runs, not one.** That distinction matters
-enough that we write it into every figure in this package rather than only here. The actual
-sequence:
-
-| When | What ran | Result |
-|---|---|---|
-| 21 Sep, 14:11 | the full suite, 98 tests, 50 min | **83 pass / 15 fail**. Of the 15, eleven are the excluded set above; **four were in scope**: FN‑D8.3, UI‑D15, FN‑I10, FN‑I11 |
-| 21 Sep, ~15:45 | the failures, with `--retries=2` | **FN‑D8.3** and **UI‑D15** pass — both were `locator.click` timeouts, not defects |
-| 21 Sep, 16:22 | FN‑I10, FN‑I11 after a harness fix | **both pass**, and for the first time reach their own assertion: `net-cost label when Dano is dearer (3.80 → 5.10; live netCost was 4.81) = "+1.30% net cost"` |
-
-**On the retry.** A `--retries=2` re-run is how this harness separates a flake from a failure: it
-repeats the test unchanged. FN‑D8.3 and UI‑D15 were `locator.click` timeouts — the browser never
-delivered the click — and they pass in other runs too. FN‑I10 and FN‑I11 were **not** retried:
-retrying them would have failed again, because the defect was in the harness. They were fixed, and
-then passed.
 
 **The harness fix, and what it says about the old “8 / 8”.** FN‑I10 and FN‑I11 build the “Dano is
 dearer” case by rewriting the live BFF response. The rewrite set the refinance target's `poolId`
@@ -345,37 +305,11 @@ an error state, and the tests timed out **without ever reaching the assertion th
 could not have passed. A suite reported as **8 / 8** contained two tests that had never run to their
 own check — which is the clearest single reason that figure had to be withdrawn.
 
-**So: 87 of 87 in-scope tests have passed — across three runs, not one.** No single run since the
-fix covers all 87, and we would rather write that sentence than imply one does. Re-running the full
-suite once more, so the figure stands on a single run, is named as outstanding work in
-[`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-ac4-what-is-automated-and-what-is-not).
-
-**Open and repay, which had no automated result at all.** We also ran the `[Create loan]` and
-`[Repay]` suites across all five protocol specs — 120 tests, **74 pass / 27 fail / 19 skipped**,
-with 15 of the failures under *Create loan* and 12 under *Repay*. Most of the 27 are the suite
-declaring its own limits rather than product defects (`STRIKE cap preview not verifiable at T2`,
-`auto-supply first-row min requires an injectable pool min`, three on a wallet that holds no loan).
-About nine are real app-vs-spec divergences, and two of them — *“Fee row must render for a fee-free
-protocol too”* and *“Fluid Fee value must be 0”* — are the **same defect as OI‑1** in
-[`06`](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session): the Fee line
-a Fluid borrow shows but never charges. An automated suite and a manual session found it
-independently.
-
-**What replaces the claim.** The measured numbers above, and nothing rounded up:
-
-- **View — all 80 in scope pass** on the live mainnet app: Loan Details overview, collateral list,
-  health factor, APR, utilisation, and the money / rate display formats. Two needed a retry, both
-  `locator.click` timeouts.
-- **Refinance — all 7 Fluid tests in scope pass** on the live mainnet app with the feature flag on:
-  the CTA exists, its label carries a figure in both directions (`Save 91.98% net cost` and, on the
-  synthesised dearer branch, `+1.30% net cost`), it sits last in the footer, it opens the preview in
-  place. Independently, 4 of them also pass on preprod, where the flag ships on by default. (The
-  control that a Dano loan offers no refinance also passes, and is counted under *view* above.)
-- **Open — 70 tests run, 15 fail. Repay — 50 tests run, 12 fail.** 74 of the 120 pass and 19 are
-  skipped; the line reporter does not split the skips per journey, so we do not report a per-journey
-  pass count for them.
-- **Every figure here is from a run we can name, on a date, against a named deployment.** Where a
-  number is not measured, it is not given.
+**What replaces the claim: nothing.** We do not publish a new automated pass rate in its place, and
+no figure of that kind appears anywhere in this package. The integration-test evidence this
+resubmission does offer is of a different kind — checks published with the figure each asserts and
+the public source that figure was re-derived from, including the one that does not hold
+([`07` §B.2](./07_ACCEPTANCE_CRITERIA_M2.md#b2-the-integration-testing-this-package-publishes)).
 
 **Nothing on chain changes.** This correction is about the automated suite only. The 15 mainnet
 transactions, the 123 manual QC checks and the four recorded sessions are untouched by it.

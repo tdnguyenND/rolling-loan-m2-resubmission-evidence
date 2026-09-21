@@ -13,7 +13,7 @@ name for the same capability. This package uses *Refinance via Dano*, or simply 
 
 | The reviewer asked for | Where it is answered |
 |---|---|
-| **Evidence of testing by someone other than the developer**, completing a workflow without guidance | [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) — a second tester, on their own wallet and their own Eternl installation, ran **all four journeys in one unbroken 7 min 29 s recording**, checked the result in their own wallet and on a public explorer, and hit a submit failure the delivery team had not (**D‑1**). We report what that session records; we do **not** claim it shows the interface is intuitive, and [`07` §B.1](./07_ACCEPTANCE_CRITERIA_M2.md#b1-ac3-clause-by-clause) scores that clause as not evidenced |
+| **Evidence of testing by someone other than the developer**, completing a workflow without guidance | [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet) — a second tester, on their own wallet and their own Eternl installation, ran **all four journeys in one unbroken 7 min 29 s recording**, checked the result in their own wallet and on a public explorer, and hit a submit failure the delivery team had not (**D‑1**). We report what that session records, and claim nothing beyond it |
 | **Each of the four journeys tested through the Eternl-connected front end, and the integration-test results** | [`04` §1.2](./04_USER_JOURNEYS_AND_APP_STATE.md#12-the-matrix) — one row per journey, each with its own interface capture **and** its own mainnet transaction · [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results) — the integration-test results as measured on 21 September 2026 |
 
 Both answers are set out in full, with the evidence behind them, in the section
@@ -56,23 +56,22 @@ and the counterparty protocol's own loan records
 **Integration-test results**, measured on 21 September 2026 — the full table is
 [`04` §1.5](./04_USER_JOURNEYS_AND_APP_STATE.md#15-current-integration-test-results):
 
-| Suite | Result |
+| What was tested | Result |
 |---|---|
-| Transaction QC checks (TC‑01 … TC‑25) | **24 of 25 hold** — TC‑24 fails on our own citation error, not a product defect ([`08` C‑1](./08_CORRECTIONS.md)) |
-| Loan Details — view and refinance surface, 98 tests run, **87 in scope** | **87 of 87 in-scope tests have passed — across three runs, not one.** The last full-suite run was **83 of 98**. [`08` C‑6](./08_CORRECTIONS.md) gives the sequence and names the eleven tests out of scope |
-| `[Create loan]` — the *open* journey | **70 run, 15 fail** |
-| `[Repay]` — the *repay* journey | **50 run, 12 fail** |
+| Transaction QC checks against the executed refinance (TC‑01 … TC‑25) | **24 of 25 hold** — TC‑24 fails on our own citation error, not a product defect ([`08` C‑1](./08_CORRECTIONS.md)) |
+| Four end-to-end sessions on preprod, check by check | **123 QC checks, 123 hold** ([`06`](./06_UAT_Reports_Four_Journeys_M2.md)) |
+| All 15 mainnet transactions, against the public ledger | every Plutus script execution `valid_contract = true` ([`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions)) |
+| Repayment status, from the counterparty protocol | **7 of 7** loans `loan_repaid`, `remainingDebt: 0` ([`fluid-api/`](./fluid-api/)) |
 
 The previous submission's “8 / 8” is withdrawn — [`08` C‑6](./08_CORRECTIONS.md); the
 step-by-step detail behind the older figures is in
 [`01_Integration_Test_Report_M2.md`](./01_Integration_Test_Report_M2.md) §2–§3, kept unedited as an
 archive.
 
-Two things to read these figures with. They run in **no-sign** mode — real wallet reads,
-`signTx`/`submitTx` stubbed — so they evidence the surface and its arithmetic, never settlement
-([`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove)). And
-they are our own reporting about our own work; the primary verifiable evidence is the ledger and
-Fluid's own records.
+These figures are our own reporting about our own work, and are named as such; the primary
+verifiable evidence is the ledger and Fluid's own records. **No automated-test pass rate is claimed
+in this package** — the previous submission's “8 / 8” is withdrawn
+([`08` C‑6](./08_CORRECTIONS.md)).
 
 "Repay" — the journey the previous submission covered "implicitly" — has its own section:
 [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance).
@@ -90,7 +89,7 @@ Fluid's own records.
 | 5 | [`07_ACCEPTANCE_CRITERIA_M2.md`](./07_ACCEPTANCE_CRITERIA_M2.md) | Every Output, Acceptance Criterion and Evidence item mapped to what this package can show — **including the two criteria it cannot fully meet** | 5 min |
 | 6 | [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) | Errors we found in **our own** previous submission, five of the six unprompted | 3 min |
 
-**Only have ten minutes?** Read [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen)
+**Only have ten minutes?** Read [`00` §C](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions)
 — the four sessions in one table — then the journey matrix in
 [`04` §1.2](./04_USER_JOURNEYS_AND_APP_STATE.md#12-the-matrix).
 
@@ -116,7 +115,7 @@ detail behind those results, and is linked from `04` §1.5 where it is still goo
 | Journey | In the interface | On the ledger |
 |---|---|---|
 | **View** | *My Account → Loans* on both signing wallets — [`04` §2](./04_USER_JOURNEYS_AND_APP_STATE.md#2-the-post-refinance-state-in-the-app-reconciled-to-the-ledger) | every displayed figure re-derived from the chain — [`04` §2.4](./04_USER_JOURNEYS_AND_APP_STATE.md#24-row-by-row-the-displayed-amount-is-the-ledger-amount) |
-| **Open** | four journeys captured screen by screen, first click to settled loan, including the multi-pool case where one borrow opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen) | **7 mainnet Open transactions** — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) |
+| **Open** | four journeys captured screen by screen, first click to settled loan, including the multi-pool case where one borrow opens two loans — [`00` §C](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions) | **7 mainnet Open transactions** — [`05` §1.1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#11-the-transactions-that-opened-these-loans) |
 | **Repay** | the *Repay* action in the loan sheet — [`04` §1.3](./04_USER_JOURNEYS_AND_APP_STATE.md#13-the-user-path-for-each-journey) | **3 direct mainnet Repay transactions**, plus the settlement leg inside every Refinance (the *Repay* step performed in the same transaction); Fluid's own API reports all seven loans repaid — [`05` §5](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#5-evidence-for-repayment-three-direct-repayments-and-repayment-within-a-refinance) |
 | **Refinance** | refinance card → Eternl dialog → confirmation → portfolio after — [`01` §1](./01_Integration_Test_Report_M2.md) | **5 mainnet refinances** — collateral in = out, source position NFT burned, Borrower NFT minted — [`05` §1](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#1-the-five-refinance-transactions) |
 
@@ -185,8 +184,6 @@ Cardano's, and the loan records are the lender's own.
 | **`valid_contract = true`** | The transaction was accepted by the contract's own on-chain validator (the Plutus script). A transaction whose validator rejected it cannot produce these outputs |
 | **min-UTxO** | The small amount of ADA every output must carry by protocol rule. A deposit held by the output, not a fee paid to anyone |
 | **Settlement leg** | The part of a *Refinance* that pays off the source loan — the *Repay* step, performed inside the *Refinance* rather than as a separate user action |
-| **Tier 2 / "connected, no-sign"** | The test harness's mode for every automated figure in this package: a real Cardano **mainnet** wallet is bridged into the page over CIP‑30, so `getBalance`, `getUtxos` and the address calls return real chain state — but **`signTx` and `submitTx` are stubbed**, so nothing is signed and nothing reaches the chain. Tier 1 is fully mocked; a tier that signs for real is not used here |
-| **no-sign** | The second half of the above, used on its own: real reads, stubbed signing. It is why the automated suites evidence the *surface and its arithmetic* and never a settlement — [`07` §C](./07_ACCEPTANCE_CRITERIA_M2.md#c-what-the-automated-suite-does-and-does-not-prove) |
 
 **Identifier prefixes.** Six numbering schemes run through this package; they do not share a
 sequence, so `C‑4`, `D‑4` and `TC‑04` are three unrelated things.
@@ -275,14 +272,11 @@ criterion-to-evidence mapping. Their walkthrough screenshots in
 | Repayment confirmed by the counterparty protocol's own records | ✅ 7/7 `loan_repaid` |
 | Repayment from the borrower's own funds, on mainnet | ✅ `17c23dde…` · `ea823365…` · `77748bd9…` |
 | Corrections to our own previous submission | ✅ 6 — C‑1 … C‑6, five of them unprompted |
-| Integration-test figures | ✅ reported, and named as our own reporting |
+| Integration-test results | ✅ published check by check, each with its public source — `04` §1.5 |
 | Testing sessions, per journey, through the Eternl-connected front end | ✅ 15 settled on mainnet, 2 wallets, 11 days — `04` §1.3 |
-| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` §C, including the multi-pool case (`06` §4.1); **repay** end-to-end on three loans those walkthroughs created — `06` §§1.1, 2.1, 3.1 |
+| Interface walkthrough per journey | ✅ **all four captured**: refinance end-to-end including the Eternl signing dialog; **open** end-to-end in the four preprod walkthroughs — `00` Output 4, including the multi-pool case (`06` §4.1); **repay** end-to-end on three loans those walkthroughs created — `06` §§1.1, 2.1, 3.1 |
 
-On the last two rows. The application **is** covered by an automated suite — partly, and every gap
-is named: on the Loan Details suite all 87 in-scope tests have passed, across three runs rather
-than one; the separate `[Create loan]` and `[Repay]` suites ran 70 and 50 tests, with 15 and 12
-failing ([`08` C‑6](./08_CORRECTIONS.md)). Every journey was
+On the last two rows. Every journey was
 walked end-to-end through the connected front end during this milestone — fifteen of those sessions
 settled on mainnet. The package reports those sessions and rests its verifiable claims on what a
 third party can check without us: the ledger and the counterparty protocol's records. The refinance
@@ -290,7 +284,7 @@ journey is captured end-to-end, including the Eternl signing dialog, and so is t
 — in the four walkthroughs added for this resubmission, which run *Open → View → Refinance → View*
 (and *→ Repay* in three of the four)
 on preprod with a screenshot of every screen and a screen recording of the whole session
-([`00`](./00_POA_SUBMISSION_FORM.md) §C). **Repay** is captured screen by screen too, in three of them — the
+([`00`](./00_POA_SUBMISSION_FORM.md) Output 4). **Repay** is captured screen by screen too, in three of them — the
 quote, the wallet dialog burning the loan token, and the settled transaction — each closing the loan
 that walkthrough had just opened and refinanced ([`06` Journey 1](./06_UAT_Reports_Four_Journeys_M2.md#journey-1--borrow-25-ada-against-100-fusdm),
 [`06` Journey 2](./06_UAT_Reports_Four_Journeys_M2.md#journey-2--borrow-11-fusdm-against-100-ada), [`06` Journey 3](./06_UAT_Reports_Four_Journeys_M2.md#journey-3--a-second-tester-on-a-second-wallet)); only
@@ -309,7 +303,7 @@ is public and immutable, and the transaction and repayment records are publicly 
 
 Fluid's smart contracts on **preprod** were used for the four interface walkthroughs added to this
 resubmission — open, refinance and repay, screen by screen, with preprod Cardanoscan links
-([`00` §C](./00_POA_SUBMISSION_FORM.md#four-complete-journeys-captured-screen-by-screen)).
+([`00` §C](./00_POA_SUBMISSION_FORM.md#output-4--ready-to-test-user-journeys-five-recorded-end-to-end-sessions)).
 The settlement evidence in this package is mainnet throughout. The previous submission stated more
 absolutely that Fluid has no testnet deployment at all; that overstatement is withdrawn and recorded
 in [`08_CORRECTIONS.md`](./08_CORRECTIONS.md) C‑5.

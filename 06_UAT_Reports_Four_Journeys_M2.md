@@ -46,7 +46,7 @@ transaction — and each is then checked, line by line, against what the chain a
 | **Repay** | [`e134b85e…681416`](https://preprod.cardanoscan.io/transaction/e134b85eb5631391089598adefd8f06024307fc7d41ec4ac8d421276d8681416) | [`bae9a9c9…c75b7d`](https://preprod.cardanoscan.io/transaction/bae9a9c9e0e4f63657d43cc21b4ab071e82d57919733ddb8908a958937c75b7d) | [`a4bebdb7…3fbeed`](https://preprod.cardanoscan.io/transaction/a4bebdb7ca185ffc1ce4fc22873e9e3d9cefa80e0d1e0d8ad698e6b1813fbeed) | — |
 | **QC checks** | **31 / 31** | **33 / 33** | **22 / 22** | **37 / 37** |
 | **Defects found** | — | — | **D-1** submit failed, recovered by *Retry* | **D-4** rounding in the loan list · **D-5**, **D-6** observations |
-| **Recording** | [`01.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.mp4) | [`02.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.mp4) | [`03.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4) (7 min 29 s) | [`04.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/04-open-and-two-refinances-borrow-ADA-collateral-USDM.mp4) (3 min 50 s) |
+| **Recording** | [`01.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/01-open-and-refinance-borrow-ADA-collateral-USDM.mp4) | [`02.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/02-open-and-refinance-borrow-USDM-collateral-ADA.mp4) | [`03.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/03-open-refinance-repay-borrow-USDM-collateral-ADA.mp4) (7 min 29 s) | [`04.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/04-open-and-two-refinances-borrow-ADA-collateral-USDM.mp4) (4 min 03 s) |
 | **Screenshots** | [`journey-1/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-1-borrow-ADA-collateral-USDM) | [`journey-2/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-2-borrow-USDM-collateral-ADA) | [`journey-3/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-3-borrow-USDM-collateral-ADA) | [`journey-4/`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/tree/main/screenshots/journey-4-borrow-ADA-collateral-USDM) |
 
 Two open items recur across the sessions and are stated once, at the end:
@@ -465,7 +465,7 @@ multi-pool case**, on a **third wallet**. It does **not** cover repay.
 **Wallet:** Eternl, account *Deploy Oracle (#0)*, address
 `addr_test1qr20zc2v0fyxwjf42jy8vjctfpqrc9f3md3cwe6fccsza9g5q42ut28rqch23fj0j4hp479jdkeyn2mpv8tmxk3h5jeqsm9xmy`
 (the interface shows it as `addr_tes…9xmy`).
-**Session:** one continuous recording of **3 min 50 s**, ≈08:33 → 08:37 UTC. Each screenshot is
+**Session:** one continuous recording of **4 min 03 s**, ≈08:33 → 08:37 UTC. Each screenshot is
 unaltered except that the browser's **bookmarks bar** has been cropped out; the address bar is kept,
 and the recording is the unedited source for every frame.
 
@@ -611,7 +611,7 @@ at a time without touching the other.
 Journeys 1–4 all ran through Eternl, which leaves one obvious question: does the integration work
 through a different CIP-30 wallet, or only through that one? This session answers it.
 
-**Session:** one continuous recording of **2 min 26 s**, 08:06:41 → 08:09:07 UTC on
+**Session:** one continuous recording of **2 min 25 s**, spanning 08:06:41 → 08:09:07 UTC on
 **21 September 2026**, on **preprod**, signed in **Vespr** —
 [`05.mp4`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/videos/05-refinance-via-vespr-second-wallet-brand.mp4).
 Two transactions settled inside it, **1 min 45 s apart**.
@@ -659,13 +659,13 @@ Borrower NFT the chain records. That is the figure being shown to the user *befo
 
 **Adds.** A second wallet brand across **two** journeys, end to end: Vespr is detected by the app,
 receives each built transaction, shows the user its real net movement, signs, and both settle with
-the same value flow as the Eternl sessions. [`07` §B.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#b1-ac3-clause-by-clause)
+the same value flow as the Eternl sessions. [`07` §B.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#b1-stability-and-the-wallets-exercised)
 scores AC3's *across supported wallets* clause on this.
 
 **Does not add.** **View and repay were not exercised** in Vespr — the session ends at the settled
 refinance. There is **no screen-by-screen screenshot set and no QC checklist** of its own, so this
 journey contributes **nothing to the 123 QC checks**; the recording plus the two ledger records are
-the whole of it. Lace, Typhon and Nami remain untried.
+the whole of it. No other wallet application was exercised.
 
 **Reproduces OI-2 on a second wallet brand.** The Fluid borrower NFT `eadc69a5….f4bd6eeb95e3` is
 **not** burned and stays in the wallet in a 1.245590 ₳ UTxO after the position is gone — the same
@@ -788,7 +788,7 @@ themselves reconcile to the chain. What the session raises is a product question
 a 6× fall in health factor should be visible as more than an unchanged word, particularly next to
 the line *"Same loan, Same collateral"*. **Open as a product decision**, and it is the one item in
 these sessions that touches how understandable the screen is — which is why it is also in
-[`07` §E](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#e-what-is-open-stated-here-rather-than-left-to-be-found).
+[`07` §E](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#d-known-issues-found-while-producing-this-package).
 
 ### What is still open after this
 
