@@ -13,7 +13,7 @@
 > - **AC3** is ticked here on the strength of the **usability self-assessment that has since been
 >   withdrawn** (see [`08` C‑2](./08_CORRECTIONS.md)). The resubmission makes no usability claim; it
 >   offers the stability evidence and the wallets actually exercised —
->   [`07` §B.1](./07_ACCEPTANCE_CRITERIA_M2.md#b1-stability-and-the-wallets-exercised).
+>   [`07` §B.1](./07_ACCEPTANCE_CRITERIA_M2.md#b1-who-ran-the-sessions-stability-and-the-wallets-exercised).
 > - **AC4** is ticked here on **8/8 automated refinance tests** alone. **That figure is withdrawn**
 >   and **nothing replaces it**: all eight carry a `KNOWN-FAIL` annotation in their own source and two
 >   never reached their own assertion. See [`08` C‑6](./08_CORRECTIONS.md); what the resubmission

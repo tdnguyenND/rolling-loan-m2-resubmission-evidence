@@ -17,8 +17,12 @@ whole session, the wallet signing dialog for each signature, and the public-expl
 transaction — and each is then checked, line by line, against what the chain actually recorded.
 **123 QC checks in total, 123 hold.**
 
-> **What these sessions are, and what they are not.** Journeys 1, 2 and 4 were run by the delivery
-> team; journey 3 was run by a second tester on their own wallet and their own wallet installation.
+> **What these sessions are, and what they are not.** All four were operated by **people from outside
+> the company**, none of whom took part in building the feature, each given only a goal and no
+> step-by-step instructions — three people across three wallet accounts. That rests on a statement by
+> the delivery team with no contemporaneous record behind it; an earlier version of this file
+> described journeys 1, 2 and 4 as delivery-team runs, and the change is logged as
+> [`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md).
 > None of them is offered as evidence that the interface is intuitive to someone who has never seen
 > it — that is the claim the previous submission made and the review rejected
 > ([`08_CORRECTIONS.md`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md) C-2).
@@ -38,7 +42,7 @@ transaction — and each is then checked, line by line, against what the chain a
 | | Journey 1 | Journey 2 | Journey 3 | Journey 4 |
 |---|---|---|---|---|
 | **Wallet** | Eternl v2.1.7.1 · *1kang (#0)* · `addr_test1qr4rll…5g494` | the same wallet | Eternl v2.1.5.0 · *Ngan Wallet (#0)* · `addr_test1qqv2pd7…027ghs` | Eternl · *Deploy Oracle (#0)* · `addr_test1qr20zc2v…sm9xmy` |
-| **Run by** | delivery team | delivery team | **a second tester** (identity not recorded — §3) | not recorded — §4 |
+| **Run by** | outside the company | the same person | outside the company, a second person | outside the company, a third person |
 | **Borrowed** | 25 ADA | 11 fUSDM | 11 fUSDM | **905.004 ADA → two loans, 20 + 885** |
 | **Collateral** | 100 fUSDM | 100 ADA | 100 ADA | 98,327.69 fUSDM |
 | **Journeys covered** | open · view · refinance · repay | open · view · refinance · repay | open · view · refinance · repay | open · view · refinance **×2** — **no repay** |
@@ -337,9 +341,10 @@ on a different wallet and a different Eternl installation**.
 `addr_test1qqv2pd75qaeye7w8fcddtwd8uk8wmxgr979wx4zcjknswfjpq4xedf86fkzd7ln9escmvdd4s5enl7ma50q4tk3dn8ys027ghs`.
 **Session:** one continuous recording of **7 min 29 s**, 08:22:02 → 08:29:31 UTC.
 
-**Tester:** a second person, who did not run journeys 1 and 2. **Their name, their relation to the
-delivery team, the instructions they were given and the questions they asked during the session were
-not recorded**, and this package does not reconstruct them after the fact.
+**Tester:** a second person, **from outside the company**, who did not run journeys 1 and 2 and took
+no part in building the feature. They were given a goal and no step-by-step instructions. **Their
+name and the questions they asked during the session were not recorded**, and this rests on the
+team's statement rather than a brief recorded at the time ([`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md)).
 
 > That omission is stated rather than worked around, because a usability claim depends on exactly
 > those facts. Without them this session establishes that the four journeys can be completed by a
@@ -469,10 +474,11 @@ multi-pool case**, on a **third wallet**. It does **not** cover repay.
 unaltered except that the browser's **bookmarks bar** has been cropped out; the address bar is kept,
 and the recording is the unedited source for every frame.
 
-**Tester: not recorded.** This session ran on a third wallet, but who operated it, their relation to
-the delivery team and what they were told were not logged at the time — so, as in
-[§3](#journey-3--a-second-tester-on-a-second-wallet), nothing about independence or usability is
-claimed from it. What it establishes is the multi-pool behaviour below.
+**Tester:** a third person, **from outside the company**, who ran none of the other journeys and took
+no part in building the feature, given a goal and no step-by-step instructions — on the same footing
+as [§3](#journey-3--a-second-tester-on-a-second-wallet), and with the same limit: it rests on the
+team's statement, not on a record made at the time ([`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md)). Their name
+was not recorded. What this session establishes is the multi-pool behaviour below.
 
 ### 4.1 The session, step by step
 
@@ -659,7 +665,7 @@ Borrower NFT the chain records. That is the figure being shown to the user *befo
 
 **Adds.** A second wallet brand across **two** journeys, end to end: Vespr is detected by the app,
 receives each built transaction, shows the user its real net movement, signs, and both settle with
-the same value flow as the Eternl sessions. [`07` §B.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#b1-stability-and-the-wallets-exercised)
+the same value flow as the Eternl sessions. [`07` §B.1](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/07_ACCEPTANCE_CRITERIA_M2.md#b1-who-ran-the-sessions-stability-and-the-wallets-exercised)
 scores AC3's *across supported wallets* clause on this.
 
 **Does not add.** **View and repay were not exercised** in Vespr — the session ends at the settled

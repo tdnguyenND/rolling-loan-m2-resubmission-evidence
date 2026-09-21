@@ -68,10 +68,20 @@ behind any flag** and are reachable on both deployments as shipped.
 |---|---|---|---|
 | **AC1** | View / open / repay / refinance via **Eternl** wallet | all four exercised through Eternl: 15 mainnet transactions from 2 wallets, plus 4 preprod sessions on 3 Eternl accounts and 2 Eternl versions (v2.1.7.1, v2.1.5.0) — [`06` At a glance](./06_UAT_Reports_Four_Journeys_M2.md#at-a-glance). **View** produces no transaction by nature; its evidence is the app's own screens reconciled to the ledger. *Open* and *refinance* were also exercised in **Vespr**, a second wallet brand ([`06` Journey 5](./06_UAT_Reports_Four_Journeys_M2.md#journey-5--open--refinance-through-a-second-wallet-brand-vespr)) | ✅ |
 | **AC2** | Back-end correct contract interactions for all loan states | every Plutus script execution in all 15 transactions returned `valid_contract = true`; inputs, outputs, mints and burns re-derived from the public **Koios** API — [`05` §2](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#2-facts-that-hold-for-all-five-transactions), [§3](./05_ONCHAIN_TRANSACTIONS_AND_REPAY.md#3-per-transaction-value-flow) | ✅ |
-| **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — quoted as written | **Stability**: no crash, no hang and no lost state in any of the five recorded sessions; the four that carry a QC checklist hold **123 of 123 checks**, each re-derived from the public ledger. **Wallets exercised**: **Eternl** on all four journeys, across three accounts and two versions (v2.1.7.1, v2.1.5.0); **Vespr** on *open* and *refinance* — [**§B.1**](#b1-stability-and-the-wallets-exercised) | evidence offered |
+| **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — quoted as written | **Stability**: no crash, no hang and no lost state in any of the five recorded sessions; the four that carry a QC checklist hold **123 of 123 checks**, each re-derived from the public ledger. **Wallets exercised**: **Eternl** on all four journeys, across three accounts and two versions (v2.1.7.1, v2.1.5.0); **Vespr** on *open* and *refinance* — [**§B.1**](#b1-who-ran-the-sessions-stability-and-the-wallets-exercised) | evidence offered |
 | **AC4** | Major journeys covered by integration tests | All four journeys executed end to end and verified check by check against the public ledger: **123 session QC checks** (123 hold) and **25 transaction QC checks** (24 hold), each published with the figure it asserts and the source it was re-derived from — [**§B.2**](#b2-the-integration-testing-this-package-publishes) | evidence offered |
 
-### B.1 Stability, and the wallets exercised
+### B.1 Who ran the sessions, stability, and the wallets exercised
+
+**Who operated the four recorded sessions.** All four were run by **people from outside the company**
+— three people across three wallet accounts — none of whom took part in building the feature, each
+given a goal only, with no step-by-step instructions and no one guiding them during the run.
+
+This rests on a statement by the delivery team; there is no test plan, brief, assignment message or
+tester name to cite, and an earlier version of this package described journeys 1, 2 and 4 as
+delivery-team runs. The change is logged as [`08` C‑7](./08_CORRECTIONS.md). What the recordings show
+without relying on it: three accounts, two Eternl installations, and four operators who behaved
+differently from one another ([`06`](./06_UAT_Reports_Four_Journeys_M2.md)).
 
 **Stability.** No crash, no hang and no lost state in any of the five recorded sessions. The four
 that carry a QC checklist hold **123 of 123 checks**; the Vespr session has no checklist of its own.
@@ -142,4 +152,4 @@ each is published with its established cause rather than left for a reviewer to 
 | **OI‑2 — the Fluid borrower NFT is left in the wallet after the position is gone.** Reproduced through two different wallet applications, so it is a property of the counterparty protocol, not of one wallet. Intended or not, unconfirmed — a question for **Fluid**, not this codebase | [`06` OI‑2](./06_UAT_Reports_Four_Journeys_M2.md#open-items-common-to-more-than-one-session) |
 | **D‑6 — Loan Details labels a health factor of 197 and of 32.3 both *Healthy*.** Not a computation error: the band is absolute, `HEALTHY` above 1.6. Open as a product decision | [`06` Root causes](./06_UAT_Reports_Four_Journeys_M2.md#root-causes-established-after-the-sessions) |
 | **TC‑24 does not hold** — our own citation error, not a product defect | [`08` C‑1](./08_CORRECTIONS.md) |
-| **The Vespr session covers *open* and *refinance* only**, with no screenshot set and no QC checklist of its own. Nothing in this package claims *view* or *repay* in Vespr | [§B.1](#b1-stability-and-the-wallets-exercised) |
+| **The Vespr session covers *open* and *refinance* only**, with no screenshot set and no QC checklist of its own. Nothing in this package claims *view* or *repay* in Vespr | [§B.1](#b1-who-ran-the-sessions-stability-and-the-wallets-exercised) |

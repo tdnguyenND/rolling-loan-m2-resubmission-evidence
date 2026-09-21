@@ -6,7 +6,7 @@ While preparing this resubmission we re-derived every on-chain figure from a **p
 (Koios)** rather than from our own reporting. That exercise found errors and overstatements in
 our own evidence — a mis-cited transaction, a mis-identified token, a self-assessment doing more
 work than it could carry, and two claims stated more absolutely than what we can show. Each is
-recorded here, C‑1 to C‑6.
+recorded here, C‑1 to C‑7.
 
 **C‑6 came from a different exercise and is the most serious.** We re-ran the automated test suite
 instead of citing the number the previous submission reported, and the number did not survive: the
@@ -313,6 +313,38 @@ the public source that figure was re-derived from, including the one that does n
 
 **Nothing on chain changes.** This correction is about the automated suite only. The 15 mainnet
 transactions, the 123 manual QC checks and the four recorded sessions are untouched by it.
+
+## C‑7 — **Corrected.** Who operated the four recorded sessions
+
+### What we said
+
+> | **Run by** | delivery team | delivery team | **a second tester** (identity not recorded) | not recorded |
+> — `06_UAT_Reports_Four_Journeys_M2.md`, *At a glance*
+
+### What is actually the case
+
+**All four sessions were operated by people from outside the company** — not employees of Teko or
+Danogo, and with no part in building the feature. Each was given **only a goal** (for example: borrow
+against collateral, then refinance the loan into Dano). **No step-by-step instructions were supplied
+and no one from the team guided them during the run.** Journeys 1 and 2 ran on one account, journeys
+3 and 4 on two further accounts, so the four sessions were operated by **three** people.
+
+### The correction, and how far it goes
+
+The description of journeys 1 and 2 as delivery-team runs was wrong and is withdrawn. For journeys 3
+and 4, "not recorded" is replaced by the statement above.
+
+**This rests on a statement by the delivery team, made on 21 September 2026.** There is no
+contemporaneous artifact behind it — no test plan, written brief, assignment message or tester name —
+so a reviewer cannot verify it from this repository, and we do not present it as verified. It is
+recorded here because it changes what the package says about itself.
+
+**What the recordings show without relying on it:** three wallet accounts, two separate Eternl
+installations, and four operators who behaved differently from one another — one checked the result
+on a public explorer and one did not, one ran all four journeys in a single unbroken take, one
+stopped after the refinances ([`06`](./06_UAT_Reports_Four_Journeys_M2.md)).
+
+---
 
 ## Claims from the previous submission that we re-verified and that **hold**
 
