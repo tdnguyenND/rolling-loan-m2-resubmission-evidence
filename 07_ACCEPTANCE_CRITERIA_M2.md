@@ -78,8 +78,8 @@ behind any flag** and are reachable on both deployments as shipped.
 given a goal only, with no step-by-step instructions and no one guiding them during the run.
 
 This rests on a statement by the delivery team; there is no test plan, brief, assignment message or
-tester name to cite, and an earlier version of this package described journeys 1, 2 and 4 as
-delivery-team runs. The change is logged as [`08` C‑7](./08_CORRECTIONS.md). What the recordings show
+tester name to cite, and an earlier version of this package described journeys 1 and 2 as
+delivery-team runs and journeys 3 and 4 as not recorded. The change is logged as [`08` C‑7](./08_CORRECTIONS.md). What the recordings show
 without relying on it: three accounts, two Eternl installations, and four operators who behaved
 differently from one another ([`06`](./06_UAT_Reports_Four_Journeys_M2.md)).
 

@@ -35,7 +35,12 @@ wallet-connected front end, against live Cardano mainnet contracts.
    screens reconciled to the ledger.
 2. **Five complete sessions were recorded end to end**, each an unedited continuous take from the
    first click to the settled transaction, with every wallet signing dialog and every explorer record.
-   **The four Eternl sessions were operated by people from outside the company.**
+   **The four Eternl sessions were operated by people from outside the company** — a statement by the
+   delivery team, made on 21 September 2026, with **no contemporaneous artifact behind it**: no test
+   plan, written brief, assignment message or tester name. It is offered as a self-report, not as
+   verified evidence, and is logged as [`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md#c7--corrected-who-operated-the-four-recorded-sessions). What the recordings show without
+   relying on it: three wallet accounts, two separate Eternl installations, and four operators who
+   behaved differently from one another.
 3. **Every on-chain figure is read back from public sources** — the **Koios** API and the
    **Cardanoscan** explorer for the ledger, and **Fluid Tokens' own API** for the repayment status.
    None of it comes from our backend.
@@ -63,8 +68,11 @@ preprod contracts; they are interface evidence, not settlement evidence.
 |---|---|---|---|
 | **AC1** | View / open / repay / refinance via **Eternl** wallet | **15 mainnet transactions** signed through Eternl from two wallets — 7 open, 5 refinance, 3 repay — plus four preprod sessions on three Eternl accounts and two Eternl versions. *Open* and *refinance* were also signed in **Vespr**, a second wallet brand | Outputs 1–4 |
 | **AC2** | Back-end performs correct contract interactions for all loan states | Every smart-contract execution in all 15 transactions returned `valid_contract = true`; inputs, outputs, mints and burns read back from the public **Koios** API | Outputs 2, 3, 5 |
-| **AC3** | Integration stable and free from blocking issues across supported wallets | No crash, no hang and no lost state in any of the five recorded sessions; the four with a QC checklist hold **123 of 123 checks**, each recomputed from the public ledger. Exercised on **Eternl** across all four journeys — three accounts, two installations, versions v2.1.7.1 and v2.1.5.0 — and on **Vespr** for *open* and *refinance* | Output 4 |
+| **AC3** | *"Integration must be **stable**, **intuitive**, and **free from blocking UI/UX issues** across **supported wallets**"* — quoted as written | **Stability:** no crash, no hang and no lost state in any of the five recorded sessions; the four with a QC checklist hold **123 of 123 checks**, each recomputed from the public ledger. **Wallets:** **Eternl** across all four journeys — three accounts, two installations, versions v2.1.7.1 and v2.1.5.0 — and **Vespr** for *open* and *refinance*. **Intuitive:** the nearest evidence is that the four sessions were operated without step-by-step instructions, which rests on a self-report with no contemporaneous record ([`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md#c7--corrected-who-operated-the-four-recorded-sessions)). **No independent usability study is offered, and the previous submission's "intuitive" self-assessment is withdrawn** ([`08` C‑2](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md)) | Output 4 |
 | **AC4** | Major journeys covered by integration tests | Each of the four journeys executed end to end and verified check by check against the public ledger — **123 QC checks across the recorded sessions, 123 of which hold** — each published with the figure it asserts and the public source that figure was read from | Output 6 |
+
+Each criterion is quoted as written. This table states **the evidence offered** for each; it does not
+mark any of them met — that is the reviewer's judgement.
 
 ---
 
@@ -280,8 +288,15 @@ journey 3 through a second wallet brand, **Vespr**.
 
 **Who operated them.** The four Eternl sessions were run by **people from outside the company** —
 three people across three wallet accounts — none of whom took part in building the feature. Each was
-given **the goal only**: no step-by-step instructions, and no one from the team guiding the run. The
-sessions differ from one another accordingly: one operator checked the result for themselves in their
+given **the goal only**: no step-by-step instructions, and no one from the team guiding the run.
+
+**How far that goes as evidence.** It rests on a statement by the delivery team made on 21 September
+2026. **There is no contemporaneous artifact behind it** — no test plan, written brief, assignment
+message or tester name — so a reviewer cannot verify it from this repository, and it is **not offered
+as verified evidence**. An earlier version of this package described journeys 1, 2 and 4 as
+delivery-team runs; the change is logged as [`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md#c7--corrected-who-operated-the-four-recorded-sessions). What the recordings show
+without relying on the statement: three wallet accounts, two separate Eternl installations, and four
+operators who behaved differently from one another — one checked the result for themselves in their
 own wallet and on a public block explorer, another did not; one ran all four journeys in a single
 unbroken take, another stopped after the refinances.
 

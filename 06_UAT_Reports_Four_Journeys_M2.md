@@ -21,7 +21,8 @@ transaction — and each is then checked, line by line, against what the chain a
 > the company**, none of whom took part in building the feature, each given only a goal and no
 > step-by-step instructions — three people across three wallet accounts. That rests on a statement by
 > the delivery team with no contemporaneous record behind it; an earlier version of this file
-> described journeys 1, 2 and 4 as delivery-team runs, and the change is logged as
+> described journeys 1 and 2 as delivery-team runs and journeys 3 and 4 as not recorded; the change is
+> logged as
 > [`08` C‑7](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/08_CORRECTIONS.md).
 > None of them is offered as evidence that the interface is intuitive to someone who has never seen
 > it — that is the claim the previous submission made and the review rejected
@@ -841,9 +842,11 @@ and counted separately, an *open* and a *refinance* run through a **second walle
 - **Defects are published, not edited out.** Journey 3's refinance failed to submit on the first
   attempt and needed a *Retry* (D-1); journey 4 records three smaller items (D-4, D-5, D-6). Two questions recur and
   are stated once, as OI-1 and OI-2, rather than four times as passes.
-- **What none of this shows** is whether an independent user finds the interface intuitive. Journey 3
-  was run by someone outside the walkthroughs, but **who the testers of journeys 3 and 4 were, what
-  they were told and what they asked were not recorded** (§3, §4) — so no usability verdict is drawn
-  from any of these sessions. The milestone's settlement evidence
+- **What none of this shows** is whether an independent user finds the interface intuitive. That the
+  four sessions were operated by people outside the company, each given a goal and no step-by-step
+  instructions, rests on a statement by the delivery team with **no contemporaneous record behind it**
+  ([`08` C‑7](./08_CORRECTIONS.md)) — and **what each operator was told, what they asked and where
+  they hesitated were not recorded at the time**. No usability verdict is drawn from any of these
+  sessions. The milestone's settlement evidence
   remains the fifteen mainnet transactions in
   [`00`](https://github.com/tdnguyenND/rolling-loan-m2-resubmission-evidence/blob/main/00_POA_SUBMISSION_FORM.md) §A.
